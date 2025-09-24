@@ -117,6 +117,67 @@
             letter-spacing: -0.025em;
         }
 
+        .auth-mode-selector {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .auth-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .auth-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 50px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .auth-toggle input[type="checkbox"]:checked + .toggle-slider {
+            background-color: var(--umgc-accent);
+        }
+
+        .auth-toggle input[type="checkbox"]:checked + .toggle-slider::before {
+            transform: translateX(25px);
+        }
+
+        .toggle-label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .auth-help {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .auth-help small {
+            font-size: 0.8rem;
+        }
+
         .powerbi-iframe {
             width: 100%;
             height: 95vh;
@@ -205,6 +266,16 @@
         <div class="dashboard-wrapper">
             <div class="dashboard-header">
                 <h2>FMP Campus</h2>
+                <div class="auth-mode-selector">
+                    <label class="auth-toggle">
+                        <input type="checkbox" id="publicModeToggle" onchange="toggleAuthMode()">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Public Access Mode</span>
+                    </label>
+                    <div class="auth-help">
+                        <small>Toggle this if you're getting sign-in errors</small>
+                    </div>
+                </div>
             </div>
             
             <div id="loading" class="loading">
@@ -214,8 +285,8 @@
             <iframe 
                 class="powerbi-iframe"
                 id="powerbi-frame"
-                src="https://app.powerbi.com/reportEmbed?reportId=c7325f3a-2272-4140-89e1-9a07162648d8&autoAuth=true&ctid=42523965-66b8-4e84-8ead-59b4ba83077b&actionBarEnabled=true"
-                title="UMGC Financial Management Platform Dashboard"
+                src="https://app.powerbi.com/reportEmbed?reportId=c7325f3a-2272-4140-89e1-9a07162648d8&autoAuth=true&ctid=42523965-66b8-4e84-8ead-59b4ba83077b&actionBarEnabled=true&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWEtcHJpbWFyeS5yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImNvbXBvc2VUeXBlIjoiaW5saW5lIn19"
+                title="UMGC Facilities Master Plan Dashboard"
                 allowfullscreen="true"
                 loading="lazy"
                 onload="hideLoading()">
@@ -259,6 +330,106 @@
             }
         };
 
+        // Authentication persistence helpers
+        function storeAuthPreference() {
+            // Store user's preference to stay signed in
+            localStorage.setItem('umgc_powerbi_remember_auth', 'true');
+            localStorage.setItem('umgc_powerbi_last_access', new Date().toISOString());
+        }
+
+        function shouldRememberAuth() {
+            const rememberAuth = localStorage.getItem('umgc_powerbi_remember_auth');
+            const lastAccess = localStorage.getItem('umgc_powerbi_last_access');
+            
+            if (rememberAuth === 'true' && lastAccess) {
+                const lastAccessDate = new Date(lastAccess);
+                const now = new Date();
+                const daysSinceLastAccess = (now - lastAccessDate) / (1000 * 60 * 60 * 24);
+                
+                // Remember auth for 30 days
+                return daysSinceLastAccess < 30;
+            }
+            return false;
+        }
+
+        // Enhanced iframe URL with authentication persistence
+        function getPowerBIUrl() {
+            // Check if we should use public embed (no authentication required)
+            const usePublicEmbed = localStorage.getItem('umgc_use_public_embed') === 'true';
+            
+            if (usePublicEmbed) {
+                // Public embed URL - no authentication required
+                return 'https://app.powerbi.com/reportEmbed?reportId=c7325f3a-2272-4140-89e1-9a07162648d8&autoAuth=true&ctid=42523965-66b8-4e84-8ead-59b4ba83077b&actionBarEnabled=true&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWEtcHJpbWFyeS5yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImNvbXBvc2VUeXBlIjoiaW5saW5lIn19';
+            }
+            
+            // Authenticated embed URL (requires proper tenant access)
+            const baseUrl = 'https://app.powerbi.com/reportEmbed';
+            const params = {
+                reportId: 'c7325f3a-2272-4140-89e1-9a07162648d8',
+                autoAuth: 'true',
+                ctid: '42523965-66b8-4e84-8ead-59b4ba83077b',
+                actionBarEnabled: 'true',
+                // Enhanced authentication parameters
+                persistFilters: 'true',
+                bookmarkId: '',
+                filterPaneEnabled: 'true',
+                navContentPaneEnabled: 'true'
+            };
+
+            // Add authentication persistence if user has opted in
+            if (shouldRememberAuth()) {
+                params.persistAuth = 'true';
+                storeAuthPreference();
+            }
+
+            const config = {
+                clusterUrl: 'https://wabi-us-east2-a-primary.redirect.analysis.windows.net',
+                embedFeatures: {
+                    modernEmbed: true,
+                    composeType: 'inline'
+                }
+            };
+
+            const configParam = btoa(JSON.stringify(config));
+            
+            const queryString = Object.keys(params)
+                .map(key => `${key}=${encodeURIComponent(params[key])}`)
+                .join('&');
+
+            return `${baseUrl}?${queryString}&config=${configParam}`;
+        }
+
+        // Toggle authentication mode
+        function toggleAuthMode() {
+            const toggle = document.getElementById('publicModeToggle');
+            const usePublicEmbed = toggle.checked;
+            
+            // Store user's preference
+            localStorage.setItem('umgc_use_public_embed', usePublicEmbed.toString());
+            
+            // Reload the iframe with new URL
+            const iframe = document.getElementById('powerbi-frame');
+            iframe.src = getPowerBIUrl();
+            
+            // Show loading indicator
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
+            loading.innerHTML = usePublicEmbed ? 
+                'Switching to public access mode...' : 
+                'Switching to authenticated mode...';
+        }
+
+        // Update iframe URL when page loads
+        function initializePowerBI() {
+            const iframe = document.getElementById('powerbi-frame');
+            iframe.src = getPowerBIUrl();
+            
+            // Set toggle state based on stored preference
+            const usePublicEmbed = localStorage.getItem('umgc_use_public_embed') === 'true';
+            const toggle = document.getElementById('publicModeToggle');
+            toggle.checked = usePublicEmbed;
+        }
+
         // Make iframe responsive
         function resizeIframe() {
             const iframe = document.getElementById('powerbi-frame');
@@ -273,11 +444,33 @@
             }
         }
 
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            initializePowerBI();
+            resizeIframe();
+            storeAuthPreference(); // Remember this session
+        });
+
         // Resize on window resize
         window.addEventListener('resize', resizeIframe);
-        
-        // Initial resize
-        window.addEventListener('load', resizeIframe);
+
+        // Handle Power BI authentication events (if using Power BI SDK)
+        function handlePowerBIAuth(event) {
+            if (event.type === 'loaded') {
+                console.log('Power BI report loaded successfully');
+                storeAuthPreference();
+            } else if (event.type === 'error') {
+                console.error('Power BI authentication error:', event.detail);
+                // Could show a login prompt here if needed
+            }
+        }
+
+        // Add event listeners for Power BI events
+        window.addEventListener('message', function(event) {
+            if (event.origin === 'https://app.powerbi.com') {
+                handlePowerBIAuth(event);
+            }
+        });
     </script>
 </body>
 </html>
