@@ -2233,9 +2233,34 @@
                                             </div>
                                             <span id="iccOtherToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s;">▼</span>
                                         </div>
-                                        <div id="iccOtherContent" style="max-height: 1000px; overflow: hidden; transition: max-height 0.4s ease;">
+                                        <div id="iccOtherContent" style="max-height: 1500px; overflow: hidden; transition: max-height 0.4s ease;">
                                             <div class="space-types-grid" id="iccOtherSpacesGrid">
                                                 <!-- Other space types will be dynamically generated -->
+                                            </div>
+                                            
+                                            <!-- Custom Space Input -->
+                                            <div style="margin-top: 20px; padding: 15px; background: var(--umgc-gray-light); border-radius: 8px;">
+                                                <h5 style="color: var(--umgc-navy); font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">Add Custom Space</h5>
+                                                <div class="custom-space-inputs">
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Space Name</label>
+                                                        <input type="text" class="custom-input" id="iccCustomName" placeholder="e.g., Storage Room">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Square Feet</label>
+                                                        <input type="number" class="custom-input" id="iccCustomSF" placeholder="e.g., 200">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Qty</label>
+                                                        <input type="number" class="custom-input" id="iccCustomQty" placeholder="e.g., 2">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <button class="add-space-button" onclick="addICCCustomSpace()">
+                                                            ➕ Add Space
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div id="iccCustomSpacesList" class="custom-spaces-list" style="margin-top: 15px;"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -2493,9 +2518,34 @@
                                             </div>
                                             <span id="hotelOtherToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s;">▼</span>
                                         </div>
-                                        <div id="hotelOtherContent" style="max-height: 1000px; overflow: hidden; transition: max-height 0.4s ease;">
+                                        <div id="hotelOtherContent" style="max-height: 1500px; overflow: hidden; transition: max-height 0.4s ease;">
                                             <div class="space-types-grid" id="hotelOtherSpacesGrid">
                                                 <!-- Other space types will be dynamically generated -->
+                                            </div>
+                                            
+                                            <!-- Custom Space Input -->
+                                            <div style="margin-top: 20px; padding: 15px; background: var(--umgc-gray-light); border-radius: 8px;">
+                                                <h5 style="color: var(--umgc-navy); font-size: 0.9rem; font-weight: 600; margin-bottom: 10px;">Add Custom Space</h5>
+                                                <div class="custom-space-inputs">
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Space Name</label>
+                                                        <input type="text" class="custom-input" id="hotelCustomName" placeholder="e.g., Storage Room">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Square Feet</label>
+                                                        <input type="number" class="custom-input" id="hotelCustomSF" placeholder="e.g., 200">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <label class="custom-label">Qty</label>
+                                                        <input type="number" class="custom-input" id="hotelCustomQty" placeholder="e.g., 2">
+                                                    </div>
+                                                    <div class="custom-input-group">
+                                                        <button class="add-space-button" onclick="addHotelCustomSpace()">
+                                                            ➕ Add Space
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div id="hotelCustomSpacesList" class="custom-spaces-list" style="margin-top: 15px;"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -3577,6 +3627,8 @@
             collaboration: 2
         };
         let customSpaces = [];
+        let iccCustomSpaces = [];
+        let hotelCustomSpaces = [];
         let categoryChart = null;
         let typeChart = null;
         let alertShown = false;
@@ -4710,6 +4762,12 @@
                 if (type.category === 'other') otherCount += qty;
             });
             
+            // Add ICC custom spaces
+            iccCustomSpaces.forEach(space => {
+                usedSF += space.sf * space.quantity;
+                otherCount += space.quantity;
+            });
+            
             document.getElementById('iccTotalAssignedSF').textContent = usedSF.toLocaleString();
             document.getElementById('iccBuildingTotalGSF').textContent = totalGSF.toLocaleString();
             document.getElementById('iccBuildingTotalAssignable').textContent = totalAssignable.toLocaleString();
@@ -4981,6 +5039,12 @@
                 if (type.category === 'other') otherCount += qty;
             });
             
+            // Add Hotel custom spaces
+            hotelCustomSpaces.forEach(space => {
+                usedSF += space.sf * space.quantity;
+                otherCount += space.quantity;
+            });
+            
             document.getElementById('hotelTotalAssignedSF').textContent = usedSF.toLocaleString();
             document.getElementById('hotelBuildingTotalGSF').textContent = totalGSF.toLocaleString();
             document.getElementById('hotelBuildingTotalAssignable').textContent = totalAssignable.toLocaleString();
@@ -5044,7 +5108,7 @@
             const iccUsedSF = SPACE_TYPES.reduce((total, type) => {
                 const sfPerUnit = iccSpaceSF[type.id] || type.defaultSf;
                 return total + (iccQuantities[type.id] || 0) * sfPerUnit;
-            }, 0);
+            }, 0) + iccCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
             const iccEfficiency = iccTotalGSF > 0 ? Math.round((iccAssignableSF / iccTotalGSF) * 100) : 0;
             
             // Calculate Hotel Building totals from floor sliders
@@ -5055,7 +5119,7 @@
             const hotelUsedSF = SPACE_TYPES.reduce((total, type) => {
                 const sfPerUnit = hotelSpaceSF[type.id] || type.defaultSf;
                 return total + (hotelQuantities[type.id] || 0) * sfPerUnit;
-            }, 0);
+            }, 0) + hotelCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
             // Calculate combined totals
@@ -5318,6 +5382,122 @@
             customSpaces = customSpaces.filter(space => space.id !== id);
             renderCustomSpaces();
             updateSpaceCalculations();
+        }
+
+        // ICC Custom Spaces Functions
+        function addICCCustomSpace() {
+            const name = document.getElementById('iccCustomName').value;
+            const sf = document.getElementById('iccCustomSF').value;
+            const qty = document.getElementById('iccCustomQty').value;
+            
+            if (name && sf && qty) {
+                const newSpace = {
+                    id: `icc-custom-${Date.now()}`,
+                    name: name,
+                    sf: parseInt(sf),
+                    quantity: parseInt(qty)
+                };
+                
+                iccCustomSpaces.push(newSpace);
+                
+                // Clear inputs
+                document.getElementById('iccCustomName').value = '';
+                document.getElementById('iccCustomSF').value = '';
+                document.getElementById('iccCustomQty').value = '';
+                
+                updateICCCustomSpacesList();
+                updateICCBuildingTotals();
+                updateBuildingComparison();
+            }
+        }
+
+        function removeICCCustomSpace(id) {
+            iccCustomSpaces = iccCustomSpaces.filter(space => space.id !== id);
+            updateICCCustomSpacesList();
+            updateICCBuildingTotals();
+            updateBuildingComparison();
+        }
+
+        function updateICCCustomSpacesList() {
+            const list = document.getElementById('iccCustomSpacesList');
+            if (!list) return;
+            
+            if (iccCustomSpaces.length === 0) {
+                list.innerHTML = '';
+                return;
+            }
+            
+            list.innerHTML = '<div class="space-types-grid">' + iccCustomSpaces.map(space => `
+                <div class="space-type-card" style="position: relative;">
+                    <button class="remove-space-button" onclick="removeICCCustomSpace('${space.id}')" style="position: absolute; top: 10px; right: 10px; background: #dc2626; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;">✕</button>
+                    <div class="space-type-header">
+                        <div class="space-type-name">${space.name}</div>
+                        <div class="space-type-color" style="background-color: hsl(280, 65%, 70%);"></div>
+                    </div>
+                    <div class="space-type-total">
+                        <span class="space-total-label">Total SF:</span>
+                        <span class="space-total-value" id="icc-custom-total-${space.id}">${(space.sf * space.quantity).toLocaleString()} SF</span>
+                    </div>
+                </div>
+            `).join('') + '</div>';
+        }
+
+        // Hotel Custom Spaces Functions
+        function addHotelCustomSpace() {
+            const name = document.getElementById('hotelCustomName').value;
+            const sf = document.getElementById('hotelCustomSF').value;
+            const qty = document.getElementById('hotelCustomQty').value;
+            
+            if (name && sf && qty) {
+                const newSpace = {
+                    id: `hotel-custom-${Date.now()}`,
+                    name: name,
+                    sf: parseInt(sf),
+                    quantity: parseInt(qty)
+                };
+                
+                hotelCustomSpaces.push(newSpace);
+                
+                // Clear inputs
+                document.getElementById('hotelCustomName').value = '';
+                document.getElementById('hotelCustomSF').value = '';
+                document.getElementById('hotelCustomQty').value = '';
+                
+                updateHotelCustomSpacesList();
+                updateHotelBuildingTotals();
+                updateBuildingComparison();
+            }
+        }
+
+        function removeHotelCustomSpace(id) {
+            hotelCustomSpaces = hotelCustomSpaces.filter(space => space.id !== id);
+            updateHotelCustomSpacesList();
+            updateHotelBuildingTotals();
+            updateBuildingComparison();
+        }
+
+        function updateHotelCustomSpacesList() {
+            const list = document.getElementById('hotelCustomSpacesList');
+            if (!list) return;
+            
+            if (hotelCustomSpaces.length === 0) {
+                list.innerHTML = '';
+                return;
+            }
+            
+            list.innerHTML = '<div class="space-types-grid">' + hotelCustomSpaces.map(space => `
+                <div class="space-type-card" style="position: relative;">
+                    <button class="remove-space-button" onclick="removeHotelCustomSpace('${space.id}')" style="position: absolute; top: 10px; right: 10px; background: #dc2626; color: white; border: none; border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center;">✕</button>
+                    <div class="space-type-header">
+                        <div class="space-type-name">${space.name}</div>
+                        <div class="space-type-color" style="background-color: hsl(280, 65%, 70%);"></div>
+                    </div>
+                    <div class="space-type-total">
+                        <span class="space-total-label">Total SF:</span>
+                        <span class="space-total-value" id="hotel-custom-total-${space.id}">${(space.sf * space.quantity).toLocaleString()} SF</span>
+                    </div>
+                </div>
+            `).join('') + '</div>';
         }
 
         function renderCustomSpaces() {
