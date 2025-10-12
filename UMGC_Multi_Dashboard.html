@@ -2031,6 +2031,70 @@
                             </div>
                     </div>
                     
+                <!-- ICC Comparison Content -->
+                <div id="iccComparisonContent" class="collapsible-content" style="max-height: 1000px; overflow: hidden; transition: max-height 0.4s ease;">
+                    <div class="space-planning-container">
+                        <div class="space-card">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                                    <!-- Existing Conditions -->
+                                    <div style="background: var(--umgc-gray-light); padding: 20px; border-radius: 8px; border-left: 4px solid var(--umgc-red);">
+                                        <h4 style="color: var(--umgc-navy); font-size: 1rem; font-weight: 700; margin: 0 0 15px 0;">Existing Conditions</h4>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Workstations</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Private Offices</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Spaces</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Seats</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 seats</span>
+                                            </div>
+                                        </div>
+                        </div>
+
+                                    <!-- Planned Conditions -->
+                                    <div style="background: var(--umgc-gray-light); padding: 20px; border-radius: 8px; border-left: 4px solid hsl(142, 76%, 36%);">
+                                        <h4 style="color: var(--umgc-navy); font-size: 1rem; font-weight: 700; margin: 0 0 15px 0;">Planned Conditions</h4>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
+                                                <span id="iccPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">24,000</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Workstations</span>
+                                                <span id="iccPlannedWorkstation" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Private Offices</span>
+                                                <span id="iccPlannedOffice" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Spaces</span>
+                                                <span id="iccPlannedCollab" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Seats</span>
+                                                <span id="iccPlannedSeats" style="color: var(--umgc-navy); font-weight: 700;">0 seats</span>
+                                            </div>
+                                        </div>
+                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    
                     <div class="space-planning-container">
                         <div class="space-title">
                             <h2>ICC Building</h2>
@@ -2051,7 +2115,7 @@
                                             <div id="iccBuildingTotalAssignable" style="color: white; font-size: 1.1rem; font-weight: 700;">24,000</div>
                                         </div>
                                         <div style="text-align: center;">
-                                            <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Overall Efficiency</div>
+                                            <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Efficiency</div>
                                             <div id="iccBuildingOverallEfficiency" style="color: white; font-size: 1.1rem; font-weight: 700;">80%</div>
                                         </div>
                                     </div>
@@ -2316,6 +2380,70 @@
                             </div>
                     </div>
                     
+                <!-- Hotel Comparison Content -->
+                <div id="hotelComparisonContent" class="collapsible-content" style="max-height: 1000px; overflow: hidden; transition: max-height 0.4s ease;">
+                    <div class="space-planning-container">
+                        <div class="space-card">
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px;">
+                                    <!-- Existing Conditions -->
+                                    <div style="background: var(--umgc-gray-light); padding: 20px; border-radius: 8px; border-left: 4px solid var(--umgc-red);">
+                                        <h4 style="color: var(--umgc-navy); font-size: 1rem; font-weight: 700; margin: 0 0 15px 0;">Existing Conditions</h4>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Workstations</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Private Offices</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Spaces</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Seats</span>
+                                                <span style="color: var(--umgc-navy); font-weight: 700;">0 seats</span>
+                                            </div>
+                                        </div>
+                        </div>
+
+                                    <!-- Planned Conditions -->
+                                    <div style="background: var(--umgc-gray-light); padding: 20px; border-radius: 8px; border-left: 4px solid hsl(142, 76%, 36%);">
+                                        <h4 style="color: var(--umgc-navy); font-size: 1rem; font-weight: 700; margin: 0 0 15px 0;">Planned Conditions</h4>
+                                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
+                                                <span id="hotelPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">37,500</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Workstations</span>
+                                                <span id="hotelPlannedWorkstation" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Private Offices</span>
+                                                <span id="hotelPlannedOffice" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Spaces</span>
+                                                <span id="hotelPlannedCollab" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                            </div>
+                                            <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
+                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Collab Seats</span>
+                                                <span id="hotelPlannedSeats" style="color: var(--umgc-navy); font-weight: 700;">0 seats</span>
+                                            </div>
+                                        </div>
+                        </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    
                     <div class="space-planning-container">
                         <div class="space-title">
                             <h2>Hotel Building</h2>
@@ -2336,7 +2464,7 @@
                                             <div id="hotelBuildingTotalAssignable" style="color: white; font-size: 1.1rem; font-weight: 700;">37,500</div>
                                         </div>
                                         <div style="text-align: center;">
-                                            <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Overall Efficiency</div>
+                                            <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Efficiency</div>
                                             <div id="hotelBuildingOverallEfficiency" style="color: white; font-size: 1.1rem; font-weight: 700;">75%</div>
                                         </div>
                                     </div>
@@ -2595,6 +2723,30 @@
                                             <span class="metric-value" id="adminEfficiency">85%</span>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Admin Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 40</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 25</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 17</div>
+                                                    <div><strong>Seats:</strong> 85</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="adminSummaryWorkstation">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="adminSummaryOffice">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="adminSummaryCollab">0</span></div>
+                                                    <div><strong>Seats:</strong> <span id="adminSummarySeats">0</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div class="building-summary-card icc">
@@ -2618,6 +2770,30 @@
                                         <div class="metric">
                                             <span class="metric-label">Efficiency</span>
                                             <span class="metric-value" id="iccEfficiency">80%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- ICC Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 0</div>
+                                                    <div><strong>Seats:</strong> 0</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="iccSummaryWorkstation">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="iccSummaryOffice">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="iccSummaryCollab">0</span></div>
+                                                    <div><strong>Seats:</strong> <span id="iccSummarySeats">0</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2645,11 +2821,35 @@
                                             <span class="metric-value" id="hotelEfficiency">75%</span>
                                         </div>
                                     </div>
+                                    
+                                    <!-- Hotel Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 0</div>
+                                                    <div><strong>Seats:</strong> 0</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="hotelSummaryWorkstation">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="hotelSummaryOffice">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="hotelSummaryCollab">0</span></div>
+                                                    <div><strong>Seats:</strong> <span id="hotelSummarySeats">0</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 
                                 <div class="building-summary-card combined">
                                     <div class="building-header">
-                                        <h3><img src="adelphicampus.png" alt="Adelphi Campus" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px; vertical-align: middle; margin-right: 8px;"> Adelphi Campus Total</h3>
+                                        <h3><img src="adelphicampus.png" alt="Adelphi Campus" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px; vertical-align: middle; margin-right: 8px;"> Adelphi Campus</h3>
                                         <div class="building-status">Total</div>
                                     </div>
                                     <div class="building-metrics">
@@ -2666,8 +2866,34 @@
                                             <span class="metric-value" id="combinedUsedSF">8,685</span>
                                         </div>
                                         <div class="metric">
-                                            <span class="metric-label">Overall Efficiency</span>
+                                            <span class="metric-label">Efficiency</span>
                                             <span class="metric-value" id="combinedEfficiency">81%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Campus Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusExistingAssignable">52,000</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusExistingWorkstation">40</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusExistingOffice">25</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusExistingCollab">17</span></div>
+                                                    <div><strong>Seats:</strong> <span id="campusExistingSeats">85</span></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusPlannedAssignable">129,500</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusPlannedWorkstation">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusPlannedOffice">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusPlannedCollab">0</span></div>
+                                                    <div><strong>Seats:</strong> <span id="campusPlannedSeats">0</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -2876,7 +3102,9 @@
                     <div class="chart-card">
                         <h3 class="chart-title">Travel Time Distribution</h3>
                         <p class="chart-subtitle">Number of people within different time thresholds</p>
-                        <canvas id="travelChart" class="travel-chart"></canvas>
+                        <div style="position: relative; height: 300px; width: 100%;">
+                            <canvas id="travelChart" class="travel-chart"></canvas>
+                        </div>
                     </div>
 
                     <!-- Key Metrics -->
@@ -3854,27 +4082,31 @@
         }
 
         function toggleICCComparison() {
-            // ICC comparison header doesn't have expandable content, this is just a placeholder for consistency
+            const content = document.getElementById('iccComparisonContent');
             const toggle = document.getElementById('iccComparisonToggle');
-            if (toggle) {
-                // Just animate the toggle icon for visual feedback
-                if (toggle.textContent === '▼') {
-                    toggle.textContent = '▶';
-                } else {
+            
+            if (content && toggle) {
+                if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                    content.style.maxHeight = '1000px';
                     toggle.textContent = '▼';
+                } else {
+                    content.style.maxHeight = '0px';
+                    toggle.textContent = '▲';
                 }
             }
         }
 
         function toggleHotelComparison() {
-            // Hotel comparison header doesn't have expandable content, this is just a placeholder for consistency
+            const content = document.getElementById('hotelComparisonContent');
             const toggle = document.getElementById('hotelComparisonToggle');
-            if (toggle) {
-                // Just animate the toggle icon for visual feedback
-                if (toggle.textContent === '▼') {
-                    toggle.textContent = '▶';
-                } else {
+            
+            if (content && toggle) {
+                if (content.style.maxHeight === '0px' || content.style.maxHeight === '') {
+                    content.style.maxHeight = '1000px';
                     toggle.textContent = '▼';
+                } else {
+                    content.style.maxHeight = '0px';
+                    toggle.textContent = '▲';
                 }
             }
         }
@@ -4870,6 +5102,19 @@
             if (deltaOfficesEl) deltaOfficesEl.textContent = formatDelta(deltaOfficeVal);
             if (deltaSpacesEl) deltaSpacesEl.textContent = formatDelta(deltaCollabVal);
             if (deltaSeatsEl) deltaSeatsEl.textContent = formatDelta(deltaSeatVal);
+            
+            // Update ICC comparison cards
+            const iccPlannedAssignableEl = document.getElementById('iccPlannedAssignable');
+            const iccPlannedWorkstationEl = document.getElementById('iccPlannedWorkstation');
+            const iccPlannedOfficeEl = document.getElementById('iccPlannedOffice');
+            const iccPlannedCollabEl = document.getElementById('iccPlannedCollab');
+            const iccPlannedSeatsEl = document.getElementById('iccPlannedSeats');
+            
+            if (iccPlannedAssignableEl) iccPlannedAssignableEl.textContent = assignableSF.toLocaleString();
+            if (iccPlannedWorkstationEl) iccPlannedWorkstationEl.textContent = workstationCount + ' spaces';
+            if (iccPlannedOfficeEl) iccPlannedOfficeEl.textContent = officeCount + ' spaces';
+            if (iccPlannedCollabEl) iccPlannedCollabEl.textContent = collabCount + ' spaces';
+            if (iccPlannedSeatsEl) iccPlannedSeatsEl.textContent = collabSeats + ' seats';
         }
 
         // Hotel Building Functions (render same space types as Admin)
@@ -5147,6 +5392,19 @@
             if (deltaOfficesEl) deltaOfficesEl.textContent = formatDelta(deltaOfficeVal);
             if (deltaSpacesEl) deltaSpacesEl.textContent = formatDelta(deltaCollabVal);
             if (deltaSeatsEl) deltaSeatsEl.textContent = formatDelta(deltaSeatVal);
+            
+            // Update Hotel comparison cards
+            const hotelPlannedAssignableEl = document.getElementById('hotelPlannedAssignable');
+            const hotelPlannedWorkstationEl = document.getElementById('hotelPlannedWorkstation');
+            const hotelPlannedOfficeEl = document.getElementById('hotelPlannedOffice');
+            const hotelPlannedCollabEl = document.getElementById('hotelPlannedCollab');
+            const hotelPlannedSeatsEl = document.getElementById('hotelPlannedSeats');
+            
+            if (hotelPlannedAssignableEl) hotelPlannedAssignableEl.textContent = assignableSF.toLocaleString();
+            if (hotelPlannedWorkstationEl) hotelPlannedWorkstationEl.textContent = workstationCount + ' spaces';
+            if (hotelPlannedOfficeEl) hotelPlannedOfficeEl.textContent = officeCount + ' spaces';
+            if (hotelPlannedCollabEl) hotelPlannedCollabEl.textContent = collabCount + ' spaces';
+            if (hotelPlannedSeatsEl) hotelPlannedSeatsEl.textContent = collabSeats + ' seats';
         }
 
 
@@ -5220,6 +5478,109 @@
             document.getElementById('remainingSF').textContent = adminRemainingSF.toLocaleString();
             document.getElementById('iccRemainingSF').textContent = iccRemainingSF.toLocaleString();
             document.getElementById('hotelRemainingSF').textContent = hotelRemainingSF.toLocaleString();
+            
+            // Calculate campus-wide totals for comparison cards
+            const campusPlannedWorkstations = (quantities.workstation || 0) + (iccQuantities.workstation || 0) + (hotelQuantities.workstation || 0);
+            const campusPlannedOffices = 
+                ((quantities.smallOffice || 0) + (quantities.medOffice || 0) + (quantities.largeOffice || 0)) +
+                ((iccQuantities.smallOffice || 0) + (iccQuantities.medOffice || 0) + (iccQuantities.largeOffice || 0)) +
+                ((hotelQuantities.smallOffice || 0) + (hotelQuantities.medOffice || 0) + (hotelQuantities.largeOffice || 0));
+            
+            let campusPlannedCollabCount = 0;
+            let campusPlannedCollabSeats = 0;
+            
+            SPACE_TYPES.forEach(type => {
+                if (type.category === 'collaboration') {
+                    const adminQty = quantities[type.id] || 0;
+                    const iccQty = iccQuantities[type.id] || 0;
+                    const hotelQty = hotelQuantities[type.id] || 0;
+                    const totalQty = adminQty + iccQty + hotelQty;
+                    
+                    campusPlannedCollabCount += totalQty;
+                    campusPlannedCollabSeats += totalQty * (type.seats || 0);
+                }
+            });
+            
+            // Update campus comparison cards
+            const campusPlannedAssignableEl = document.getElementById('campusPlannedAssignable');
+            const campusPlannedWorkstationEl = document.getElementById('campusPlannedWorkstation');
+            const campusPlannedOfficeEl = document.getElementById('campusPlannedOffice');
+            const campusPlannedCollabEl = document.getElementById('campusPlannedCollab');
+            const campusPlannedSeatsEl = document.getElementById('campusPlannedSeats');
+            
+            if (campusPlannedAssignableEl) campusPlannedAssignableEl.textContent = combinedAssignableSF.toLocaleString();
+            if (campusPlannedWorkstationEl) campusPlannedWorkstationEl.textContent = campusPlannedWorkstations;
+            if (campusPlannedOfficeEl) campusPlannedOfficeEl.textContent = campusPlannedOffices;
+            if (campusPlannedCollabEl) campusPlannedCollabEl.textContent = campusPlannedCollabCount;
+            if (campusPlannedSeatsEl) campusPlannedSeatsEl.textContent = campusPlannedCollabSeats;
+            
+            // Calculate individual building totals for summary cards
+            const adminWorkstationCount = quantities.workstation || 0;
+            const adminOfficeCount = (quantities.smallOffice || 0) + (quantities.medOffice || 0) + (quantities.largeOffice || 0);
+            let adminCollabCount = 0;
+            let adminCollabSeats = 0;
+            SPACE_TYPES.forEach(type => {
+                if (type.category === 'collaboration') {
+                    const qty = quantities[type.id] || 0;
+                    adminCollabCount += qty;
+                    adminCollabSeats += qty * (type.seats || 0);
+                }
+            });
+            
+            const iccWorkstationCount = iccQuantities.workstation || 0;
+            const iccOfficeCount = (iccQuantities.smallOffice || 0) + (iccQuantities.medOffice || 0) + (iccQuantities.largeOffice || 0);
+            let iccCollabCount = 0;
+            let iccCollabSeats = 0;
+            SPACE_TYPES.forEach(type => {
+                if (type.category === 'collaboration') {
+                    const qty = iccQuantities[type.id] || 0;
+                    iccCollabCount += qty;
+                    iccCollabSeats += qty * (type.seats || 0);
+                }
+            });
+            
+            const hotelWorkstationCount = hotelQuantities.workstation || 0;
+            const hotelOfficeCount = (hotelQuantities.smallOffice || 0) + (hotelQuantities.medOffice || 0) + (hotelQuantities.largeOffice || 0);
+            let hotelCollabCount = 0;
+            let hotelCollabSeats = 0;
+            SPACE_TYPES.forEach(type => {
+                if (type.category === 'collaboration') {
+                    const qty = hotelQuantities[type.id] || 0;
+                    hotelCollabCount += qty;
+                    hotelCollabSeats += qty * (type.seats || 0);
+                }
+            });
+            
+            // Update building summary cards
+            const adminSummaryWorkstationEl = document.getElementById('adminSummaryWorkstation');
+            const adminSummaryOfficeEl = document.getElementById('adminSummaryOffice');
+            const adminSummaryCollabEl = document.getElementById('adminSummaryCollab');
+            const adminSummarySeatsEl = document.getElementById('adminSummarySeats');
+            
+            if (adminSummaryWorkstationEl) adminSummaryWorkstationEl.textContent = adminWorkstationCount;
+            if (adminSummaryOfficeEl) adminSummaryOfficeEl.textContent = adminOfficeCount;
+            if (adminSummaryCollabEl) adminSummaryCollabEl.textContent = adminCollabCount;
+            if (adminSummarySeatsEl) adminSummarySeatsEl.textContent = adminCollabSeats;
+            
+            const iccSummaryWorkstationEl = document.getElementById('iccSummaryWorkstation');
+            const iccSummaryOfficeEl = document.getElementById('iccSummaryOffice');
+            const iccSummaryCollabEl = document.getElementById('iccSummaryCollab');
+            const iccSummarySeatsEl = document.getElementById('iccSummarySeats');
+            
+            if (iccSummaryWorkstationEl) iccSummaryWorkstationEl.textContent = iccWorkstationCount;
+            if (iccSummaryOfficeEl) iccSummaryOfficeEl.textContent = iccOfficeCount;
+            if (iccSummaryCollabEl) iccSummaryCollabEl.textContent = iccCollabCount;
+            if (iccSummarySeatsEl) iccSummarySeatsEl.textContent = iccCollabSeats;
+            
+            const hotelSummaryWorkstationEl = document.getElementById('hotelSummaryWorkstation');
+            const hotelSummaryOfficeEl = document.getElementById('hotelSummaryOffice');
+            const hotelSummaryCollabEl = document.getElementById('hotelSummaryCollab');
+            const hotelSummarySeatsEl = document.getElementById('hotelSummarySeats');
+            
+            if (hotelSummaryWorkstationEl) hotelSummaryWorkstationEl.textContent = hotelWorkstationCount;
+            if (hotelSummaryOfficeEl) hotelSummaryOfficeEl.textContent = hotelOfficeCount;
+            if (hotelSummaryCollabEl) hotelSummaryCollabEl.textContent = hotelCollabCount;
+            if (hotelSummarySeatsEl) hotelSummarySeatsEl.textContent = hotelCollabSeats;
             
             // Update Adelphi comparison charts
             if (typeof updateAdephiComparisonCharts === 'function') updateAdephiComparisonCharts();
@@ -6300,9 +6661,25 @@
             const iccWorkstations = iccQuantities.workstation || 0;
             const iccClosedOffices = (iccQuantities.smallOffice || 0) + (iccQuantities.medOffice || 0) + (iccQuantities.largeOffice || 0);
             
+            // Calculate ICC collaboration rooms
+            const iccPhoneRooms = iccQuantities.phoneRoom || 0;
+            const iccHuddle = iccQuantities.huddleRoom || 0;
+            const iccSmallMeeting = iccQuantities.smallMeeting || 0;
+            const iccMedMeeting = iccQuantities.mediumMeeting || 0;
+            const iccLargeMeeting = iccQuantities.largeMeeting || 0;
+            const iccCollab = iccQuantities.collaboration || 0;
+            
             // Calculate Hotel totals
             const hotelWorkstations = hotelQuantities.workstation || 0;
             const hotelClosedOffices = (hotelQuantities.smallOffice || 0) + (hotelQuantities.medOffice || 0) + (hotelQuantities.largeOffice || 0);
+            
+            // Calculate Hotel collaboration rooms
+            const hotelPhoneRooms = hotelQuantities.phoneRoom || 0;
+            const hotelHuddle = hotelQuantities.huddleRoom || 0;
+            const hotelSmallMeeting = hotelQuantities.smallMeeting || 0;
+            const hotelMedMeeting = hotelQuantities.mediumMeeting || 0;
+            const hotelLargeMeeting = hotelQuantities.largeMeeting || 0;
+            const hotelCollab = hotelQuantities.collaboration || 0;
             
             // Calculate efficiency
             const adminTotalGSF = floorSpaces.reduce((a, b) => a + b, 0);
@@ -6343,22 +6720,6 @@
                 seatsOfficesChart.data.datasets[3].data = [adminClosedOffices, iccClosedOffices, hotelClosedOffices, campusClosedOffices];
                 seatsOfficesChart.update();
             }
-            
-            // Calculate ICC collaboration rooms
-            const iccPhoneRooms = iccQuantities.phoneRoom || 0;
-            const iccHuddle = iccQuantities.huddleRoom || 0;
-            const iccSmallMeeting = iccQuantities.smallMeeting || 0;
-            const iccMedMeeting = iccQuantities.mediumMeeting || 0;
-            const iccLargeMeeting = iccQuantities.largeMeeting || 0;
-            const iccCollab = iccQuantities.collaboration || 0;
-            
-            // Calculate Hotel collaboration rooms
-            const hotelPhoneRooms = hotelQuantities.phoneRoom || 0;
-            const hotelHuddle = hotelQuantities.huddleRoom || 0;
-            const hotelSmallMeeting = hotelQuantities.smallMeeting || 0;
-            const hotelMedMeeting = hotelQuantities.mediumMeeting || 0;
-            const hotelLargeMeeting = hotelQuantities.largeMeeting || 0;
-            const hotelCollab = hotelQuantities.collaboration || 0;
             
             // Update Collaboration Rooms Chart (stacked by building)
             if (collabRoomsChart) {
