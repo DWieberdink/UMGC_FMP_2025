@@ -5944,19 +5944,19 @@
                 efficiencyChart = new Chart(efficiencyCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Admin Building', 'ICC Building', 'Hotel Building'],
+                        labels: ['Admin Building', 'ICC Building', 'Hotel Building', 'Campus Total'],
                         datasets: [
                             {
                                 label: 'Existing',
-                                data: [85, 80, 75],
+                                data: [85, 80, 75, 81],
                                 backgroundColor: existingColor,
                                 borderColor: 'rgba(128, 128, 128, 1)',
                                 borderWidth: 1
                             },
                             {
                                 label: 'Planned',
-                                data: [85, 80, 75],
-                                backgroundColor: [adminColor, iccColor, hotelColor],
+                                data: [85, 80, 75, 81],
+                                backgroundColor: [adminColor, iccColor, hotelColor, 'rgba(100, 100, 100, 0.8)'],
                                 borderWidth: 1
                             }
                         ]
@@ -5985,30 +5985,35 @@
                 seatsOfficesChart = new Chart(seatsOfficesCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Admin Building', 'ICC Building', 'Hotel Building'],
+                        labels: ['Admin Building', 'ICC Building', 'Hotel Building', 'Campus Total'],
                         datasets: [
                             {
                                 label: 'Existing Open Offices',
-                                data: [40, 0, 0],
+                                data: [40, 0, 0, 40],
                                 backgroundColor: 'rgba(128, 128, 128, 0.6)',
                                 stack: 'existing'
                             },
                             {
                                 label: 'Existing Closed Offices',
-                                data: [25, 0, 0],
+                                data: [25, 0, 0, 25],
                                 backgroundColor: 'rgba(90, 90, 90, 0.6)',
                                 stack: 'existing'
                             },
                             {
                                 label: 'Planned Open Offices',
-                                data: [50, 0, 0],
-                                backgroundColor: adminColor,
+                                data: [50, 0, 0, 50],
+                                backgroundColor: [adminColor, iccColor, hotelColor, 'rgba(0, 45, 114, 0.5)'],
                                 stack: 'planned'
                             },
                             {
                                 label: 'Planned Closed Offices',
-                                data: [23, 0, 0],
-                                backgroundColor: 'rgba(0, 45, 114, 0.6)',
+                                data: [23, 0, 0, 23],
+                                backgroundColor: [
+                                    'rgba(0, 45, 114, 0.6)', 
+                                    'rgba(255, 184, 28, 0.6)', 
+                                    'rgba(197, 32, 50, 0.6)', 
+                                    'rgba(0, 45, 114, 0.3)'
+                                ],
                                 stack: 'planned'
                             }
                         ]
@@ -6041,22 +6046,38 @@
                             {
                                 label: 'Admin - Existing',
                                 data: [3, 4, 3, 3, 2, 2],
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)'
+                                backgroundColor: 'rgba(128, 128, 128, 0.6)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'ICC - Existing',
+                                data: [0, 0, 0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.4)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'Hotel - Existing',
+                                data: [0, 0, 0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                                stack: 'existing'
                             },
                             {
                                 label: 'Admin - Planned',
                                 data: [3, 4, 3, 2, 1, 2],
-                                backgroundColor: adminColor
+                                backgroundColor: adminColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'ICC - Planned',
                                 data: [0, 0, 0, 0, 0, 0],
-                                backgroundColor: iccColor
+                                backgroundColor: iccColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'Hotel - Planned',
                                 data: [0, 0, 0, 0, 0, 0],
-                                backgroundColor: hotelColor
+                                backgroundColor: hotelColor,
+                                stack: 'planned'
                             }
                         ]
                     },
@@ -6083,17 +6104,17 @@
                 collabSeatsChart = new Chart(collabSeatsCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Admin Building', 'ICC Building', 'Hotel Building'],
+                        labels: ['Admin Building', 'ICC Building', 'Hotel Building', 'Campus Total'],
                         datasets: [
                             {
                                 label: 'Existing',
-                                data: [75, 0, 0],
+                                data: [75, 0, 0, 75],
                                 backgroundColor: existingColor
                             },
                             {
                                 label: 'Planned',
-                                data: [62, 0, 0],
-                                backgroundColor: [adminColor, iccColor, hotelColor]
+                                data: [62, 0, 0, 62],
+                                backgroundColor: [adminColor, iccColor, hotelColor, 'rgba(100, 100, 100, 0.8)']
                             }
                         ]
                     },
@@ -6125,22 +6146,38 @@
                             {
                                 label: 'Admin - Existing',
                                 data: [4000, 4750, 4500, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)'
+                                backgroundColor: 'rgba(128, 128, 128, 0.6)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'ICC - Existing',
+                                data: [0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.4)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'Hotel - Existing',
+                                data: [0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                                stack: 'existing'
                             },
                             {
                                 label: 'Admin - Planned',
                                 data: [5000, 4360, 3250, 0],
-                                backgroundColor: adminColor
+                                backgroundColor: adminColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'ICC - Planned',
                                 data: [0, 0, 0, 0],
-                                backgroundColor: iccColor
+                                backgroundColor: iccColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'Hotel - Planned',
                                 data: [0, 0, 0, 0],
-                                backgroundColor: hotelColor
+                                backgroundColor: hotelColor,
+                                stack: 'planned'
                             }
                         ]
                     },
@@ -6172,22 +6209,38 @@
                             {
                                 label: 'Admin - Existing',
                                 data: [4000, 2250, 1540, 960, 60, 200, 450, 1350, 1800, 640],
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)'
+                                backgroundColor: 'rgba(128, 128, 128, 0.6)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'ICC - Existing',
+                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.4)',
+                                stack: 'existing'
+                            },
+                            {
+                                label: 'Hotel - Existing',
+                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                                backgroundColor: 'rgba(128, 128, 128, 0.2)',
+                                stack: 'existing'
                             },
                             {
                                 label: 'Admin - Planned',
                                 data: [5000, 1500, 1760, 1100, 60, 200, 450, 900, 1000, 640],
-                                backgroundColor: adminColor
+                                backgroundColor: adminColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'ICC - Planned',
                                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                backgroundColor: iccColor
+                                backgroundColor: iccColor,
+                                stack: 'planned'
                             },
                             {
                                 label: 'Hotel - Planned',
                                 data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                backgroundColor: hotelColor
+                                backgroundColor: hotelColor,
+                                stack: 'planned'
                             }
                         ]
                     },
@@ -6264,45 +6317,53 @@
             const hotelAssignableSF = hotelFloorSpaces.reduce((sum, gsf, index) => sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100)), 0);
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
+            // Calculate campus totals
+            const campusTotalGSF = adminTotalGSF + iccTotalGSF + hotelTotalGSF;
+            const campusAssignableSF = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
+            const campusEfficiency = campusTotalGSF > 0 ? Math.round((campusAssignableSF / campusTotalGSF) * 100) : 0;
+            const campusWorkstations = adminWorkstations + iccWorkstations + hotelWorkstations;
+            const campusClosedOffices = adminClosedOffices + iccClosedOffices + hotelClosedOffices;
+            const campusCollabSeats = adminCollabSeats;
+            
             // Update Efficiency Chart
             if (efficiencyChart) {
-                efficiencyChart.data.datasets[1].data = [adminEfficiency, iccEfficiency, hotelEfficiency];
+                efficiencyChart.data.datasets[1].data = [adminEfficiency, iccEfficiency, hotelEfficiency, campusEfficiency];
                 efficiencyChart.update();
             }
             
             // Update Seats & Offices Chart
             if (seatsOfficesChart) {
-                seatsOfficesChart.data.datasets[2].data = [adminWorkstations, iccWorkstations, hotelWorkstations];
-                seatsOfficesChart.data.datasets[3].data = [adminClosedOffices, iccClosedOffices, hotelClosedOffices];
+                seatsOfficesChart.data.datasets[2].data = [adminWorkstations, iccWorkstations, hotelWorkstations, campusWorkstations];
+                seatsOfficesChart.data.datasets[3].data = [adminClosedOffices, iccClosedOffices, hotelClosedOffices, campusClosedOffices];
                 seatsOfficesChart.update();
             }
             
-            // Update Collaboration Rooms Chart
+            // Update Collaboration Rooms Chart (stacked by building)
             if (collabRoomsChart) {
-                collabRoomsChart.data.datasets[1].data = [adminPhoneRooms, adminHuddle, adminSmallMeeting, adminMedMeeting, adminLargeMeeting, adminCollab];
+                collabRoomsChart.data.datasets[3].data = [adminPhoneRooms, adminHuddle, adminSmallMeeting, adminMedMeeting, adminLargeMeeting, adminCollab];
                 collabRoomsChart.update();
             }
             
             // Update Collaboration Seats Chart
             if (collabSeatsChart) {
-                collabSeatsChart.data.datasets[1].data = [adminCollabSeats, 0, 0];
+                collabSeatsChart.data.datasets[1].data = [adminCollabSeats, 0, 0, campusCollabSeats];
                 collabSeatsChart.update();
             }
             
-            // Update Space Category SF Chart
+            // Update Space Category SF Chart (stacked by building)
             if (spaceCategoryChart) {
                 const adminWorkstationCat = adminWorkstationsSF;
                 const adminOfficesCat = adminSmallOfficeSF + adminMedOfficeSF + adminLargeOfficeSF;
                 const adminCollabCat = adminPhoneRoomSF + adminHuddleSF + adminSmallMeetingSF + adminMedMeetingSF + adminLargeMeetingSF + adminCollabSF;
                 const adminOtherCat = customSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
                 
-                spaceCategoryChart.data.datasets[1].data = [adminWorkstationCat, adminOfficesCat, adminCollabCat, adminOtherCat];
+                spaceCategoryChart.data.datasets[3].data = [adminWorkstationCat, adminOfficesCat, adminCollabCat, adminOtherCat];
                 spaceCategoryChart.update();
             }
             
-            // Update Space Detail SF Chart
+            // Update Space Detail SF Chart (stacked by building)
             if (spaceDetailChart) {
-                spaceDetailChart.data.datasets[1].data = [
+                spaceDetailChart.data.datasets[3].data = [
                     adminWorkstationsSF, 
                     adminSmallOfficeSF, 
                     adminMedOfficeSF, 
