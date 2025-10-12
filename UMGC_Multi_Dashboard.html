@@ -6317,13 +6317,19 @@
             const hotelAssignableSF = hotelFloorSpaces.reduce((sum, gsf, index) => sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100)), 0);
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
+            // Calculate ICC collaboration seats
+            const iccCollabSeats = iccPhoneRooms + iccHuddle * 4 + iccSmallMeeting * 6 + iccMedMeeting * 10 + iccLargeMeeting * 20 + iccCollab * 8;
+            
+            // Calculate Hotel collaboration seats
+            const hotelCollabSeats = hotelPhoneRooms + hotelHuddle * 4 + hotelSmallMeeting * 6 + hotelMedMeeting * 10 + hotelLargeMeeting * 20 + hotelCollab * 8;
+            
             // Calculate campus totals
             const campusTotalGSF = adminTotalGSF + iccTotalGSF + hotelTotalGSF;
             const campusAssignableSF = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
             const campusEfficiency = campusTotalGSF > 0 ? Math.round((campusAssignableSF / campusTotalGSF) * 100) : 0;
             const campusWorkstations = adminWorkstations + iccWorkstations + hotelWorkstations;
             const campusClosedOffices = adminClosedOffices + iccClosedOffices + hotelClosedOffices;
-            const campusCollabSeats = adminCollabSeats;
+            const campusCollabSeats = adminCollabSeats + iccCollabSeats + hotelCollabSeats;
             
             // Update Efficiency Chart
             if (efficiencyChart) {
@@ -6338,17 +6344,62 @@
                 seatsOfficesChart.update();
             }
             
+            // Calculate ICC collaboration rooms
+            const iccPhoneRooms = iccQuantities.phoneRoom || 0;
+            const iccHuddle = iccQuantities.huddleRoom || 0;
+            const iccSmallMeeting = iccQuantities.smallMeeting || 0;
+            const iccMedMeeting = iccQuantities.mediumMeeting || 0;
+            const iccLargeMeeting = iccQuantities.largeMeeting || 0;
+            const iccCollab = iccQuantities.collaboration || 0;
+            
+            // Calculate Hotel collaboration rooms
+            const hotelPhoneRooms = hotelQuantities.phoneRoom || 0;
+            const hotelHuddle = hotelQuantities.huddleRoom || 0;
+            const hotelSmallMeeting = hotelQuantities.smallMeeting || 0;
+            const hotelMedMeeting = hotelQuantities.mediumMeeting || 0;
+            const hotelLargeMeeting = hotelQuantities.largeMeeting || 0;
+            const hotelCollab = hotelQuantities.collaboration || 0;
+            
             // Update Collaboration Rooms Chart (stacked by building)
             if (collabRoomsChart) {
+                // Dataset 0: Admin - Existing (no update needed, static)
+                // Dataset 1: ICC - Existing (no update needed, no existing data)
+                // Dataset 2: Hotel - Existing (no update needed, no existing data)
                 collabRoomsChart.data.datasets[3].data = [adminPhoneRooms, adminHuddle, adminSmallMeeting, adminMedMeeting, adminLargeMeeting, adminCollab];
+                collabRoomsChart.data.datasets[4].data = [iccPhoneRooms, iccHuddle, iccSmallMeeting, iccMedMeeting, iccLargeMeeting, iccCollab];
+                collabRoomsChart.data.datasets[5].data = [hotelPhoneRooms, hotelHuddle, hotelSmallMeeting, hotelMedMeeting, hotelLargeMeeting, hotelCollab];
                 collabRoomsChart.update();
             }
             
             // Update Collaboration Seats Chart
             if (collabSeatsChart) {
-                collabSeatsChart.data.datasets[1].data = [adminCollabSeats, 0, 0, campusCollabSeats];
+                collabSeatsChart.data.datasets[1].data = [adminCollabSeats, iccCollabSeats, hotelCollabSeats, campusCollabSeats];
                 collabSeatsChart.update();
             }
+            
+            // Calculate ICC SF by category
+            const iccWorkstationsSF = iccWorkstations * (iccSpaceSF.workstation || 100);
+            const iccSmallOfficeSF = (iccQuantities.smallOffice || 0) * (iccSpaceSF.smallOffice || 150);
+            const iccMedOfficeSF = (iccQuantities.medOffice || 0) * (iccSpaceSF.medOffice || 220);
+            const iccLargeOfficeSF = (iccQuantities.largeOffice || 0) * (iccSpaceSF.largeOffice || 320);
+            const iccPhoneRoomSF = iccPhoneRooms * (iccSpaceSF.phoneRoom || 20);
+            const iccHuddleSF = iccHuddle * (iccSpaceSF.huddleRoom || 50);
+            const iccSmallMeetingSF = iccSmallMeeting * (iccSpaceSF.smallMeeting || 150);
+            const iccMedMeetingSF = iccMedMeeting * (iccSpaceSF.mediumMeeting || 450);
+            const iccLargeMeetingSF = iccLargeMeeting * (iccSpaceSF.largeMeeting || 1000);
+            const iccCollabSF = iccCollab * (iccSpaceSF.collaboration || 320);
+            
+            // Calculate Hotel SF by category
+            const hotelWorkstationsSF = hotelWorkstations * (hotelSpaceSF.workstation || 100);
+            const hotelSmallOfficeSF = (hotelQuantities.smallOffice || 0) * (hotelSpaceSF.smallOffice || 150);
+            const hotelMedOfficeSF = (hotelQuantities.medOffice || 0) * (hotelSpaceSF.medOffice || 220);
+            const hotelLargeOfficeSF = (hotelQuantities.largeOffice || 0) * (hotelSpaceSF.largeOffice || 320);
+            const hotelPhoneRoomSF = hotelPhoneRooms * (hotelSpaceSF.phoneRoom || 20);
+            const hotelHuddleSF = hotelHuddle * (hotelSpaceSF.huddleRoom || 50);
+            const hotelSmallMeetingSF = hotelSmallMeeting * (hotelSpaceSF.smallMeeting || 150);
+            const hotelMedMeetingSF = hotelMedMeeting * (hotelSpaceSF.mediumMeeting || 450);
+            const hotelLargeMeetingSF = hotelLargeMeeting * (hotelSpaceSF.largeMeeting || 1000);
+            const hotelCollabSF = hotelCollab * (hotelSpaceSF.collaboration || 320);
             
             // Update Space Category SF Chart (stacked by building)
             if (spaceCategoryChart) {
@@ -6357,7 +6408,19 @@
                 const adminCollabCat = adminPhoneRoomSF + adminHuddleSF + adminSmallMeetingSF + adminMedMeetingSF + adminLargeMeetingSF + adminCollabSF;
                 const adminOtherCat = customSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
                 
+                const iccWorkstationCat = iccWorkstationsSF;
+                const iccOfficesCat = iccSmallOfficeSF + iccMedOfficeSF + iccLargeOfficeSF;
+                const iccCollabCat = iccPhoneRoomSF + iccHuddleSF + iccSmallMeetingSF + iccMedMeetingSF + iccLargeMeetingSF + iccCollabSF;
+                const iccOtherCat = iccCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
+                
+                const hotelWorkstationCat = hotelWorkstationsSF;
+                const hotelOfficesCat = hotelSmallOfficeSF + hotelMedOfficeSF + hotelLargeOfficeSF;
+                const hotelCollabCat = hotelPhoneRoomSF + hotelHuddleSF + hotelSmallMeetingSF + hotelMedMeetingSF + hotelLargeMeetingSF + hotelCollabSF;
+                const hotelOtherCat = hotelCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
+                
                 spaceCategoryChart.data.datasets[3].data = [adminWorkstationCat, adminOfficesCat, adminCollabCat, adminOtherCat];
+                spaceCategoryChart.data.datasets[4].data = [iccWorkstationCat, iccOfficesCat, iccCollabCat, iccOtherCat];
+                spaceCategoryChart.data.datasets[5].data = [hotelWorkstationCat, hotelOfficesCat, hotelCollabCat, hotelOtherCat];
                 spaceCategoryChart.update();
             }
             
@@ -6374,6 +6437,30 @@
                     adminMedMeetingSF, 
                     adminLargeMeetingSF, 
                     adminCollabSF
+                ];
+                spaceDetailChart.data.datasets[4].data = [
+                    iccWorkstationsSF,
+                    iccSmallOfficeSF,
+                    iccMedOfficeSF,
+                    iccLargeOfficeSF,
+                    iccPhoneRoomSF,
+                    iccHuddleSF,
+                    iccSmallMeetingSF,
+                    iccMedMeetingSF,
+                    iccLargeMeetingSF,
+                    iccCollabSF
+                ];
+                spaceDetailChart.data.datasets[5].data = [
+                    hotelWorkstationsSF,
+                    hotelSmallOfficeSF,
+                    hotelMedOfficeSF,
+                    hotelLargeOfficeSF,
+                    hotelPhoneRoomSF,
+                    hotelHuddleSF,
+                    hotelSmallMeetingSF,
+                    hotelMedMeetingSF,
+                    hotelLargeMeetingSF,
+                    hotelCollabSF
                 ];
                 spaceDetailChart.update();
             }
