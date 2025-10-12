@@ -44,7 +44,9 @@
             color: var(--umgc-black);
             padding: 20px 40px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             border-bottom: 4px solid var(--umgc-gold);
             display: grid;
             grid-template-columns: auto 1fr;
@@ -89,6 +91,9 @@
             margin-top: 0;
             display: flex;
             border-bottom: 3px solid var(--umgc-gold);
+            position: sticky;
+            top: 128px;
+            z-index: 999;
         }
 
         .tab-button {
@@ -726,6 +731,9 @@
             margin-bottom: 0;
             padding: 0;
             overflow-x: auto;
+            position: sticky;
+            top: 188px;
+            z-index: 998;
         }
 
         .building-tab-button {
