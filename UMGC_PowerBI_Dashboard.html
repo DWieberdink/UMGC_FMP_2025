@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMGC Facilities Master Plan - Interactive Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* UMGC Official Theme Styling */
+        :root {
+            --umgc-primary: #1e3a8a; /* UMGC Blue */
+            --umgc-secondary: #dc2626; /* UMGC Red */
+            --umgc-accent: #f59e0b; /* UMGC Gold */
+            --umgc-success: #059669; /* UMGC Green */
+            --umgc-purple: #7c3aed; /* UMGC Purple */
+            --umgc-text-dark: #1f2937; /* Dark Gray */
+            --umgc-text-light: #6b7280; /* Light Gray */
+            --umgc-background: #f8fafc; /* Light Background */
+            --umgc-white: #ffffff;
+            --umgc-blue-dark: #1e40af;
+            --umgc-blue-light: #dbeafe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--umgc-background);
+            color: var(--umgc-text-dark);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--umgc-primary) 0%, var(--umgc-blue-dark) 50%, var(--umgc-secondary) 100%);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.025em;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.95;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .dashboard-wrapper {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15), 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-top: 15px;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--umgc-primary) 0%, var(--umgc-blue-dark) 100%);
+            color: white;
+            padding: 20px 30px;
+            border-bottom: 4px solid var(--umgc-accent);
+            position: relative;
+        }
+
+        .dashboard-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--umgc-accent) 0%, var(--umgc-secondary) 50%, var(--umgc-accent) 100%);
+        }
+
+        .dashboard-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -0.025em;
+        }
+
+        .auth-mode-selector {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .auth-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .auth-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .toggle-slider {
+            width: 50px;
+            height: 25px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .toggle-slider::before {
+            content: '';
+            position: absolute;
+            width: 21px;
+            height: 21px;
+            border-radius: 50%;
+            background-color: white;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+        }
+
+        .auth-toggle input[type="checkbox"]:checked + .toggle-slider {
+            background-color: var(--umgc-accent);
+        }
+
+        .auth-toggle input[type="checkbox"]:checked + .toggle-slider::before {
+            transform: translateX(25px);
+        }
+
+        .toggle-label {
+            color: white;
+            font-weight: 500;
+        }
+
+        .auth-help {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .auth-help small {
+            font-size: 0.8rem;
+        }
+
+        .powerbi-iframe {
+            width: 100%;
+            height: 95vh;
+            min-height: 900px;
+            border: none;
+            display: block;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 1.2rem;
+            color: var(--umgc-text-light);
+        }
+
+        .footer {
+            background: linear-gradient(135deg, var(--umgc-text-dark) 0%, #374151 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 4px solid var(--umgc-accent);
+        }
+
+        .footer p {
+            margin-bottom: 5px;
+        }
+
+        .footer a {
+            color: var(--umgc-accent);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .powerbi-iframe {
+                height: 85vh;
+                min-height: 700px;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--umgc-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--umgc-secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>University of Maryland Global Campus</h1>
+        <p>Facilities Master Plan Dashboard</p>
+    </div>
+
+    <div class="container">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-header">
+                <h2>FMP Campus</h2>
+                <div class="auth-mode-selector">
+                    <label class="auth-toggle">
+                        <input type="checkbox" id="publicModeToggle" onchange="toggleAuthMode()">
+                        <span class="toggle-slider"></span>
+                        <span class="toggle-label">Public Access Mode</span>
+                    </label>
+                    <div class="auth-help">
+                        <small>Toggle this if you're getting sign-in errors</small>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">
+                Loading dashboard...
+            </div>
+            
+            <iframe 
+                class="powerbi-iframe"
+                id="powerbi-frame"
+                src="https://app.powerbi.com/reportEmbed?reportId=c7325f3a-2272-4140-89e1-9a07162648d8&autoAuth=true&ctid=42523965-66b8-4e84-8ead-59b4ba83077b&actionBarEnabled=true&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWEtcHJpbWFyeS5yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImNvbXBvc2VUeXBlIjoiaW5saW5lIn19"
+                title="UMGC Facilities Master Plan Dashboard"
+                allowfullscreen="true"
+                loading="lazy"
+                onload="hideLoading()">
+            </iframe>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p><strong>University of Maryland Global Campus</strong></p>
+        <p>Facilities Master Plan 2025</p>
+        <p>Empowering Education • Building Futures • Serving Globally</p>
+        <p>Last updated: <span id="lastUpdated"></span></p>
+        <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">
+            <a href="https://www.umgc.edu/" target="_blank" style="color: var(--umgc-accent);">Visit UMGC.edu</a> • 
+            <a href="https://www.umgc.edu/about-umgc/locations" target="_blank" style="color: var(--umgc-accent);">Global Locations</a> • 
+            <a href="https://www.umgc.edu/contact-us" target="_blank" style="color: var(--umgc-accent);">Contact Us</a>
+        </p>
+    </div>
+
+    <script>
+        // Hide loading indicator when iframe loads
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            const iframe = document.getElementById('powerbi-frame');
+            
+            if (loading && iframe) {
+                loading.style.display = 'none';
+                iframe.style.display = 'block';
+            }
+        }
+
+        // Set last updated timestamp
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString();
+
+        // Handle iframe load errors
+        document.getElementById('powerbi-frame').onerror = function() {
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.innerHTML = 'Unable to load dashboard. Please check your connection or contact support.';
+                loading.style.color = '#A31D27';
+            }
+        };
+
+        // Authentication persistence helpers
+        function storeAuthPreference() {
+            // Store user's preference to stay signed in
+            localStorage.setItem('umgc_powerbi_remember_auth', 'true');
+            localStorage.setItem('umgc_powerbi_last_access', new Date().toISOString());
+        }
+
+        function shouldRememberAuth() {
+            const rememberAuth = localStorage.getItem('umgc_powerbi_remember_auth');
+            const lastAccess = localStorage.getItem('umgc_powerbi_last_access');
+            
+            if (rememberAuth === 'true' && lastAccess) {
+                const lastAccessDate = new Date(lastAccess);
+                const now = new Date();
+                const daysSinceLastAccess = (now - lastAccessDate) / (1000 * 60 * 60 * 24);
+                
+                // Remember auth for 30 days
+                return daysSinceLastAccess < 30;
+            }
+            return false;
+        }
+
+        // Enhanced iframe URL with authentication persistence
+        function getPowerBIUrl() {
+            // Check if we should use public embed (no authentication required)
+            const usePublicEmbed = localStorage.getItem('umgc_use_public_embed') === 'true';
+            
+            if (usePublicEmbed) {
+                // Public embed URL - no authentication required
+                return 'https://app.powerbi.com/reportEmbed?reportId=c7325f3a-2272-4140-89e1-9a07162648d8&autoAuth=true&ctid=42523965-66b8-4e84-8ead-59b4ba83077b&actionBarEnabled=true&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly93YWJpLXVzLWVhc3QyLWEtcHJpbWFyeS5yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImNvbXBvc2VUeXBlIjoiaW5saW5lIn19';
+            }
+            
+            // Authenticated embed URL (requires proper tenant access)
+            const baseUrl = 'https://app.powerbi.com/reportEmbed';
+            const params = {
+                reportId: 'c7325f3a-2272-4140-89e1-9a07162648d8',
+                autoAuth: 'true',
+                ctid: '42523965-66b8-4e84-8ead-59b4ba83077b',
+                actionBarEnabled: 'true',
+                // Enhanced authentication parameters
+                persistFilters: 'true',
+                bookmarkId: '',
+                filterPaneEnabled: 'true',
+                navContentPaneEnabled: 'true'
+            };
+
+            // Add authentication persistence if user has opted in
+            if (shouldRememberAuth()) {
+                params.persistAuth = 'true';
+                storeAuthPreference();
+            }
+
+            const config = {
+                clusterUrl: 'https://wabi-us-east2-a-primary.redirect.analysis.windows.net',
+                embedFeatures: {
+                    modernEmbed: true,
+                    composeType: 'inline'
+                }
+            };
+
+            const configParam = btoa(JSON.stringify(config));
+            
+            const queryString = Object.keys(params)
+                .map(key => `${key}=${encodeURIComponent(params[key])}`)
+                .join('&');
+
+            return `${baseUrl}?${queryString}&config=${configParam}`;
+        }
+
+        // Toggle authentication mode
+        function toggleAuthMode() {
+            const toggle = document.getElementById('publicModeToggle');
+            const usePublicEmbed = toggle.checked;
+            
+            // Store user's preference
+            localStorage.setItem('umgc_use_public_embed', usePublicEmbed.toString());
+            
+            // Reload the iframe with new URL
+            const iframe = document.getElementById('powerbi-frame');
+            iframe.src = getPowerBIUrl();
+            
+            // Show loading indicator
+            const loading = document.getElementById('loading');
+            loading.style.display = 'flex';
+            loading.innerHTML = usePublicEmbed ? 
+                'Switching to public access mode...' : 
+                'Switching to authenticated mode...';
+        }
+
+        // Update iframe URL when page loads
+        function initializePowerBI() {
+            const iframe = document.getElementById('powerbi-frame');
+            iframe.src = getPowerBIUrl();
+            
+            // Set toggle state based on stored preference
+            const usePublicEmbed = localStorage.getItem('umgc_use_public_embed') === 'true';
+            const toggle = document.getElementById('publicModeToggle');
+            toggle.checked = usePublicEmbed;
+        }
+
+        // Make iframe responsive
+        function resizeIframe() {
+            const iframe = document.getElementById('powerbi-frame');
+            const container = iframe.parentElement;
+            const containerWidth = container.offsetWidth;
+            
+            // Adjust height based on screen size
+            if (window.innerWidth < 768) {
+                iframe.style.height = '85vh';
+            } else {
+                iframe.style.height = '95vh';
+            }
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('load', function() {
+            initializePowerBI();
+            resizeIframe();
+            storeAuthPreference(); // Remember this session
+        });
+
+        // Resize on window resize
+        window.addEventListener('resize', resizeIframe);
+
+        // Handle Power BI authentication events (if using Power BI SDK)
+        function handlePowerBIAuth(event) {
+            if (event.type === 'loaded') {
+                console.log('Power BI report loaded successfully');
+                storeAuthPreference();
+            } else if (event.type === 'error') {
+                console.error('Power BI authentication error:', event.detail);
+                // Could show a login prompt here if needed
+            }
+        }
+
+        // Add event listeners for Power BI events
+        window.addEventListener('message', function(event) {
+            if (event.origin === 'https://app.powerbi.com') {
+                handlePowerBIAuth(event);
+            }
+        });
+    </script>
+</body>
+</html>
