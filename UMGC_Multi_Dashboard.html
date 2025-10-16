@@ -1491,9 +1491,43 @@
             .tab-button:last-child {
                 border-bottom: none;
             }
+
+            /* Responsive efficiency cards */
+            .building-params-grid {
+                grid-template-columns: 1fr !important;
+            }
+
+            .param-control {
+                min-width: 220px;
+                max-width: 350px;
+                margin: 0 auto;
+            }
             
             .container {
                 padding: 10px;
+            }
+        }
+
+        /* Tablet and medium screens */
+        @media (min-width: 769px) and (max-width: 1200px) {
+            .building-params-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, max-content)) !important;
+            }
+        }
+
+        /* Large screens and widescreen */
+        @media (min-width: 1201px) {
+            .building-params-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, max-content)) !important;
+                max-width: 1400px;
+                margin: 0 auto;
+            }
+        }
+
+        /* Extra wide screens */
+        @media (min-width: 1600px) {
+            .building-params-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, max-content)) !important;
             }
             
             .dashboard-iframe {
@@ -1611,7 +1645,7 @@
                                 <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
                                     <div style="text-align: center;">
                                         <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Remaining SF</div>
-                                        <div id="remainingSF" style="color: white; font-size: 1.2rem; font-weight: 700;">93,725</div>
+                                        <div id="remainingSF" style="color: white; font-size: 1.2rem; font-weight: 700;">0</div>
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
@@ -1682,26 +1716,26 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span id="plannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">93,725</span>
+                                                <span id="plannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">77,514</span>
                                             </div>
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                     <span style="color: var(--umgc-text-dark); font-weight: 600;">Work Points</span>
-                                                    <span id="plannedWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                    <span id="plannedWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">292 spaces</span>
                                                 </div>
                                                 <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                    <span>Desk: <span id="plannedDeskCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
-                                                    <span>Office: <span id="plannedOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                    <span>Desk: <span id="plannedDeskCount" style="font-weight: 600; color: var(--umgc-navy);">99</span></span>
+                                                    <span>Office: <span id="plannedOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">193</span></span>
                                                 </div>
                                             </div>
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                     <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                    <span id="plannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                    <span id="plannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">56 spaces</span>
                                                 </div>
                                                 <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                    <span>Conf: <span id="plannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
-                                                    <span>Huddle: <span id="plannedHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                    <span>Conf: <span id="plannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">21</span></span>
+                                                    <span>Huddle: <span id="plannedHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">35</span></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1760,7 +1794,7 @@
                             </div>
                         </div>
                         <div id="buildingParamsContent" class="collapsible-content" style="max-height: 2000px; overflow: hidden; transition: max-height 0.4s ease;">
-                            <div class="building-params-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                            <div class="building-params-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, max-content));">
                                 <!-- Floor 1 -->
                             <div class="param-control" style="border: 2px solid var(--umgc-navy); border-radius: 8px; padding: 15px; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);">
                                 <h4 style="color: var(--umgc-navy); font-size: 1rem; margin-bottom: 10px; font-weight: 700;">Floor 1</h4>
@@ -1878,6 +1912,14 @@
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                 <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                                     <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600; cursor: pointer;" onclick="toggleSpaceAllocation()">Space Allocation</h3>
+                                    <button id="resetSpaceAllocationBtn" onclick="resetSpaceAllocationToExisting()" 
+                                            style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                   font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                   transition: all 0.3s ease;"
+                                            onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                            onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                        Reset to Existing
+                                    </button>
                                     <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px;">
                                         <input type="checkbox" id="showExistingToggle" onchange="toggleExistingData()" checked style="cursor: pointer;">
                                         <span style="color: white; font-size: 0.85rem; font-weight: 600;">Show Existing</span>
@@ -2112,25 +2154,25 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span id="iccPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">37,700</span>
+                                                <span id="iccPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">15,721</span>
                                             </div>
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                     <span style="color: var(--umgc-text-dark); font-weight: 600;">Work Points</span>
-                                                    <span id="iccPlannedWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                    <span id="iccPlannedWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">66 spaces</span>
                                                 </div>
                                                 <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                    <span>Desk: <span id="iccPlannedDeskCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
-                                                    <span>Office: <span id="iccPlannedOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                    <span>Desk: <span id="iccPlannedDeskCount" style="font-weight: 600; color: var(--umgc-navy);">17</span></span>
+                                                    <span>Office: <span id="iccPlannedOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">49</span></span>
                                                 </div>
                                             </div>
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                     <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                    <span id="iccPlannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                    <span id="iccPlannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">7 spaces</span>
                                                 </div>
                                                 <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                    <span>Conf: <span id="iccPlannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                    <span>Conf: <span id="iccPlannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">7</span></span>
                                                     <span>Huddle: <span id="iccPlannedHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
                                                 </div>
                                             </div>
@@ -2183,36 +2225,53 @@
                                     <p style="color: var(--umgc-text-light); margin-bottom: 20px; font-size: 0.9rem;">ICC Building - Conference and Meeting Center</p>
                                     
                                     <!-- ICC Building Floors -->
-                                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, max-content)); gap: 20px;">
                                         <!-- Basement - Fixed ASF -->
-                                        <div class="param-control" style="border: 2px solid var(--umgc-gold); border-radius: 8px; padding: 20px; background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);">
-                                            <h4 style="color: var(--umgc-gold); font-size: 1rem; margin-bottom: 15px; font-weight: 700;">Basement</h4>
-                                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 4px; margin-bottom: 10px;">
-                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Total Assignable SF:</span>
-                                                <span style="color: var(--umgc-gold); font-size: 1.2rem; font-weight: 700;">20,300</span>
+                                        <div class="param-control" style="border: 2px solid var(--umgc-gold); border-radius: 8px; padding: 15px; background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);">
+                                            <h4 style="color: var(--umgc-gold); font-size: 1rem; margin-bottom: 10px; font-weight: 700;">Basement</h4>
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing GSF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">20,300</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing Eff</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">100%</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing ASF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">20,300</div>
+                                                </div>
                                             </div>
-                                            <div style="padding: 10px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
-                                                <span style="font-size: 0.85rem; color: var(--umgc-text-medium);">Fixed capacity</span>
+                                            <div style="padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
+                                                <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Fixed Capacity - No Adjustments</span>
                                             </div>
                                         </div>
                                         
                                         <!-- 3rd Floor - Adjustable with Efficiency Slider -->
                                         <div class="param-control" style="border: 2px solid var(--umgc-gold); border-radius: 8px; padding: 15px; background: linear-gradient(135deg, #fff9f0 0%, #ffffff 100%);">
                                             <h4 style="color: var(--umgc-gold); font-size: 1rem; margin-bottom: 10px; font-weight: 700;">3rd Floor</h4>
-                                            <div class="param-header">
-                                                <label class="param-label">GSF</label>
-                                                <span class="param-value" id="iccFloor3Value">19,900</span>
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing GSF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">19,900</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing Eff</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">79%</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing ASF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-gold); font-weight: 700;">15,721</div>
+                                                </div>
                                             </div>
-                                            <div class="param-header" style="margin-top: 15px;">
-                                                <label class="param-label">Efficiency</label>
+                                            <div class="param-header">
+                                                <label class="param-label">Planned Efficiency</label>
                                                 <span class="param-value" id="iccFloor3EffValue">79%</span>
                                             </div>
                                             <input type="range" class="slider" id="iccFloor3EffSlider" min="50" max="85" value="79" step="1" oninput="updateICCFloorEfficiency(3, this.value)">
-                                            <div style="margin-top: 8px; padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
-                                                <span style="font-size: 0.85rem; color: var(--umgc-navy); font-weight: 600;">Assignable SF: <span id="iccFloor3Assignable">15,721</span></span>
-                                            </div>
-                                            <div style="margin-top: 8px; padding: 6px; background: #fff3cd; border: 1px solid #ffc107; border-radius: 4px; text-align: center;">
-                                                <span style="font-size: 0.75rem; color: #856404; font-weight: 600;">Target: 80% efficiency</span>
+                                            <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
+                                                <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="iccFloor3Assignable">15,721</span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -2226,6 +2285,14 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                                         <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600; cursor: pointer;" onclick="toggleICCSpaceAllocation()">ICC Space Allocation</h3>
+                                        <button id="resetICCSpaceAllocationBtn" onclick="resetICCSpaceAllocationToExisting()" 
+                                                style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                                onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                            Reset to Existing
+                                        </button>
                                     </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
@@ -2409,7 +2476,7 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span id="hotelPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">7,500</span>
+                                                <span id="hotelPlannedAssignable" style="color: var(--umgc-navy); font-weight: 700;">5,325</span>
                                             </div>
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
@@ -2424,10 +2491,10 @@
                                             <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                     <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                    <span id="hotelPlannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                    <span id="hotelPlannedCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">6 spaces</span>
                                                 </div>
                                                 <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                    <span>Conf: <span id="hotelPlannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                    <span>Conf: <span id="hotelPlannedConfCount" style="font-weight: 600; color: var(--umgc-navy);">6</span></span>
                                                     <span>Huddle: <span id="hotelPlannedHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
                                                 </div>
                                             </div>
@@ -2448,11 +2515,29 @@
                         <div class="space-card">
                             <div class="collapsible-header" onclick="toggleHotelBuildingParams()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #dc2626 100%); border-radius: 8px; margin-bottom: 15px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
-                                    <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Hotel Building Parameters</h3>
+                                    <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                                        <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Hotel Building Parameters</h3>
+                                        <button id="hotelBestPracticeEfficiencyBtn" onclick="applyHotelBestPracticeEfficiency()" 
+                                                style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#bbdefb'; this.style.borderColor='#90caf9'"
+                                                onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
+                                            Best Practice Efficiency
+                                        </button>
+                                        <button id="hotelResetToExistingBtn" onclick="resetHotelToExistingConditions()" 
+                                                style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                                onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                            Reset to Existing
+                                        </button>
+                                    </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
                                             <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Total Assignable SF</div>
-                                            <div id="hotelBuildingTotalAssignable" style="color: white; font-size: 1.1rem; font-weight: 700;">7,500</div>
+                                            <div id="hotelBuildingTotalAssignable" style="color: white; font-size: 1.1rem; font-weight: 700;">5,310</div>
                                         </div>
                                     </div>
                                     <span id="hotelBuildingParamsToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s ease;">▼</span>
@@ -2462,16 +2547,31 @@
                                 <div style="padding: 20px;">
                                     <p style="color: var(--umgc-text-light); margin-bottom: 20px; font-size: 0.9rem;">Hotel Building - Guest Accommodations and Services</p>
                                     
-                                    <!-- Hotel Building Floors - Fixed Display -->
-                                    <div style="display: grid; grid-template-columns: 1fr; gap: 20px; max-width: 400px;">
-                                        <div class="param-control" style="border: 2px solid var(--umgc-red); border-radius: 8px; padding: 20px; background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
-                                            <h4 style="color: var(--umgc-red); font-size: 1rem; margin-bottom: 15px; font-weight: 700;">1st Floor</h4>
-                                            <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px; background: white; border-radius: 4px; margin-bottom: 10px;">
-                                                <span style="color: var(--umgc-text-dark); font-weight: 600;">Total Assignable SF:</span>
-                                                <span style="color: var(--umgc-red); font-size: 1.2rem; font-weight: 700;">7,500</span>
+                                    <!-- Hotel Building Floors - Efficiency Control -->
+                                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, max-content)); gap: 20px;">
+                                        <div class="param-control" style="border: 2px solid var(--umgc-red); border-radius: 8px; padding: 15px; background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);">
+                                            <h4 style="color: var(--umgc-red); font-size: 1rem; margin-bottom: 10px; font-weight: 700;">1st Floor</h4>
+                                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing GSF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-red); font-weight: 700;">7,500</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing Eff</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-red); font-weight: 700;">71%</div>
+                                                </div>
+                                                <div style="padding: 8px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
+                                                    <div style="font-size: 0.7rem; color: var(--umgc-text-light); margin-bottom: 2px;">Existing ASF</div>
+                                                    <div style="font-size: 0.95rem; color: var(--umgc-red); font-weight: 700;">5,325</div>
+                                                </div>
                                             </div>
-                                            <div style="padding: 10px; background: var(--umgc-gray-light); border-radius: 4px; text-align: center;">
-                                                <span style="font-size: 0.85rem; color: var(--umgc-text-medium);">Fixed capacity - no adjustments needed</span>
+                                            <div class="param-header">
+                                                <label class="param-label">Planned Efficiency</label>
+                                                <span class="param-value" id="hotelFloor1EffValue">71%</span>
+                                            </div>
+                                            <input type="range" class="slider" id="hotelFloor1EffSlider" min="50" max="100" value="71" step="1" oninput="updateHotelFloorEfficiency(1, this.value)">
+                                            <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
+                                                <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="hotelFloor1Assignable">5,325</span></span>
                                             </div>
                                         </div>
                                     </div>
@@ -2485,6 +2585,14 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                                         <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600; cursor: pointer;" onclick="toggleHotelSpaceAllocation()">Hotel Space Allocation</h3>
+                                        <button id="resetHotelSpaceAllocationBtn" onclick="resetHotelSpaceAllocationToExisting()" 
+                                                style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                                onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                            Reset to Existing
+                                        </button>
                                     </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
@@ -2591,8 +2699,39 @@
                 <!-- Adelphi Campus Content -->
                 <div id="comparison-building-content" class="building-content active">
                     <div class="space-planning-container">
-                        <div class="space-title">
-                            <h2>Adelphi Campus - Building Portfolio Summary</h2>
+                        <!-- Campus Summary Header -->
+                        <div class="collapsible-header" style="padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-navy) 0%, #003366 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
+                                <h3 style="color: white; margin: 0; font-size: 1.3rem; font-weight: 700;">Adelphi Campus</h3>
+                                <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
+                                    <div style="text-align: center;">
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Remaining SF</div>
+                                        <div id="campusRemainingSF" style="color: white; font-size: 1.2rem; font-weight: 700;">0</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+                                    <div style="text-align: center;">
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">vs Existing (Efficiency)</div>
+                                        <div id="campusDeltaGSF" style="color: white; font-size: 1rem; font-weight: 700;">+0</div>
+                                    </div>
+                                    <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Work Points</div>
+                                        <div id="campusDeltaWorkstations" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
+                                        <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
+                                            <span>Desk: <span id="campusHeaderDeskCount" style="font-weight: 600;">0</span></span>
+                                            <span>Office: <span id="campusHeaderOfficeCount" style="font-weight: 600;">0</span></span>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Collaboration</div>
+                                        <div id="campusDeltaOffices" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
+                                        <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
+                                            <span>Conf: <span id="campusHeaderConfCount" style="font-weight: 600;">0</span></span>
+                                            <span>Huddle: <span id="campusHeaderHuddleCount" style="font-weight: 600;">0</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="building-comparison">
@@ -2605,7 +2744,25 @@
                                     <div class="building-metrics">
                                         <div class="metric">
                                             <span class="metric-label">GSF in Scope</span>
-                                            <span class="metric-value" id="adminAssignableSF">106,420</span>
+                                            <span class="metric-value" id="adminTotalGSF">142,300</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Admin ASF Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="adminExistingASF">77,514</span></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="adminPlannedASF">77,514</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -2642,7 +2799,25 @@
                                     <div class="building-metrics">
                                         <div class="metric">
                                             <span class="metric-label">GSF in Scope</span>
-                                            <span class="metric-value" id="iccAssignableSF">37,700</span>
+                                            <span class="metric-value" id="iccTotalGSF">37,700</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- ICC ASF Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="iccExistingASF">36,021</span></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="iccPlannedASF">36,021</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -2679,7 +2854,25 @@
                                     <div class="building-metrics">
                                         <div class="metric">
                                             <span class="metric-label">GSF in Scope</span>
-                                            <span class="metric-value" id="hotelAssignableSF">7,500</span>
+                                            <span class="metric-value" id="hotelTotalGSF">7,500</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Hotel ASF Comparison -->
+                                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--umgc-gray-medium);">
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="hotelExistingASF">5,310</span></div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="hotelPlannedASF">5,310</span></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     
@@ -2716,7 +2909,7 @@
                                     <div class="building-metrics">
                                         <div class="metric">
                                             <span class="metric-label">GSF in Scope</span>
-                                            <span class="metric-value" id="combinedTotalASF">151,620</span>
+                                            <span class="metric-value" id="campusTotalGSF">187,500</span>
                                         </div>
                                     </div>
                                     
@@ -2726,21 +2919,27 @@
                                             <div>
                                                 <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
                                                 <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
-                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusExistingAssignable">52,000</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusExistingWorkstation">40</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusExistingOffice">25</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusExistingCollab">17</span></div>
-                                                    <div><strong>Seats:</strong> <span id="campusExistingSeats">85</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusExistingAssignable">118,845</span></div>
+                                                    <div style="border-top: 1px solid var(--umgc-gray-medium); margin-top: 20px; padding-top: 20px;">
+                                                        <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
+                                                    </div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusExistingWorkstation">116</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusExistingOffice">242</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusExistingCollab">69</span></div>
+                                                    <div><strong>Seats:</strong> <span id="campusExistingSeats">427</span></div>
                                                 </div>
                                             </div>
                                             <div>
                                                 <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
                                                 <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
-                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusPlannedAssignable">151,620</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusPlannedWorkstation">0</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusPlannedOffice">0</span></div>
-                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusPlannedCollab">0</span></div>
-                                                    <div><strong>Seats:</strong> <span id="campusPlannedSeats">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Assignable SF:</strong> <span id="campusPlannedAssignable">118,845</span></div>
+                                                    <div style="border-top: 1px solid var(--umgc-gray-medium); margin-top: 20px; padding-top: 20px;">
+                                                        <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">PLANNED</div>
+                                                    </div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="campusPlannedWorkstation">116</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="campusPlannedOffice">242</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="campusPlannedCollab">69</span></div>
+                                                    <div><strong>Seats:</strong> <span id="campusPlannedSeats">427</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -3586,17 +3785,20 @@
             { id: "cubicalDesk", name: "Cubical/Desk (60 sf)", defaultSf: 60, category: "workPoints", color: "hsl(217, 91%, 60%)", seats: 0 },
             { id: "office", name: "Office (140 sf)", defaultSf: 140, category: "workPoints", color: "hsl(142, 76%, 36%)", seats: 0 },
             { id: "conferenceRoom", name: "Conference Room - Reservable (480 sf)", defaultSf: 480, category: "collaborationPoints", color: "hsl(47, 96%, 53%)", seats: 12 },
-            { id: "huddleShelter", name: "Huddle/Shelter - Non Reservable (180 sf)", defaultSf: 180, category: "collaborationPoints", color: "hsl(47, 96%, 63%)", seats: 6 }
+            { id: "huddleShelter", name: "Huddle/Shelter - Non Reservable (180 sf)", defaultSf: 180, category: "collaborationPoints", color: "hsl(47, 96%, 63%)", seats: 6 },
+            { id: "otherSpaces", name: "Storage, Kitchen, and Other Support Spaces (28174 sf)", defaultSf: 28174, category: "otherSpaces", color: "hsl(280, 65%, 45%)", seats: 0 }
         ];
 
         const CATEGORY_NAMES = {
             workPoints: "Work Points",
-            collaborationPoints: "Collaboration Points"
+            collaborationPoints: "Collaboration Points",
+            otherSpaces: "Other Spaces"
         };
 
         const CATEGORY_COLORS = {
             workPoints: "hsl(217, 91%, 60%)",
-            collaborationPoints: "hsl(47, 96%, 53%)"
+            collaborationPoints: "hsl(47, 96%, 53%)",
+            otherSpaces: "hsl(280, 65%, 45%)"
         };
 
         let spaceInitialized = false;
@@ -3609,7 +3811,8 @@
             cubicalDesk: 99, // Match existing quantities as baseline
             office: 193,
             conferenceRoom: 21,
-            huddleShelter: 35
+            huddleShelter: 35,
+            otherSpaces: 1 // 1 unit of 28,174 SF for storage, kitchen, and other support spaces
         };
         let showExisting = true;
         let assignByFloor = true; // Always use floor-by-floor assignment
@@ -3617,13 +3820,15 @@
             cubicalDesk: [84, 7, 0, 8], // Match existing floor distribution as baseline
             office: [12, 65, 100, 16],
             conferenceRoom: [7, 5, 5, 4],
-            huddleShelter: [20, 6, 7, 2]
+            huddleShelter: [20, 6, 7, 2],
+            otherSpaces: [0, 0, 0, 0] // Storage, kitchen, and other support spaces are not assigned by floor
         };
         let existingFloorQuantities = {
             cubicalDesk: [84, 7, 0, 8], // Floor 1, 2, 3, 4 (from provided data)
             office: [12, 65, 100, 16],
             conferenceRoom: [7, 5, 5, 4], // Floor 1, 2, 3, 4 (from provided data)
-            huddleShelter: [20, 6, 7, 2]
+            huddleShelter: [20, 6, 7, 2],
+            otherSpaces: [0, 0, 0, 0] // Storage, kitchen, and other support spaces are not assigned by floor
         };
 
         // ICC Building Data (same space types as Admin)
@@ -3695,12 +3900,13 @@
 
         // Hotel Building floor parameters (1st Floor with ASF only)
         let hotelFloorSpaces = [7500, 0, 0, 0]; // 1st Floor only (ASF value)
-        let hotelFloorEfficiencies = [100, 100, 100, 100]; // Set to 100% since we're using ASF directly
+        let hotelFloorEfficiencies = [71, 100, 100, 100]; // 1st Floor 71% efficiency (existing), other floors not used
         let existingQuantities = {
             cubicalDesk: 99, // 84+7+0+8 from provided data
             office: 193, // 12+65+100+16 from provided data
             conferenceRoom: 21, // 7+5+5+4 from provided data
-            huddleShelter: 35 // 20+6+7+2 from provided data
+            huddleShelter: 35, // 20+6+7+2 from provided data
+            otherSpaces: 1 // 1 unit of 28,174 SF for storage, kitchen, and other support spaces
         };
         let customSpaces = [];
         let iccCustomSpaces = [];
@@ -3915,9 +4121,11 @@
             document.getElementById('totalBuildingGSF').textContent = totalGSF.toLocaleString();
             
             // Calculate total assignable SF
+            // Use existing GSF for assignable SF calculation
+            const existingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
             let totalAssignable = 0;
             for (let i = 0; i < 4; i++) {
-                totalAssignable += Math.round(floorSpaces[i] * (floorEfficiencies[i] / 100));
+                totalAssignable += Math.round(existingGSF[i] * (floorEfficiencies[i] / 100));
             }
             document.getElementById('totalAssignableSF').textContent = totalAssignable.toLocaleString();
             
@@ -4197,10 +4405,11 @@
             // Calculate totals
             const totalGSF = floorSpaces.reduce((sum, floor) => sum + floor, 0);
             
-            // Calculate total assignable SF from all floors
+            // Calculate total assignable SF from all floors using existing GSF values
+            const existingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
             let assignableSF = 0;
             for (let i = 0; i < 4; i++) {
-                assignableSF += Math.round(floorSpaces[i] * (floorEfficiencies[i] / 100));
+                assignableSF += Math.round(existingGSF[i] * (floorEfficiencies[i] / 100));
             }
             
             const overallEfficiency = totalGSF > 0 ? ((assignableSF / totalGSF) * 100).toFixed(1) : 85;
@@ -4480,7 +4689,7 @@
             const existingTotal = existingQty * existingSF;
             const currentQty = customQuantities[type.id] || 0;
             
-            if (customAssignByFloor) {
+            if (customAssignByFloor && type.category !== 'otherSpaces') {
                 // Floor-by-floor assignment
                 // Build floor inputs HTML
                 let floorInputsHTML = '';
@@ -5075,6 +5284,86 @@
             updateBuildingComparison();
         }
 
+        function applyHotelBestPracticeEfficiency() {
+            // Apply 100% efficiency (best practice - use full space)
+            const bestPracticeEfficiency = 100;
+            
+            // Update slider and efficiency value
+            const slider = document.getElementById('hotelFloor1EffSlider');
+            const effValueEl = document.getElementById('hotelFloor1EffValue');
+            
+            if (slider) slider.value = bestPracticeEfficiency;
+            if (effValueEl) effValueEl.textContent = bestPracticeEfficiency;
+            
+            // Update efficiency array
+            hotelFloorEfficiencies[0] = bestPracticeEfficiency;
+            
+            // Update assignable SF display
+            const existingGSF = 7500; // 1st floor GSF
+            const assignable = Math.round(existingGSF * (bestPracticeEfficiency / 100));
+            document.getElementById('hotelFloor1Assignable').textContent = assignable.toLocaleString();
+            
+            // Update building totals and calculations
+            updateHotelBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('hotelBestPracticeEfficiencyBtn');
+            if (button) {
+                const originalText = button.textContent;
+                button.textContent = 'Applied!';
+                button.style.background = '#c8e6c9';
+                button.style.color = '#2e7d32';
+                button.style.borderColor = '#4caf50';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#e3f2fd';
+                    button.style.color = '#1976d2';
+                    button.style.borderColor = '#bbdefb';
+                }, 2000);
+            }
+        }
+
+        function resetHotelToExistingConditions() {
+            // Reset to existing efficiency (71%)
+            const existingEfficiency = 71;
+            
+            // Update slider and efficiency value
+            const slider = document.getElementById('hotelFloor1EffSlider');
+            const effValueEl = document.getElementById('hotelFloor1EffValue');
+            
+            if (slider) slider.value = existingEfficiency;
+            if (effValueEl) effValueEl.textContent = existingEfficiency;
+            
+            // Update efficiency array
+            hotelFloorEfficiencies[0] = existingEfficiency;
+            
+            // Update assignable SF display
+            const existingGSF = 7500; // 1st floor GSF
+            const assignable = Math.round(existingGSF * (existingEfficiency / 100));
+            document.getElementById('hotelFloor1Assignable').textContent = assignable.toLocaleString();
+            
+            // Update building totals and calculations
+            updateHotelBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('hotelResetToExistingBtn');
+            if (button) {
+                const originalText = button.textContent;
+                button.textContent = 'Reset!';
+                button.style.background = '#c8e6c9';
+                button.style.color = '#2e7d32';
+                button.style.borderColor = '#4caf50';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#fff3e0';
+                    button.style.color = '#f57c00';
+                    button.style.borderColor = '#ffcc02';
+                }, 2000);
+            }
+        }
+
         function toggleHotelBuildingParams() {
             const content = document.getElementById('hotelBuildingParamsContent');
             const toggle = document.getElementById('hotelBuildingParamsToggle');
@@ -5247,7 +5536,9 @@
         function updateBuildingComparison() {
             // Calculate Admin Building totals from floor sliders
             const adminTotalGSF = floorSpaces.reduce((a, b) => a + b, 0);
-            const adminAssignableSF = floorSpaces.reduce((sum, gsf, index) => {
+            // Use existing GSF for assignable SF calculation to show proper comparison
+            const adminExistingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
+            const adminAssignableSF = adminExistingGSF.reduce((sum, gsf, index) => {
                 return sum + Math.round(gsf * (floorEfficiencies[index] / 100));
             }, 0);
             const adminUsedSF = SPACE_TYPES.reduce((total, type) => {
@@ -5258,9 +5549,11 @@
             
             // Calculate ICC Building totals from floor sliders
             const iccTotalGSF = iccFloorSpaces.reduce((a, b) => a + b, 0);
-            const iccAssignableSF = iccFloorSpaces.reduce((sum, gsf, index) => {
+            // Use existing GSF for assignable SF calculation to show proper comparison
+            const iccExistingGSF = [0, 0, 19900, 0]; // ICC Floor 3 existing GSF
+            const iccAssignableSF = 20300 + iccExistingGSF.reduce((sum, gsf, index) => {
                 return sum + Math.round(gsf * (iccFloorEfficiencies[index] / 100));
-            }, 0);
+            }, 0); // Basement (20,300) + 3rd Floor (dynamic)
             const iccUsedSF = SPACE_TYPES.reduce((total, type) => {
                 const sfPerUnit = iccSpaceSF[type.id] || type.defaultSf;
                 return total + (iccQuantities[type.id] || 0) * sfPerUnit;
@@ -5285,33 +5578,53 @@
             const combinedEfficiency = combinedTotalGSF > 0 ? Math.round((combinedAssignableSF / combinedTotalGSF) * 100) : 0;
             
             // Update comparison display
-            document.getElementById('adminTotalGSF').textContent = adminTotalGSF.toLocaleString();
-            document.getElementById('adminAssignableSF').textContent = adminAssignableSF.toLocaleString();
-            document.getElementById('adminUsedSF').textContent = adminUsedSF.toLocaleString();
-            document.getElementById('adminEfficiency').textContent = `${adminEfficiency}%`;
+            const adminTotalGSFEl = document.getElementById('adminTotalGSF');
+            const adminAssignableSFEl = document.getElementById('adminAssignableSF');
+            const adminUsedSFEl = document.getElementById('adminUsedSF');
+            const adminEfficiencyEl = document.getElementById('adminEfficiency');
             
-            document.getElementById('iccTotalGSF').textContent = iccTotalGSF.toLocaleString();
-            document.getElementById('iccAssignableSF').textContent = iccAssignableSF.toLocaleString();
-            document.getElementById('iccUsedSF').textContent = iccUsedSF.toLocaleString();
-            document.getElementById('iccEfficiency').textContent = `${iccEfficiency}%`;
+            if (adminTotalGSFEl) adminTotalGSFEl.textContent = adminTotalGSF.toLocaleString();
+            if (adminAssignableSFEl) adminAssignableSFEl.textContent = adminAssignableSF.toLocaleString();
+            if (adminUsedSFEl) adminUsedSFEl.textContent = adminUsedSF.toLocaleString();
+            if (adminEfficiencyEl) adminEfficiencyEl.textContent = `${adminEfficiency}%`;
             
-            document.getElementById('hotelTotalGSF').textContent = hotelTotalGSF.toLocaleString();
-            document.getElementById('hotelAssignableSF').textContent = hotelAssignableSF.toLocaleString();
-            document.getElementById('hotelUsedSF').textContent = hotelUsedSF.toLocaleString();
-            document.getElementById('hotelEfficiency').textContent = `${hotelEfficiency}%`;
+            const iccTotalGSFEl = document.getElementById('iccTotalGSF');
+            const iccAssignableSFEl = document.getElementById('iccAssignableSF');
+            const iccUsedSFEl = document.getElementById('iccUsedSF');
+            const iccEfficiencyEl = document.getElementById('iccEfficiency');
+            
+            if (iccTotalGSFEl) iccTotalGSFEl.textContent = iccTotalGSF.toLocaleString();
+            if (iccAssignableSFEl) iccAssignableSFEl.textContent = iccAssignableSF.toLocaleString();
+            if (iccUsedSFEl) iccUsedSFEl.textContent = iccUsedSF.toLocaleString();
+            if (iccEfficiencyEl) iccEfficiencyEl.textContent = `${iccEfficiency}%`;
+            
+            const hotelTotalGSFEl = document.getElementById('hotelTotalGSF');
+            const hotelAssignableSFEl = document.getElementById('hotelAssignableSF');
+            const hotelUsedSFEl = document.getElementById('hotelUsedSF');
+            const hotelEfficiencyEl = document.getElementById('hotelEfficiency');
+            
+            if (hotelTotalGSFEl) hotelTotalGSFEl.textContent = hotelTotalGSF.toLocaleString();
+            if (hotelAssignableSFEl) hotelAssignableSFEl.textContent = hotelAssignableSF.toLocaleString();
+            if (hotelUsedSFEl) hotelUsedSFEl.textContent = hotelUsedSF.toLocaleString();
+            if (hotelEfficiencyEl) hotelEfficiencyEl.textContent = `${hotelEfficiency}%`;
             
             // Update Adelphi Campus Total ASF in Scope
             const combinedTotalASF = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
-            document.getElementById('combinedTotalASF').textContent = combinedTotalASF.toLocaleString();
+            const combinedTotalASFEl = document.getElementById('combinedTotalASF');
+            if (combinedTotalASFEl) combinedTotalASFEl.textContent = combinedTotalASF.toLocaleString();
             
             // Update remaining SF in headers
             const adminRemainingSF = adminAssignableSF - adminUsedSF;
             const iccRemainingSF = iccAssignableSF - iccUsedSF;
             const hotelRemainingSF = hotelAssignableSF - hotelUsedSF;
             
-            document.getElementById('remainingSF').textContent = adminRemainingSF.toLocaleString();
-            document.getElementById('iccRemainingSF').textContent = iccRemainingSF.toLocaleString();
-            document.getElementById('hotelRemainingSF').textContent = hotelRemainingSF.toLocaleString();
+            const remainingSFEl = document.getElementById('remainingSF');
+            const iccRemainingSFEl = document.getElementById('iccRemainingSF');
+            const hotelRemainingSFEl = document.getElementById('hotelRemainingSF');
+            
+            if (remainingSFEl) remainingSFEl.textContent = adminRemainingSF.toLocaleString();
+            if (iccRemainingSFEl) iccRemainingSFEl.textContent = iccRemainingSF.toLocaleString();
+            if (hotelRemainingSFEl) hotelRemainingSFEl.textContent = hotelRemainingSF.toLocaleString();
             
             // Calculate campus-wide existing data from all buildings
             const campusExistingWorkPoints = 
@@ -5324,35 +5637,34 @@
                 iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter +
                 hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
             
-            const campusExistingAssignable = 77514 + 36021 + 5310; // Sum of existing assignable SF from all buildings
+            const campusExistingAssignable = 77514 + 36021 + 5310; // Sum of existing assignable SF from all buildings (118,845)
             
-            // Calculate campus-wide planned data from all buildings
-            const campusPlannedWorkPoints = 
-                ((quantities.cubicalDesk || 0) + (quantities.office || 0)) +
-                ((iccQuantities.cubicalDesk || 0) + (iccQuantities.office || 0)) +
-                ((hotelQuantities.cubicalDesk || 0) + (hotelQuantities.office || 0));
+            // Calculate campus total GSF (sum of all buildings' GSF)
+            const campusTotalGSF = 142300 + 37700 + 7500; // Admin + ICC + Hotel GSF (187,500)
             
-            const campusPlannedCollaborationPoints = 
-                ((quantities.conferenceRoom || 0) + (quantities.huddleShelter || 0)) +
-                ((iccQuantities.conferenceRoom || 0) + (iccQuantities.huddleShelter || 0)) +
-                ((hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0));
+            // Calculate campus-wide seats (workstations + offices + collaboration spaces)
+            const campusExistingSeats = campusExistingWorkPoints + campusExistingCollaborationPoints;
             
-            // Calculate campus-wide seats (workstations + offices + collaboration seats)
-            const campusExistingSeats = campusExistingWorkPoints + (campusExistingCollaborationPoints * 6); // Assuming 6 seats per collaboration space
-            const campusPlannedSeats = campusPlannedWorkPoints + (campusPlannedCollaborationPoints * 6);
+            // Update campus total GSF (only if campus tab is active)
+            const campusTotalGSFEl = document.getElementById('campusTotalGSF');
+            if (campusTotalGSFEl && document.getElementById('comparison-building-content').classList.contains('active')) {
+                campusTotalGSFEl.textContent = campusTotalGSF.toLocaleString();
+            }
             
-            // Update campus existing data
+            // Update campus existing data (only if campus tab is active)
             const campusExistingAssignableEl = document.getElementById('campusExistingAssignable');
             const campusExistingWorkstationEl = document.getElementById('campusExistingWorkstation');
             const campusExistingOfficeEl = document.getElementById('campusExistingOffice');
             const campusExistingCollabEl = document.getElementById('campusExistingCollab');
             const campusExistingSeatsEl = document.getElementById('campusExistingSeats');
             
-            if (campusExistingAssignableEl) campusExistingAssignableEl.textContent = campusExistingAssignable.toLocaleString();
-            if (campusExistingWorkstationEl) campusExistingWorkstationEl.textContent = existingQuantities.cubicalDesk + iccExistingQuantities.cubicalDesk + hotelExistingQuantities.cubicalDesk;
-            if (campusExistingOfficeEl) campusExistingOfficeEl.textContent = existingQuantities.office + iccExistingQuantities.office + hotelExistingQuantities.office;
-            if (campusExistingCollabEl) campusExistingCollabEl.textContent = campusExistingCollaborationPoints;
-            if (campusExistingSeatsEl) campusExistingSeatsEl.textContent = campusExistingSeats;
+            if (document.getElementById('comparison-building-content').classList.contains('active')) {
+                if (campusExistingAssignableEl) campusExistingAssignableEl.textContent = campusExistingAssignable.toLocaleString();
+                if (campusExistingWorkstationEl) campusExistingWorkstationEl.textContent = existingQuantities.cubicalDesk + iccExistingQuantities.cubicalDesk + hotelExistingQuantities.cubicalDesk;
+                if (campusExistingOfficeEl) campusExistingOfficeEl.textContent = existingQuantities.office + iccExistingQuantities.office + hotelExistingQuantities.office;
+                if (campusExistingCollabEl) campusExistingCollabEl.textContent = campusExistingCollaborationPoints;
+                if (campusExistingSeatsEl) campusExistingSeatsEl.textContent = campusExistingSeats;
+            }
             
             // Update campus planned data
             const campusPlannedAssignableEl = document.getElementById('campusPlannedAssignable');
@@ -5361,11 +5673,20 @@
             const campusPlannedCollabEl = document.getElementById('campusPlannedCollab');
             const campusPlannedSeatsEl = document.getElementById('campusPlannedSeats');
             
-            if (campusPlannedAssignableEl) campusPlannedAssignableEl.textContent = combinedTotalASF.toLocaleString();
-            if (campusPlannedWorkstationEl) campusPlannedWorkstationEl.textContent = (quantities.cubicalDesk || 0) + (iccQuantities.cubicalDesk || 0) + (hotelQuantities.cubicalDesk || 0);
-            if (campusPlannedOfficeEl) campusPlannedOfficeEl.textContent = (quantities.office || 0) + (iccQuantities.office || 0) + (hotelQuantities.office || 0);
-            if (campusPlannedCollabEl) campusPlannedCollabEl.textContent = campusPlannedCollaborationPoints;
-            if (campusPlannedSeatsEl) campusPlannedSeatsEl.textContent = campusPlannedSeats;
+            
+            // Calculate planned values dynamically
+            const campusPlannedAssignable = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
+            const campusPlannedWorkPoints = ((quantities.cubicalDesk || 0) + (quantities.office || 0)) + ((iccQuantities.cubicalDesk || 0) + (iccQuantities.office || 0)) + ((hotelQuantities.cubicalDesk || 0) + (hotelQuantities.office || 0));
+            const campusPlannedCollaborationPoints = ((quantities.conferenceRoom || 0) + (quantities.huddleShelter || 0)) + ((iccQuantities.conferenceRoom || 0) + (iccQuantities.huddleShelter || 0)) + ((hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0));
+            const campusPlannedSeats = campusPlannedWorkPoints + (campusPlannedCollaborationPoints * 6);
+            
+            if (document.getElementById('comparison-building-content').classList.contains('active')) {
+                if (campusPlannedAssignableEl) campusPlannedAssignableEl.textContent = campusPlannedAssignable.toLocaleString();
+                if (campusPlannedWorkstationEl) campusPlannedWorkstationEl.textContent = (quantities.cubicalDesk || 0) + (iccQuantities.cubicalDesk || 0) + (hotelQuantities.cubicalDesk || 0);
+                if (campusPlannedOfficeEl) campusPlannedOfficeEl.textContent = (quantities.office || 0) + (iccQuantities.office || 0) + (hotelQuantities.office || 0);
+                if (campusPlannedCollabEl) campusPlannedCollabEl.textContent = campusPlannedCollaborationPoints;
+                if (campusPlannedSeatsEl) campusPlannedSeatsEl.textContent = campusPlannedSeats;
+            }
             
             // Calculate individual building totals for summary cards
             const adminWorkPointsCount = (quantities.cubicalDesk || 0) + (quantities.office || 0);
@@ -5407,39 +5728,121 @@
             if (hotelSummaryExistingCollabEl) hotelSummaryExistingCollabEl.textContent = hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
             if (hotelSummaryExistingSeatsEl) hotelSummaryExistingSeatsEl.textContent = (hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office) + ((hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter) * 6);
             
-            // Update building summary cards - Planned data
+            // Update building ASF values
+            const adminExistingASFEl = document.getElementById('adminExistingASF');
+            const adminPlannedASFEl = document.getElementById('adminPlannedASF');
+            
+            if (adminExistingASFEl) adminExistingASFEl.textContent = 77514; // Existing ASF
+            if (adminPlannedASFEl) adminPlannedASFEl.textContent = adminAssignableSF.toLocaleString(); // Planned ASF
+            
+            const iccExistingASFEl = document.getElementById('iccExistingASF');
+            const iccPlannedASFEl = document.getElementById('iccPlannedASF');
+            
+            if (iccExistingASFEl) iccExistingASFEl.textContent = (20300 + 15721).toLocaleString(); // Total Existing ASF (Basement + 3rd Floor)
+            if (iccPlannedASFEl) iccPlannedASFEl.textContent = (20300 + iccAssignableSF).toLocaleString(); // Total Planned ASF (Basement + 3rd Floor)
+            
+            const hotelExistingASFEl = document.getElementById('hotelExistingASF');
+            const hotelPlannedASFEl = document.getElementById('hotelPlannedASF');
+            
+            if (hotelExistingASFEl) hotelExistingASFEl.textContent = 5310; // Existing ASF
+            if (hotelPlannedASFEl) hotelPlannedASFEl.textContent = hotelAssignableSF.toLocaleString(); // Planned ASF
+            
+            // Update building summary cards - Planned data (default to existing values)
             const adminSummaryWorkPointsEl = document.getElementById('adminSummaryWorkstation');
             const adminSummaryCollaborationPointsEl = document.getElementById('adminSummaryOffice');
             const adminSummaryCollabEl = document.getElementById('adminSummaryCollab');
             const adminSummarySeatsEl = document.getElementById('adminSummarySeats');
             
-            if (adminSummaryWorkPointsEl) adminSummaryWorkPointsEl.textContent = adminWorkPointsCount;
-            if (adminSummaryCollaborationPointsEl) adminSummaryCollaborationPointsEl.textContent = adminCollaborationPointsCount;
-            if (adminSummaryCollabEl) adminSummaryCollabEl.textContent = adminCollaborationPointsCount;
-            if (adminSummarySeatsEl) adminSummarySeatsEl.textContent = adminWorkPointsCount + (adminCollaborationPointsCount * 6);
+            // For default display, planned values match existing values
+            if (adminSummaryWorkPointsEl) adminSummaryWorkPointsEl.textContent = existingQuantities.cubicalDesk + existingQuantities.office;
+            if (adminSummaryCollaborationPointsEl) adminSummaryCollaborationPointsEl.textContent = existingQuantities.office;
+            if (adminSummaryCollabEl) adminSummaryCollabEl.textContent = existingQuantities.conferenceRoom + existingQuantities.huddleShelter;
+            if (adminSummarySeatsEl) adminSummarySeatsEl.textContent = (existingQuantities.cubicalDesk + existingQuantities.office) + ((existingQuantities.conferenceRoom + existingQuantities.huddleShelter) * 6);
             
             const iccSummaryWorkPointsEl = document.getElementById('iccSummaryWorkstation');
             const iccSummaryCollaborationPointsEl = document.getElementById('iccSummaryOffice');
             const iccSummaryCollabEl = document.getElementById('iccSummaryCollab');
             const iccSummarySeatsEl = document.getElementById('iccSummarySeats');
             
-            if (iccSummaryWorkPointsEl) iccSummaryWorkPointsEl.textContent = iccWorkPointsCount;
-            if (iccSummaryCollaborationPointsEl) iccSummaryCollaborationPointsEl.textContent = iccCollaborationPointsCount;
-            if (iccSummaryCollabEl) iccSummaryCollabEl.textContent = iccCollaborationPointsCount;
-            if (iccSummarySeatsEl) iccSummarySeatsEl.textContent = iccWorkPointsCount + (iccCollaborationPointsCount * 6);
+            // For default display, planned values match existing values
+            if (iccSummaryWorkPointsEl) iccSummaryWorkPointsEl.textContent = iccExistingQuantities.cubicalDesk + iccExistingQuantities.office;
+            if (iccSummaryCollaborationPointsEl) iccSummaryCollaborationPointsEl.textContent = iccExistingQuantities.office;
+            if (iccSummaryCollabEl) iccSummaryCollabEl.textContent = iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter;
+            if (iccSummarySeatsEl) iccSummarySeatsEl.textContent = (iccExistingQuantities.cubicalDesk + iccExistingQuantities.office) + ((iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter) * 6);
             
             const hotelSummaryWorkPointsEl = document.getElementById('hotelSummaryWorkstation');
             const hotelSummaryCollaborationPointsEl = document.getElementById('hotelSummaryOffice');
             const hotelSummaryCollabEl = document.getElementById('hotelSummaryCollab');
             const hotelSummarySeatsEl = document.getElementById('hotelSummarySeats');
             
-            if (hotelSummaryWorkPointsEl) hotelSummaryWorkPointsEl.textContent = hotelWorkPointsCount;
-            if (hotelSummaryCollaborationPointsEl) hotelSummaryCollaborationPointsEl.textContent = hotelCollaborationPointsCount;
-            if (hotelSummaryCollabEl) hotelSummaryCollabEl.textContent = hotelCollaborationPointsCount;
-            if (hotelSummarySeatsEl) hotelSummarySeatsEl.textContent = hotelWorkPointsCount + (hotelCollaborationPointsCount * 6);
+            // For default display, planned values match existing values
+            if (hotelSummaryWorkPointsEl) hotelSummaryWorkPointsEl.textContent = hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office;
+            if (hotelSummaryCollaborationPointsEl) hotelSummaryCollaborationPointsEl.textContent = hotelExistingQuantities.office;
+            if (hotelSummaryCollabEl) hotelSummaryCollabEl.textContent = hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
+            if (hotelSummarySeatsEl) hotelSummarySeatsEl.textContent = (hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office) + ((hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter) * 6);
             
             // Update comparison cards with existing and planned data
             updateComparisonCards();
+            
+            // Update Campus Header (only if campus tab is active)
+            const campusRemainingSFEl = document.getElementById('campusRemainingSF');
+            const campusDeltaGSFEl = document.getElementById('campusDeltaGSF');
+            const campusDeltaWorkstationsEl = document.getElementById('campusDeltaWorkstations');
+            const campusHeaderDeskCountEl = document.getElementById('campusHeaderDeskCount');
+            const campusHeaderOfficeCountEl = document.getElementById('campusHeaderOfficeCount');
+            const campusDeltaOfficesEl = document.getElementById('campusDeltaOffices');
+            const campusHeaderConfCountEl = document.getElementById('campusHeaderConfCount');
+            const campusHeaderHuddleCountEl = document.getElementById('campusHeaderHuddleCount');
+            
+            if (document.getElementById('comparison-building-content').classList.contains('active')) {
+                if (campusRemainingSFEl) {
+                    const campusUsedSF = adminUsedSF + iccUsedSF + hotelUsedSF;
+                    const campusTotalAssignable = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
+                    const campusRemaining = campusTotalAssignable - campusUsedSF;
+                    campusRemainingSFEl.textContent = campusRemaining.toLocaleString();
+                }
+            
+                if (campusDeltaGSFEl) {
+                    const campusExistingAssignable = 77514 + 36021 + 5310; // Sum of existing assignable SF from all buildings
+                    const campusPlannedAssignable = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
+                    const deltaGSF = campusPlannedAssignable - campusExistingAssignable;
+                    campusDeltaGSFEl.textContent = (deltaGSF >= 0 ? '+' : '') + deltaGSF.toLocaleString();
+                }
+                
+                if (campusDeltaWorkstationsEl) {
+                    const campusExistingWorkPoints = (existingQuantities.cubicalDesk + existingQuantities.office) + (iccExistingQuantities.cubicalDesk + iccExistingQuantities.office) + (hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office);
+                    const campusPlannedWorkPoints = ((quantities.cubicalDesk || 0) + (quantities.office || 0)) + ((iccQuantities.cubicalDesk || 0) + (iccQuantities.office || 0)) + ((hotelQuantities.cubicalDesk || 0) + (hotelQuantities.office || 0));
+                    const deltaWorkPoints = campusPlannedWorkPoints - campusExistingWorkPoints;
+                    campusDeltaWorkstationsEl.textContent = (deltaWorkPoints >= 0 ? '+' : '') + deltaWorkPoints;
+                }
+                
+                if (campusHeaderDeskCountEl) {
+                    const campusDeskCount = (quantities.cubicalDesk || 0) + (iccQuantities.cubicalDesk || 0) + (hotelQuantities.cubicalDesk || 0);
+                    campusHeaderDeskCountEl.textContent = campusDeskCount;
+                }
+                
+                if (campusHeaderOfficeCountEl) {
+                    const campusOfficeCount = (quantities.office || 0) + (iccQuantities.office || 0) + (hotelQuantities.office || 0);
+                    campusHeaderOfficeCountEl.textContent = campusOfficeCount;
+                }
+                
+                if (campusDeltaOfficesEl) {
+                    const campusExistingCollaboration = (existingQuantities.conferenceRoom + existingQuantities.huddleShelter) + (iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter) + (hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter);
+                    const campusPlannedCollaboration = ((quantities.conferenceRoom || 0) + (quantities.huddleShelter || 0)) + ((iccQuantities.conferenceRoom || 0) + (iccQuantities.huddleShelter || 0)) + ((hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0));
+                    const deltaCollaboration = campusPlannedCollaboration - campusExistingCollaboration;
+                    campusDeltaOfficesEl.textContent = (deltaCollaboration >= 0 ? '+' : '') + deltaCollaboration;
+                }
+                
+                if (campusHeaderConfCountEl) {
+                    const campusConfCount = (quantities.conferenceRoom || 0) + (iccQuantities.conferenceRoom || 0) + (hotelQuantities.conferenceRoom || 0);
+                    campusHeaderConfCountEl.textContent = campusConfCount;
+                }
+                
+                if (campusHeaderHuddleCountEl) {
+                    const campusHuddleCount = (quantities.huddleShelter || 0) + (iccQuantities.huddleShelter || 0) + (hotelQuantities.huddleShelter || 0);
+                    campusHeaderHuddleCountEl.textContent = campusHuddleCount;
+                }
+            }
             
             // Update Adelphi comparison charts
             if (typeof updateAdephiComparisonCharts === 'function') updateAdephiComparisonCharts();
@@ -5624,7 +6027,7 @@
             // Categorize space types
             const workPointsSpaces = SPACE_TYPES.filter(t => t.category === 'workPoints');
             const collaborationPointsSpaces = SPACE_TYPES.filter(t => t.category === 'collaborationPoints');
-            const otherSpaces = []; // Only custom spaces will be in "Other"
+            const otherSpaces = SPACE_TYPES.filter(t => t.category === 'otherSpaces');
             
             const renderGrid = (types, gridId) => {
                 const grid = document.getElementById(gridId);
@@ -6312,6 +6715,120 @@
             }, 2000);
         }
 
+        // Reset Space Allocation to Existing Functions
+        function resetSpaceAllocationToExisting() {
+            // Reset Admin Building space quantities to existing values
+            quantities = {
+                cubicalDesk: 99, // Existing quantities
+                office: 193,
+                conferenceRoom: 21,
+                huddleShelter: 35,
+                otherSpaces: 1 // 1 unit of 28,174 SF for storage, kitchen, and other support spaces
+            };
+            
+            // Reset floor quantities to existing distribution
+            floorQuantities = {
+                cubicalDesk: [84, 7, 0, 8], // Existing floor distribution
+                office: [12, 65, 100, 16],
+                conferenceRoom: [7, 5, 5, 4],
+                huddleShelter: [20, 6, 7, 2],
+                otherSpaces: [0, 0, 0, 0] // Storage, kitchen, and other support spaces are not assigned by floor
+            };
+            
+            // Re-render space types and update calculations
+            renderSpaceTypes();
+            updateSpaceCalculations();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('resetSpaceAllocationBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Reset!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#fff3e0';
+                button.style.color = '#f57c00';
+                button.style.borderColor = '#ffcc02';
+            }, 2000);
+        }
+
+        function resetICCSpaceAllocationToExisting() {
+            // Reset ICC Building space quantities to existing values
+            iccQuantities = {
+                cubicalDesk: 17, // Existing quantities
+                office: 49,
+                conferenceRoom: 7,
+                huddleShelter: 0
+            };
+            
+            // Reset floor quantities to existing distribution
+            iccFloorQuantities = {
+                cubicalDesk: [9, 0, 8, 0], // Existing floor distribution
+                office: [19, 0, 30, 0],
+                conferenceRoom: [1, 0, 6, 0],
+                huddleShelter: [0, 0, 0, 0]
+            };
+            
+            // Re-render space types and update calculations
+            renderICCSpaceTypes();
+            updateICCBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('resetICCSpaceAllocationBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Reset!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#fff3e0';
+                button.style.color = '#f57c00';
+                button.style.borderColor = '#ffcc02';
+            }, 2000);
+        }
+
+        function resetHotelSpaceAllocationToExisting() {
+            // Reset Hotel Building space quantities to existing values
+            hotelQuantities = {
+                cubicalDesk: 0, // Existing quantities
+                office: 0,
+                conferenceRoom: 6,
+                huddleShelter: 0
+            };
+            
+            // Reset floor quantities to existing distribution
+            hotelFloorQuantities = {
+                cubicalDesk: [0, 0, 0, 0], // Existing floor distribution
+                office: [0, 0, 0, 0],
+                conferenceRoom: [6, 0, 0, 0], // All 6 conference rooms on 1st floor
+                huddleShelter: [0, 0, 0, 0]
+            };
+            
+            // Re-render space types and update calculations
+            renderHotelSpaceTypes();
+            updateHotelBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('resetHotelSpaceAllocationBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Reset!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#fff3e0';
+                button.style.color = '#f57c00';
+                button.style.borderColor = '#ffcc02';
+            }, 2000);
+        }
+
         // Initialize on page load if Dashboard 1 is active
         window.addEventListener('load', function() {
             if (document.getElementById('dashboard1').classList.contains('active')) {
@@ -6660,15 +7177,21 @@
             
             // Calculate efficiency
             const adminTotalGSF = floorSpaces.reduce((a, b) => a + b, 0);
-            const adminAssignableSF = floorSpaces.reduce((sum, gsf, index) => sum + Math.round(gsf * (floorEfficiencies[index] / 100)), 0);
+            // Use existing GSF for assignable SF calculation
+            const adminExistingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
+            const adminAssignableSF = adminExistingGSF.reduce((sum, gsf, index) => sum + Math.round(gsf * (floorEfficiencies[index] / 100)), 0);
             const adminEfficiency = adminTotalGSF > 0 ? Math.round((adminAssignableSF / adminTotalGSF) * 100) : 0;
             
             const iccTotalGSF = iccFloorSpaces.reduce((a, b) => a + b, 0);
-            const iccAssignableSF = iccFloorSpaces.reduce((sum, gsf, index) => sum + Math.round(gsf * (iccFloorEfficiencies[index] / 100)), 0);
+            // Use existing GSF for assignable SF calculation to show proper comparison
+            const iccExistingGSF = [0, 0, 19900, 0]; // ICC Floor 3 existing GSF
+            const iccAssignableSF = iccExistingGSF.reduce((sum, gsf, index) => sum + Math.round(gsf * (iccFloorEfficiencies[index] / 100)), 0);
             const iccEfficiency = iccTotalGSF > 0 ? Math.round((iccAssignableSF / iccTotalGSF) * 100) : 0;
             
             const hotelTotalGSF = hotelFloorSpaces.reduce((a, b) => a + b, 0);
-            const hotelAssignableSF = hotelFloorSpaces.reduce((sum, gsf, index) => sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100)), 0);
+            // Use existing GSF for assignable SF calculation to show proper comparison
+            const hotelExistingGSF = [7500, 0, 0, 0]; // Hotel Floor 1 existing GSF
+            const hotelAssignableSF = hotelExistingGSF.reduce((sum, gsf, index) => sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100)), 0);
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
             // Calculate ICC collaboration seats
