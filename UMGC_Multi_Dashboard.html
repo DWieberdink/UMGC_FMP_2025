@@ -1616,11 +1616,11 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
                                     <div style="text-align: center;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Assignable SF</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">vs Existing (Efficiency)</div>
                                         <div id="deltaGSF" style="color: white; font-size: 1rem; font-weight: 700;">+0</div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Work Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Work Points</div>
                                         <div id="deltaWorkstations" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Desk: <span id="headerDeskCount" style="font-weight: 600;">0</span></span>
@@ -1628,7 +1628,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Collaboration Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Collaboration</div>
                                         <div id="deltaOffices" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Conf: <span id="headerConfCount" style="font-weight: 600;">0</span></span>
@@ -1651,26 +1651,26 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span style="color: var(--umgc-navy); font-weight: 700;">77,514</span>
+                                                <span id="existingAssignable" style="color: var(--umgc-navy); font-weight: 700;">77,514</span>
                                             </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Work Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">292 spaces</span>
+                                                     <span id="existingWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">292 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Desk: <span style="font-weight: 600; color: var(--umgc-navy);">99</span></span>
-                                                     <span>Office: <span style="font-weight: 600; color: var(--umgc-navy);">193</span></span>
+                                                     <span>Desk: <span id="existingDeskCount" style="font-weight: 600; color: var(--umgc-navy);">99</span></span>
+                                                     <span>Office: <span id="existingOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">193</span></span>
                                                  </div>
                                              </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">56 spaces</span>
+                                                     <span id="existingCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">56 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Conf: <span style="font-weight: 600; color: var(--umgc-navy);">21</span></span>
-                                                     <span>Huddle: <span style="font-weight: 600; color: var(--umgc-navy);">35</span></span>
+                                                     <span>Conf: <span id="existingConfCount" style="font-weight: 600; color: var(--umgc-navy);">21</span></span>
+                                                     <span>Huddle: <span id="existingHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">35</span></span>
                                                  </div>
                                              </div>
                                         </div>
@@ -1722,9 +1722,27 @@
 
                     <!-- Building Parameters -->
                     <div class="space-card">
-                        <div class="collapsible-header" onclick="toggleBuildingParams()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-navy) 0%, var(--umgc-navy-dark) 100%); border-radius: 8px; margin-bottom: 15px;">
+                        <div class="collapsible-header" style="padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-navy) 0%, var(--umgc-navy-dark) 100%); border-radius: 8px; margin-bottom: 15px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
-                                <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Building Parameters</h3>
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Building Parameters</h3>
+                                    <button id="bestPracticeEfficiencyBtn" onclick="applyBestPracticeEfficiency()" 
+                                            style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
+                                                   font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                   transition: all 0.3s ease;"
+                                            onmouseover="this.style.background='#bbdefb'; this.style.borderColor='#90caf9'"
+                                            onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
+                                        Best Practice Efficiency
+                                    </button>
+                                    <button id="resetToExistingBtn" onclick="resetToExistingConditions()" 
+                                            style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                   font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                   transition: all 0.3s ease;"
+                                            onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                            onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                        Reset to Existing
+                                    </button>
+                                </div>
                                 <div style="display: flex; gap: 30px; align-items: center; flex: 1; justify-content: flex-end;">
                                     <div style="text-align: center;">
                                         <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Total GSF</div>
@@ -1738,7 +1756,6 @@
                                         <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Efficiency</div>
                                         <div id="overallEfficiency" style="color: white; font-size: 1.1rem; font-weight: 700;">66%</div>
                                     </div>
-                                    <span id="buildingParamsToggle" style="color: white; font-size: 1.5rem; transition: transform 0.3s; margin-left: 10px;">▼</span>
                                 </div>
                             </div>
                         </div>
@@ -1763,9 +1780,9 @@
                                 </div>
                                 <div class="param-header">
                                     <label class="param-label">Planned Efficiency</label>
-                                    <span class="param-value" id="floor1EffValue">60%</span>
+                                    <span class="param-value" id="floor1EffValue">49%</span>
                                 </div>
-                                <input type="range" class="slider" id="floor1EffSlider" min="50" max="85" value="60" step="1" oninput="updateFloorEfficiency(1, this.value)">
+                                <input type="range" class="slider" id="floor1EffSlider" min="50" max="85" value="49" step="1" oninput="updateFloorEfficiency(1, this.value)">
                                 <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
                                     <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="floor1Assignable">22,320</span></span>
                                 </div>
@@ -1790,9 +1807,9 @@
                                 </div>
                                 <div class="param-header">
                                     <label class="param-label">Planned Efficiency</label>
-                                    <span class="param-value" id="floor2EffValue">65%</span>
+                                    <span class="param-value" id="floor2EffValue">46%</span>
                                 </div>
-                                <input type="range" class="slider" id="floor2EffSlider" min="50" max="85" value="65" step="1" oninput="updateFloorEfficiency(2, this.value)">
+                                <input type="range" class="slider" id="floor2EffSlider" min="50" max="85" value="46" step="1" oninput="updateFloorEfficiency(2, this.value)">
                                 <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
                                     <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="floor2Assignable">24,115</span></span>
                                 </div>
@@ -1817,9 +1834,9 @@
                                 </div>
                                 <div class="param-header">
                                     <label class="param-label">Planned Efficiency</label>
-                                    <span class="param-value" id="floor3EffValue">65%</span>
+                                    <span class="param-value" id="floor3EffValue">53%</span>
                                 </div>
-                                <input type="range" class="slider" id="floor3EffSlider" min="50" max="85" value="65" step="1" oninput="updateFloorEfficiency(3, this.value)">
+                                <input type="range" class="slider" id="floor3EffSlider" min="50" max="85" value="53" step="1" oninput="updateFloorEfficiency(3, this.value)">
                                 <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
                                     <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="floor3Assignable">24,115</span></span>
                                 </div>
@@ -1844,9 +1861,9 @@
                                 </div>
                                 <div class="param-header">
                                     <label class="param-label">Planned Efficiency</label>
-                                    <span class="param-value" id="floor4EffValue">75%</span>
+                                    <span class="param-value" id="floor4EffValue">73%</span>
                                 </div>
-                                <input type="range" class="slider" id="floor4EffSlider" min="50" max="85" value="75" step="1" oninput="updateFloorEfficiency(4, this.value)">
+                                <input type="range" class="slider" id="floor4EffSlider" min="50" max="85" value="73" step="1" oninput="updateFloorEfficiency(4, this.value)">
                                 <div style="margin-top: 8px; padding: 8px; background: var(--umgc-blue-light); border-radius: 4px; text-align: center;">
                                     <span style="font-size: 0.8rem; color: var(--umgc-navy); font-weight: 600;">Planned Assignable SF: <span id="floor4Assignable">23,175</span></span>
                                 </div>
@@ -2029,11 +2046,11 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
                                     <div style="text-align: center;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Assignable SF</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">vs Existing (Efficiency)</div>
                                         <div id="iccDeltaGSF" style="color: white; font-size: 1rem; font-weight: 700;">+0</div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Work Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Work Points</div>
                                         <div id="iccDeltaWorkstations" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Desk: <span id="iccHeaderDeskCount" style="font-weight: 600;">0</span></span>
@@ -2041,7 +2058,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Collaboration Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Collaboration</div>
                                         <div id="iccDeltaOffices" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Conf: <span id="iccHeaderConfCount" style="font-weight: 600;">0</span></span>
@@ -2064,26 +2081,26 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span style="color: var(--umgc-navy); font-weight: 700;">36,021</span>
+                                                <span id="iccExistingAssignable" style="color: var(--umgc-navy); font-weight: 700;">36,021</span>
                                             </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Work Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">66 spaces</span>
+                                                     <span id="iccExistingWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">66 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Desk: <span style="font-weight: 600; color: var(--umgc-navy);">17</span></span>
-                                                     <span>Office: <span style="font-weight: 600; color: var(--umgc-navy);">49</span></span>
+                                                     <span>Desk: <span id="iccExistingDeskCount" style="font-weight: 600; color: var(--umgc-navy);">17</span></span>
+                                                     <span>Office: <span id="iccExistingOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">49</span></span>
                                                  </div>
                                              </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">7 spaces</span>
+                                                     <span id="iccExistingCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">7 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Conf: <span style="font-weight: 600; color: var(--umgc-navy);">7</span></span>
-                                                     <span>Huddle: <span style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                     <span>Conf: <span id="iccExistingConfCount" style="font-weight: 600; color: var(--umgc-navy);">7</span></span>
+                                                     <span>Huddle: <span id="iccExistingHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
                                                  </div>
                                              </div>
                                         </div>
@@ -2132,16 +2149,33 @@
                         
                         <!-- ICC Building Parameters -->
                         <div class="space-card">
-                            <div class="collapsible-header" onclick="toggleICCBuildingParams()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-gold) 0%, #d97706 100%); border-radius: 8px; margin-bottom: 15px;">
+                            <div class="collapsible-header" style="padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-gold) 0%, #d97706 100%); border-radius: 8px; margin-bottom: 15px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
-                                    <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">ICC Building Parameters</h3>
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">ICC Building Parameters</h3>
+                                        <button id="iccBestPracticeEfficiencyBtn" onclick="applyICCBestPracticeEfficiency()" 
+                                                style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#bbdefb'; this.style.borderColor='#90caf9'"
+                                                onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
+                                            Best Practice Efficiency
+                                        </button>
+                                        <button id="iccResetToExistingBtn" onclick="resetICCToExistingConditions()" 
+                                                style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
+                                                       font-size: 0.8rem; font-weight: 600; cursor: pointer; 
+                                                       transition: all 0.3s ease;"
+                                                onmouseover="this.style.background='#ffcc02'; this.style.borderColor='#ff8f00'"
+                                                onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
+                                            Reset to Existing
+                                        </button>
+                                    </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
                                             <div style="color: white; font-size: 0.75rem; margin-bottom: 2px;">Total Assignable SF</div>
                                             <div id="iccBuildingTotalAssignable" style="color: white; font-size: 1.1rem; font-weight: 700;">37,700</div>
                                         </div>
                                     </div>
-                                    <span id="iccBuildingParamsToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s ease;">▼</span>
                                 </div>
                             </div>
                             <div id="iccBuildingParamsContent" style="max-height: 1000px; overflow: hidden; transition: max-height 0.3s ease;">
@@ -2309,11 +2343,11 @@
                                 </div>
                                 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
                                     <div style="text-align: center;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Assignable SF</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">vs Existing (Efficiency)</div>
                                         <div id="hotelDeltaGSF" style="color: white; font-size: 1rem; font-weight: 700;">+0</div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Work Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Work Points</div>
                                         <div id="hotelDeltaWorkstations" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Desk: <span id="hotelHeaderDeskCount" style="font-weight: 600;">0</span></span>
@@ -2321,7 +2355,7 @@
                                         </div>
                                     </div>
                                     <div style="text-align: center; border-left: 1px solid rgba(255,255,255,0.3); padding-left: 15px;">
-                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">Collaboration Points</div>
+                                        <div style="color: white; font-size: 0.7rem; margin-bottom: 2px; font-weight: 600;">vs Existing Collaboration</div>
                                         <div id="hotelDeltaOffices" style="color: white; font-size: 1rem; font-weight: 700; margin-bottom: 3px;">+0</div>
                                         <div style="display: flex; gap: 10px; font-size: 0.65rem; color: rgba(255,255,255,0.8);">
                                             <span>Conf: <span id="hotelHeaderConfCount" style="font-weight: 600;">0</span></span>
@@ -2344,26 +2378,26 @@
                                         <div style="display: flex; flex-direction: column; gap: 12px;">
                                             <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white; border-radius: 4px;">
                                                 <span style="color: var(--umgc-text-dark); font-weight: 600;">Assignable SF</span>
-                                                <span style="color: var(--umgc-navy); font-weight: 700;">5,310</span>
+                                                <span id="hotelExistingAssignable" style="color: var(--umgc-navy); font-weight: 700;">5,310</span>
                                             </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Work Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
+                                                     <span id="hotelExistingWorkPoints" style="color: var(--umgc-navy); font-weight: 700;">0 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Desk: <span style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
-                                                     <span>Office: <span style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                     <span>Desk: <span id="hotelExistingDeskCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                     <span>Office: <span id="hotelExistingOfficeCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
                                                  </div>
                                              </div>
                                              <div style="padding: 8px 12px; background: white; border-radius: 4px;">
                                                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
                                                      <span style="color: var(--umgc-text-dark); font-weight: 600;">Collaboration Points</span>
-                                                     <span style="color: var(--umgc-navy); font-weight: 700;">6 spaces</span>
+                                                     <span id="hotelExistingCollabPoints" style="color: var(--umgc-navy); font-weight: 700;">6 spaces</span>
                                                  </div>
                                                  <div style="display: flex; gap: 15px; font-size: 0.75rem; color: var(--umgc-text-medium); margin-left: 8px;">
-                                                     <span>Conf: <span style="font-weight: 600; color: var(--umgc-navy);">6</span></span>
-                                                     <span>Huddle: <span style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
+                                                     <span>Conf: <span id="hotelExistingConfCount" style="font-weight: 600; color: var(--umgc-navy);">6</span></span>
+                                                     <span>Huddle: <span id="hotelExistingHuddleCount" style="font-weight: 600; color: var(--umgc-navy);">0</span></span>
                                                  </div>
                                              </div>
                                         </div>
@@ -2570,7 +2604,7 @@
                                     </div>
                                     <div class="building-metrics">
                                         <div class="metric">
-                                            <span class="metric-label">ASF in Scope</span>
+                                            <span class="metric-label">GSF in Scope</span>
                                             <span class="metric-value" id="adminAssignableSF">106,420</span>
                                         </div>
                                     </div>
@@ -2581,10 +2615,10 @@
                                             <div>
                                                 <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
                                                 <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
-                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 40</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 25</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 17</div>
-                                                    <div><strong>Seats:</strong> 85</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="adminSummaryExistingWorkstation">99</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="adminSummaryExistingOffice">193</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="adminSummaryExistingCollab">56</span></div>
+                                                    <div><strong>Seats:</strong> <span id="adminSummaryExistingSeats">292</span></div>
                                                 </div>
                                             </div>
                                             <div>
@@ -2607,7 +2641,7 @@
                                     </div>
                                     <div class="building-metrics">
                                         <div class="metric">
-                                            <span class="metric-label">ASF in Scope</span>
+                                            <span class="metric-label">GSF in Scope</span>
                                             <span class="metric-value" id="iccAssignableSF">37,700</span>
                                         </div>
                                     </div>
@@ -2618,10 +2652,10 @@
                                             <div>
                                                 <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
                                                 <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
-                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 0</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 0</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 0</div>
-                                                    <div><strong>Seats:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="iccSummaryExistingWorkstation">17</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="iccSummaryExistingOffice">49</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="iccSummaryExistingCollab">7</span></div>
+                                                    <div><strong>Seats:</strong> <span id="iccSummaryExistingSeats">66</span></div>
                                                 </div>
                                             </div>
                                             <div>
@@ -2644,7 +2678,7 @@
                                     </div>
                                     <div class="building-metrics">
                                         <div class="metric">
-                                            <span class="metric-label">ASF in Scope</span>
+                                            <span class="metric-label">GSF in Scope</span>
                                             <span class="metric-value" id="hotelAssignableSF">7,500</span>
                                         </div>
                                     </div>
@@ -2655,10 +2689,10 @@
                                             <div>
                                                 <div style="font-size: 0.75rem; font-weight: 700; color: var(--umgc-text-light); margin-bottom: 8px;">EXISTING</div>
                                                 <div style="font-size: 0.85rem; color: var(--umgc-text-dark);">
-                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> 0</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> 0</div>
-                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> 0</div>
-                                                    <div><strong>Seats:</strong> 0</div>
+                                                    <div style="margin-bottom: 4px;"><strong>Workstations:</strong> <span id="hotelSummaryExistingWorkstation">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Offices:</strong> <span id="hotelSummaryExistingOffice">0</span></div>
+                                                    <div style="margin-bottom: 4px;"><strong>Collab:</strong> <span id="hotelSummaryExistingCollab">6</span></div>
+                                                    <div><strong>Seats:</strong> <span id="hotelSummaryExistingSeats">72</span></div>
                                                 </div>
                                             </div>
                                             <div>
@@ -2681,7 +2715,7 @@
                                     </div>
                                     <div class="building-metrics">
                                         <div class="metric">
-                                            <span class="metric-label">ASF in Scope</span>
+                                            <span class="metric-label">GSF in Scope</span>
                                             <span class="metric-value" id="combinedTotalASF">151,620</span>
                                         </div>
                                     </div>
@@ -3567,23 +3601,23 @@
 
         let spaceInitialized = false;
         let floorSpaces = [34300, 33000, 34900, 23000]; // 4 floors for Admin Building
-        let floorEfficiencies = [85, 85, 85, 85]; // Efficiency for each floor
+        let floorEfficiencies = [49, 46, 53, 73]; // Existing efficiency for each floor (default)
         let spaceSF = {};
         let iccSpaceSF = {};
         let hotelSpaceSF = {};
         let quantities = {
-            cubicalDesk: 0,
-            office: 0,
-            conferenceRoom: 0,
-            huddleShelter: 0
+            cubicalDesk: 99, // Match existing quantities as baseline
+            office: 193,
+            conferenceRoom: 21,
+            huddleShelter: 35
         };
         let showExisting = true;
         let assignByFloor = true; // Always use floor-by-floor assignment
         let floorQuantities = {
-            cubicalDesk: [0, 0, 0, 0], // Floor 1, 2, 3, 4
-            office: [0, 0, 0, 0],
-            conferenceRoom: [0, 0, 0, 0],
-            huddleShelter: [0, 0, 0, 0]
+            cubicalDesk: [84, 7, 0, 8], // Match existing floor distribution as baseline
+            office: [12, 65, 100, 16],
+            conferenceRoom: [7, 5, 5, 4],
+            huddleShelter: [20, 6, 7, 2]
         };
         let existingFloorQuantities = {
             cubicalDesk: [84, 7, 0, 8], // Floor 1, 2, 3, 4 (from provided data)
@@ -3594,9 +3628,9 @@
 
         // ICC Building Data (same space types as Admin)
         let iccQuantities = {
-            cubicalDesk: 0,
-            office: 0,
-            conferenceRoom: 0,
+            cubicalDesk: 17, // Match existing quantities as baseline
+            office: 49,
+            conferenceRoom: 7,
             huddleShelter: 0
         };
 
@@ -3614,18 +3648,25 @@
             huddleShelter: 0
         };
 
+        let iccExistingFloorQuantities = {
+            cubicalDesk: [9, 0, 8, 0], // Basement, Floor 2, 3rd Floor, Floor 4
+            office: [19, 0, 30, 0],
+            conferenceRoom: [1, 0, 6, 0],
+            huddleShelter: [0, 0, 0, 0]
+        };
+
         // Hotel Building Data (same space types as Admin)
         let hotelQuantities = {
-            cubicalDesk: 0,
+            cubicalDesk: 0, // Match existing quantities as baseline
             office: 0,
-            conferenceRoom: 0,
+            conferenceRoom: 6,
             huddleShelter: 0
         };
 
         let hotelFloorQuantities = {
-            cubicalDesk: [0, 0, 0, 0],
+            cubicalDesk: [0, 0, 0, 0], // Match existing floor distribution as baseline
             office: [0, 0, 0, 0],
-            conferenceRoom: [0, 0, 0, 0],
+            conferenceRoom: [6, 0, 0, 0], // All 6 conference rooms on 1st floor
             huddleShelter: [0, 0, 0, 0]
         };
 
@@ -3636,6 +3677,13 @@
             huddleShelter: 0
         };
 
+        let hotelExistingFloorQuantities = {
+            cubicalDesk: [0, 0, 0, 0], // 1st Floor, Floor 2, Floor 3, Floor 4
+            office: [0, 0, 0, 0],
+            conferenceRoom: [6, 0, 0, 0], // All 6 conference rooms on 1st floor
+            huddleShelter: [0, 0, 0, 0]
+        };
+
         let iccShowExisting = true;
         let iccAssignByFloor = false;
         let hotelShowExisting = true;
@@ -3643,7 +3691,7 @@
 
         // ICC Building floor parameters (Basement fixed ASF, 3rd Floor with GSF and efficiency)
         let iccFloorSpaces = [20300, 0, 19900, 0]; // Basement (ASF), Floor 2, 3rd Floor (GSF), Floor 4
-        let iccFloorEfficiencies = [100, 100, 79, 100]; // Basement 100% (ASF), 3rd Floor 79% efficiency
+        let iccFloorEfficiencies = [100, 100, 79, 100]; // Basement 100% (ASF), 3rd Floor 79% efficiency (existing)
 
         // Hotel Building floor parameters (1st Floor with ASF only)
         let hotelFloorSpaces = [7500, 0, 0, 0]; // 1st Floor only (ASF value)
@@ -3678,59 +3726,30 @@
             if (spaceInitialized) return;
             spaceInitialized = true;
             
-            // Initialize Admin Building floor quantities
+            // Initialize Admin Building floor quantities (don't override existing distributions)
             SPACE_TYPES.forEach(type => {
-                const buildingQty = quantities[type.id] || 0;
-                if (buildingQty > 0) {
-                    const qtyPerFloor = Math.floor(buildingQty / 4);
-                    const remainder = buildingQty % 4;
-                    
-                    floorQuantities[type.id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor + (remainder > 1 ? 1 : 0),
-                        qtyPerFloor + (remainder > 2 ? 1 : 0),
-                        qtyPerFloor
-                    ];
-                } else {
-                    floorQuantities[type.id] = [0, 0, 0, 0];
+                // Only initialize if floor quantities are all zeros (not already set)
+                if (floorQuantities[type.id].every(qty => qty === 0)) {
+                    const buildingQty = quantities[type.id] || 0;
+                    if (buildingQty > 0) {
+                        const qtyPerFloor = Math.floor(buildingQty / 4);
+                        const remainder = buildingQty % 4;
+                        
+                        floorQuantities[type.id] = [
+                            qtyPerFloor + (remainder > 0 ? 1 : 0),
+                            qtyPerFloor + (remainder > 1 ? 1 : 0),
+                            qtyPerFloor + (remainder > 2 ? 1 : 0),
+                            qtyPerFloor
+                        ];
+                    }
                 }
             });
             
-            // Initialize ICC Building floor quantities (2 floors)
-            SPACE_TYPES.forEach(type => {
-                const buildingQty = iccQuantities[type.id] || 0;
-                if (buildingQty > 0) {
-                    const qtyPerFloor = Math.floor(buildingQty / 2);
-                    const remainder = buildingQty % 2;
-                    
-                    iccFloorQuantities[type.id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor,
-                        0,
-                        0
-                    ];
-                } else {
-                    iccFloorQuantities[type.id] = [0, 0, 0, 0];
-                }
-            });
+            // Initialize ICC Building floor quantities (use existing distribution)
+            // Don't override the existing floor distribution that matches actual building layout
             
-            // Initialize Hotel Building floor quantities (2 floors)
-            SPACE_TYPES.forEach(type => {
-                const buildingQty = hotelQuantities[type.id] || 0;
-                if (buildingQty > 0) {
-                    const qtyPerFloor = Math.floor(buildingQty / 2);
-                    const remainder = buildingQty % 2;
-                    
-                    hotelFloorQuantities[type.id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor,
-                        0,
-                        0
-                    ];
-                } else {
-                    hotelFloorQuantities[type.id] = [0, 0, 0, 0];
-                }
-            });
+            // Initialize Hotel Building floor quantities (use existing distribution)
+            // Don't override the existing floor distribution that matches actual building layout
             
             // Render all buildings
             renderSpaceTypes();
@@ -3740,8 +3759,24 @@
             updateSpaceCalculations();
             createSpaceCharts();
             
+            // Create campus comparison charts
+            createAdephiComparisonCharts();
+            
             // Initialize building comparison
             updateBuildingComparison();
+            
+            // Update all building totals and calculations
+            updateBuildingTotals();
+            updateICCBuildingTotals();
+            updateHotelBuildingTotals();
+            
+            // Force update of all building comparisons to ensure cards show correct values
+            setTimeout(() => {
+                updateBuildingComparison();
+                updateBuildingTotals();
+                updateICCBuildingTotals();
+                updateHotelBuildingTotals();
+            }, 100);
         }
 
         function updateFloor(floorNum, value) {
@@ -3784,8 +3819,9 @@
             floorEfficiencies[floorNum - 1] = effValue;
             document.getElementById(`floor${floorNum}EffValue`).textContent = effValue + '%';
             
-            // Update floor assignable SF
-            const assignable = Math.round(floorSpaces[floorNum - 1] * (effValue / 100));
+            // Update floor assignable SF using existing GSF values
+            const existingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
+            const assignable = Math.round(existingGSF[floorNum - 1] * (effValue / 100));
             document.getElementById(`floor${floorNum}Assignable`).textContent = assignable.toLocaleString();
             
             updateBuildingTotals();
@@ -3793,22 +3829,6 @@
             updateBuildingComparison();
         }
 
-        function toggleBuildingParams() {
-            const content = document.getElementById('buildingParamsContent');
-            const toggle = document.getElementById('buildingParamsToggle');
-            
-            if (content.style.maxHeight === '0px') {
-                // Expand
-                content.style.maxHeight = '2000px';
-                toggle.textContent = '▼';
-                toggle.style.transform = 'rotate(0deg)';
-            } else {
-                // Collapse
-                content.style.maxHeight = '0px';
-                toggle.textContent = '▶';
-                toggle.style.transform = 'rotate(-90deg)';
-            }
-        }
 
         function toggleComparison() {
             const content = document.getElementById('comparisonContent');
@@ -3923,20 +3943,31 @@
             quantities[id] = newQty;
             document.getElementById(`qty-${id}`).textContent = value;
             
-            // If we're in floor mode, also update floor distribution
+            // If we're in floor mode, update floor distribution only if all floors are zero
             if (assignByFloor) {
-                if (newQty > 0) {
-                    const qtyPerFloor = Math.floor(newQty / 4);
-                    const remainder = newQty % 4;
-                    
-                    floorQuantities[id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor + (remainder > 1 ? 1 : 0),
-                        qtyPerFloor + (remainder > 2 ? 1 : 0),
-                        qtyPerFloor
-                    ];
+                // Only redistribute if all floor quantities are zero (preserve existing distributions)
+                if (floorQuantities[id].every(qty => qty === 0)) {
+                    if (newQty > 0) {
+                        const qtyPerFloor = Math.floor(newQty / 4);
+                        const remainder = newQty % 4;
+                        
+                        floorQuantities[id] = [
+                            qtyPerFloor + (remainder > 0 ? 1 : 0),
+                            qtyPerFloor + (remainder > 1 ? 1 : 0),
+                            qtyPerFloor + (remainder > 2 ? 1 : 0),
+                            qtyPerFloor
+                        ];
+                    } else {
+                        floorQuantities[id] = [0, 0, 0, 0];
+                    }
                 } else {
-                    floorQuantities[id] = [0, 0, 0, 0];
+                    // If there are existing floor quantities, just update the total to match
+                    const currentTotal = floorQuantities[id].reduce((a, b) => a + b, 0);
+                    if (currentTotal !== newQty) {
+                        // Adjust the first floor to match the new total
+                        const difference = newQty - currentTotal;
+                        floorQuantities[id][0] = Math.max(0, floorQuantities[id][0] + difference);
+                    }
                 }
                 // Re-render to update floor inputs
                 renderSpaceTypes();
@@ -4443,8 +4474,8 @@
         }
 
         // Helper function to generate HTML for a single space type card
-        function generateSpaceTypeCard(type, customQuantities, customFloorQuantities, customAssignByFloor, customShowExisting, updateQuantityFunc, updateFloorQuantityFunc, customSpaceSF, updateSpaceSFFunc, buildingPrefix = '', floorLabels = ['Floor 1', 'Floor 2', 'Floor 3', 'Floor 4'], activeFloors = [true, true, true, true]) {
-            const existingQty = existingQuantities[type.id] || 0;
+        function generateSpaceTypeCard(type, customQuantities, customFloorQuantities, customAssignByFloor, customShowExisting, updateQuantityFunc, updateFloorQuantityFunc, customSpaceSF, updateSpaceSFFunc, buildingPrefix = '', floorLabels = ['Floor 1', 'Floor 2', 'Floor 3', 'Floor 4'], activeFloors = [true, true, true, true], customExistingQuantities = null, customExistingFloorQuantities = null) {
+            const existingQty = (customExistingQuantities && customExistingQuantities[type.id]) ? customExistingQuantities[type.id] : (existingQuantities[type.id] || 0);
             const existingSF = type.defaultSf;
             const existingTotal = existingQty * existingSF;
             const currentQty = customQuantities[type.id] || 0;
@@ -4469,10 +4500,11 @@
                 activeFloors.forEach((isActive, idx) => {
                     if (isActive) {
                         const shortLabel = floorLabels[idx].replace('Floor ', 'F').replace('Basement', 'B').replace('3rd Floor', '3F').replace('1st Floor', '1F');
+                        const existingFloorQty = (customExistingFloorQuantities && customExistingFloorQuantities[type.id]) ? (customExistingFloorQuantities[type.id][idx] || 0) : (existingFloorQuantities[type.id][idx] || 0);
                         existingFloorsHTML += `
                             <div>
                                 <div style="color: var(--umgc-text-light); font-weight: 600;">${shortLabel}</div>
-                                <div style="color: var(--umgc-navy); font-weight: 700;">${existingFloorQuantities[type.id][idx] || 0}</div>
+                                <div style="color: var(--umgc-navy); font-weight: 700;">${existingFloorQty}</div>
                             </div>`;
                     }
                 });
@@ -4577,7 +4609,7 @@
                 const workPointsSpaces = SPACE_TYPES.filter(t => t.category === 'workPoints');
                 let html = '';
                 workPointsSpaces.forEach(space => {
-                    html += generateSpaceTypeCard(space, iccQuantities, iccFloorQuantities, iccAlwaysAssignByFloor, iccShowExisting, 'updateICCSpaceQuantity', 'updateICCFloorQuantity', iccSpaceSF, 'updateICCSpaceSF', 'icc-', iccFloorLabels, iccActiveFloors, iccExistingQuantities);
+                    html += generateSpaceTypeCard(space, iccQuantities, iccFloorQuantities, iccAlwaysAssignByFloor, iccShowExisting, 'updateICCSpaceQuantity', 'updateICCFloorQuantity', iccSpaceSF, 'updateICCSpaceSF', 'icc-', iccFloorLabels, iccActiveFloors, iccExistingQuantities, iccExistingFloorQuantities);
                 });
                 workPointsGrid.innerHTML = html;
             }
@@ -4588,7 +4620,7 @@
                 const collabPointsSpaces = SPACE_TYPES.filter(t => t.category === 'collaborationPoints');
                 let html = '';
                 collabPointsSpaces.forEach(space => {
-                    html += generateSpaceTypeCard(space, iccQuantities, iccFloorQuantities, iccAlwaysAssignByFloor, iccShowExisting, 'updateICCSpaceQuantity', 'updateICCFloorQuantity', iccSpaceSF, 'updateICCSpaceSF', 'icc-', iccFloorLabels, iccActiveFloors, iccExistingQuantities);
+                    html += generateSpaceTypeCard(space, iccQuantities, iccFloorQuantities, iccAlwaysAssignByFloor, iccShowExisting, 'updateICCSpaceQuantity', 'updateICCFloorQuantity', iccSpaceSF, 'updateICCSpaceSF', 'icc-', iccFloorLabels, iccActiveFloors, iccExistingQuantities, iccExistingFloorQuantities);
                 });
                 collabPointsGrid.innerHTML = html;
             }
@@ -4631,18 +4663,29 @@
             iccQuantities[id] = newQty;
             
             if (iccAssignByFloor) {
-                if (newQty > 0) {
-                    const qtyPerFloor = Math.floor(newQty / 4); // ICC has 4 floors
-                    const remainder = newQty % 4;
-                    
-                    iccFloorQuantities[id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor + (remainder > 1 ? 1 : 0),
-                        qtyPerFloor + (remainder > 2 ? 1 : 0),
-                        qtyPerFloor
-                    ];
+                // Only redistribute if all floor quantities are zero (preserve existing distributions)
+                if (iccFloorQuantities[id].every(qty => qty === 0)) {
+                    if (newQty > 0) {
+                        const qtyPerFloor = Math.floor(newQty / 4); // ICC has 4 floors
+                        const remainder = newQty % 4;
+                        
+                        iccFloorQuantities[id] = [
+                            qtyPerFloor + (remainder > 0 ? 1 : 0),
+                            qtyPerFloor + (remainder > 1 ? 1 : 0),
+                            qtyPerFloor + (remainder > 2 ? 1 : 0),
+                            qtyPerFloor
+                        ];
+                    } else {
+                        iccFloorQuantities[id] = [0, 0, 0, 0];
+                    }
                 } else {
-                    iccFloorQuantities[id] = [0, 0, 0, 0];
+                    // If there are existing floor quantities, just update the total to match
+                    const currentTotal = iccFloorQuantities[id].reduce((a, b) => a + b, 0);
+                    if (currentTotal !== newQty) {
+                        // Adjust the first floor to match the new total
+                        const difference = newQty - currentTotal;
+                        iccFloorQuantities[id][0] = Math.max(0, iccFloorQuantities[id][0] + difference);
+                    }
                 }
                 renderICCSpaceTypes();
             }
@@ -4682,29 +4725,15 @@
             iccFloorEfficiencies[floorNum - 1] = efficiencyValue;
             document.getElementById(`iccFloor${floorNum}EffValue`).textContent = efficiencyValue + '%';
             
-            // Update assignable SF
-            const gsf = iccFloorSpaces[floorNum - 1];
-            const assignable = Math.round(gsf * (efficiencyValue / 100));
+            // Update assignable SF using existing GSF values
+            const existingGSF = [0, 0, 19900, 0]; // Only 3rd floor has GSF
+            const assignable = Math.round(existingGSF[floorNum - 1] * (efficiencyValue / 100));
             document.getElementById(`iccFloor${floorNum}Assignable`).textContent = assignable.toLocaleString();
             
             updateICCBuildingTotals();
             updateBuildingComparison();
         }
 
-        function toggleICCBuildingParams() {
-            const content = document.getElementById('iccBuildingParamsContent');
-            const toggle = document.getElementById('iccBuildingParamsToggle');
-            
-            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-                content.style.maxHeight = '0px';
-                toggle.textContent = '▶';
-                toggle.style.transform = 'rotate(-90deg)';
-            } else {
-                content.style.maxHeight = '2000px';
-                toggle.textContent = '▼';
-                toggle.style.transform = 'rotate(0deg)';
-            }
-        }
 
         function toggleICCSpaceAllocation() {
             const content = document.getElementById('iccSpaceAllocationContent');
@@ -4731,21 +4760,24 @@
             iccAssignByFloor = document.getElementById('iccAssignByFloorToggle').checked;
             
             if (iccAssignByFloor && !wasFloorMode) {
-                // Switching TO floor mode: distribute building quantities equally across 2 floors
+                // Switching TO floor mode: preserve existing distributions if they exist
                 SPACE_TYPES.forEach(type => {
-                    const buildingQty = iccQuantities[type.id] || 0;
-                    if (buildingQty > 0) {
-                        const qtyPerFloor = Math.floor(buildingQty / 2);
-                        const remainder = buildingQty % 2;
-                        
-                        iccFloorQuantities[type.id] = [
-                            qtyPerFloor + (remainder > 0 ? 1 : 0),
-                            qtyPerFloor,
-                            0,
-                            0
-                        ];
-                    } else {
-                        iccFloorQuantities[type.id] = [0, 0, 0, 0];
+                    // Only distribute equally if floor quantities are all zeros
+                    if (iccFloorQuantities[type.id].every(qty => qty === 0)) {
+                        const buildingQty = iccQuantities[type.id] || 0;
+                        if (buildingQty > 0) {
+                            const qtyPerFloor = Math.floor(buildingQty / 2);
+                            const remainder = buildingQty % 2;
+                            
+                            iccFloorQuantities[type.id] = [
+                                qtyPerFloor + (remainder > 0 ? 1 : 0),
+                                qtyPerFloor,
+                                0,
+                                0
+                            ];
+                        } else {
+                            iccFloorQuantities[type.id] = [0, 0, 0, 0];
+                        }
                     }
                 });
             } else if (!iccAssignByFloor && wasFloorMode) {
@@ -4771,21 +4803,24 @@
             iccAssignByFloor = document.getElementById('iccAssignByFloorToggle').checked;
             
             if (iccAssignByFloor && !wasFloorMode) {
-                // Switching TO floor mode: distribute building quantities equally across 2 floors
+                // Switching TO floor mode: preserve existing distributions if they exist
                 SPACE_TYPES.forEach(type => {
-                    const buildingQty = iccQuantities[type.id] || 0;
-                    if (buildingQty > 0) {
-                        const qtyPerFloor = Math.floor(buildingQty / 2);
-                        const remainder = buildingQty % 2;
-                        
-                        iccFloorQuantities[type.id] = [
-                            qtyPerFloor + (remainder > 0 ? 1 : 0),
-                            qtyPerFloor,
-                            0,
-                            0
-                        ];
-                    } else {
-                        iccFloorQuantities[type.id] = [0, 0, 0, 0];
+                    // Only distribute equally if floor quantities are all zeros
+                    if (iccFloorQuantities[type.id].every(qty => qty === 0)) {
+                        const buildingQty = iccQuantities[type.id] || 0;
+                        if (buildingQty > 0) {
+                            const qtyPerFloor = Math.floor(buildingQty / 2);
+                            const remainder = buildingQty % 2;
+                            
+                            iccFloorQuantities[type.id] = [
+                                qtyPerFloor + (remainder > 0 ? 1 : 0),
+                                qtyPerFloor,
+                                0,
+                                0
+                            ];
+                        } else {
+                            iccFloorQuantities[type.id] = [0, 0, 0, 0];
+                        }
                     }
                 });
             } else if (!iccAssignByFloor && wasFloorMode) {
@@ -4916,7 +4951,7 @@
                 const workPointsSpaces = SPACE_TYPES.filter(t => t.category === 'workPoints');
                 let html = '';
                 workPointsSpaces.forEach(space => {
-                    html += generateSpaceTypeCard(space, hotelQuantities, hotelFloorQuantities, hotelAlwaysAssignByFloor, hotelShowExisting, 'updateHotelSpaceQuantity', 'updateHotelFloorQuantity', hotelSpaceSF, 'updateHotelSpaceSF', 'hotel-', hotelFloorLabels, hotelActiveFloors, hotelExistingQuantities);
+                    html += generateSpaceTypeCard(space, hotelQuantities, hotelFloorQuantities, hotelAlwaysAssignByFloor, hotelShowExisting, 'updateHotelSpaceQuantity', 'updateHotelFloorQuantity', hotelSpaceSF, 'updateHotelSpaceSF', 'hotel-', hotelFloorLabels, hotelActiveFloors, hotelExistingQuantities, hotelExistingFloorQuantities);
                 });
                 workPointsGrid.innerHTML = html;
             }
@@ -4927,7 +4962,7 @@
                 const collabPointsSpaces = SPACE_TYPES.filter(t => t.category === 'collaborationPoints');
                 let html = '';
                 collabPointsSpaces.forEach(space => {
-                    html += generateSpaceTypeCard(space, hotelQuantities, hotelFloorQuantities, hotelAlwaysAssignByFloor, hotelShowExisting, 'updateHotelSpaceQuantity', 'updateHotelFloorQuantity', hotelSpaceSF, 'updateHotelSpaceSF', 'hotel-', hotelFloorLabels, hotelActiveFloors, hotelExistingQuantities);
+                    html += generateSpaceTypeCard(space, hotelQuantities, hotelFloorQuantities, hotelAlwaysAssignByFloor, hotelShowExisting, 'updateHotelSpaceQuantity', 'updateHotelFloorQuantity', hotelSpaceSF, 'updateHotelSpaceSF', 'hotel-', hotelFloorLabels, hotelActiveFloors, hotelExistingQuantities, hotelExistingFloorQuantities);
                 });
                 collabPointsGrid.innerHTML = html;
             }
@@ -4970,18 +5005,29 @@
             hotelQuantities[id] = newQty;
             
             if (hotelAssignByFloor) {
-                if (newQty > 0) {
-                    const qtyPerFloor = Math.floor(newQty / 4); // Hotel has 4 floors
-                    const remainder = newQty % 4;
-                    
-                    hotelFloorQuantities[id] = [
-                        qtyPerFloor + (remainder > 0 ? 1 : 0),
-                        qtyPerFloor + (remainder > 1 ? 1 : 0),
-                        qtyPerFloor + (remainder > 2 ? 1 : 0),
-                        qtyPerFloor
-                    ];
+                // Only redistribute if all floor quantities are zero (preserve existing distributions)
+                if (hotelFloorQuantities[id].every(qty => qty === 0)) {
+                    if (newQty > 0) {
+                        const qtyPerFloor = Math.floor(newQty / 4); // Hotel has 4 floors
+                        const remainder = newQty % 4;
+                        
+                        hotelFloorQuantities[id] = [
+                            qtyPerFloor + (remainder > 0 ? 1 : 0),
+                            qtyPerFloor + (remainder > 1 ? 1 : 0),
+                            qtyPerFloor + (remainder > 2 ? 1 : 0),
+                            qtyPerFloor
+                        ];
+                    } else {
+                        hotelFloorQuantities[id] = [0, 0, 0, 0];
+                    }
                 } else {
-                    hotelFloorQuantities[id] = [0, 0, 0, 0];
+                    // If there are existing floor quantities, just update the total to match
+                    const currentTotal = hotelFloorQuantities[id].reduce((a, b) => a + b, 0);
+                    if (currentTotal !== newQty) {
+                        // Adjust the first floor to match the new total
+                        const difference = newQty - currentTotal;
+                        hotelFloorQuantities[id][0] = Math.max(0, hotelFloorQuantities[id][0] + difference);
+                    }
                 }
                 renderHotelSpaceTypes();
             }
@@ -5020,9 +5066,9 @@
             hotelFloorEfficiencies[floorNum - 1] = efficiencyValue;
             document.getElementById(`hotelFloor${floorNum}EffValue`).textContent = efficiencyValue + '%';
             
-            // Update assignable SF
-            const gsf = hotelFloorSpaces[floorNum - 1];
-            const assignable = Math.round(gsf * (efficiencyValue / 100));
+            // Update assignable SF using existing GSF values
+            const existingGSF = [7500, 0, 0, 0]; // Only 1st floor has GSF
+            const assignable = Math.round(existingGSF[floorNum - 1] * (efficiencyValue / 100));
             document.getElementById(`hotelFloor${floorNum}Assignable`).textContent = assignable.toLocaleString();
             
             updateHotelBuildingTotals();
@@ -5069,21 +5115,24 @@
             hotelAssignByFloor = document.getElementById('hotelAssignByFloorToggle').checked;
             
             if (hotelAssignByFloor && !wasFloorMode) {
-                // Switching TO floor mode: distribute building quantities equally across 2 floors
+                // Switching TO floor mode: preserve existing distributions if they exist
                 SPACE_TYPES.forEach(type => {
-                    const buildingQty = hotelQuantities[type.id] || 0;
-                    if (buildingQty > 0) {
-                        const qtyPerFloor = Math.floor(buildingQty / 2);
-                        const remainder = buildingQty % 2;
-                        
-                        hotelFloorQuantities[type.id] = [
-                            qtyPerFloor + (remainder > 0 ? 1 : 0),
-                            qtyPerFloor,
-                            0,
-                            0
-                        ];
-                    } else {
-                        hotelFloorQuantities[type.id] = [0, 0, 0, 0];
+                    // Only distribute equally if floor quantities are all zeros
+                    if (hotelFloorQuantities[type.id].every(qty => qty === 0)) {
+                        const buildingQty = hotelQuantities[type.id] || 0;
+                        if (buildingQty > 0) {
+                            const qtyPerFloor = Math.floor(buildingQty / 2);
+                            const remainder = buildingQty % 2;
+                            
+                            hotelFloorQuantities[type.id] = [
+                                qtyPerFloor + (remainder > 0 ? 1 : 0),
+                                qtyPerFloor,
+                                0,
+                                0
+                            ];
+                        } else {
+                            hotelFloorQuantities[type.id] = [0, 0, 0, 0];
+                        }
                     }
                 });
             } else if (!hotelAssignByFloor && wasFloorMode) {
@@ -5264,7 +5313,20 @@
             document.getElementById('iccRemainingSF').textContent = iccRemainingSF.toLocaleString();
             document.getElementById('hotelRemainingSF').textContent = hotelRemainingSF.toLocaleString();
             
-            // Calculate campus-wide totals for comparison cards
+            // Calculate campus-wide existing data from all buildings
+            const campusExistingWorkPoints = 
+                existingQuantities.cubicalDesk + existingQuantities.office +
+                iccExistingQuantities.cubicalDesk + iccExistingQuantities.office +
+                hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office;
+            
+            const campusExistingCollaborationPoints = 
+                existingQuantities.conferenceRoom + existingQuantities.huddleShelter +
+                iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter +
+                hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
+            
+            const campusExistingAssignable = 77514 + 36021 + 5310; // Sum of existing assignable SF from all buildings
+            
+            // Calculate campus-wide planned data from all buildings
             const campusPlannedWorkPoints = 
                 ((quantities.cubicalDesk || 0) + (quantities.office || 0)) +
                 ((iccQuantities.cubicalDesk || 0) + (iccQuantities.office || 0)) +
@@ -5275,14 +5337,35 @@
                 ((iccQuantities.conferenceRoom || 0) + (iccQuantities.huddleShelter || 0)) +
                 ((hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0));
             
-            // Update campus comparison cards
+            // Calculate campus-wide seats (workstations + offices + collaboration seats)
+            const campusExistingSeats = campusExistingWorkPoints + (campusExistingCollaborationPoints * 6); // Assuming 6 seats per collaboration space
+            const campusPlannedSeats = campusPlannedWorkPoints + (campusPlannedCollaborationPoints * 6);
+            
+            // Update campus existing data
+            const campusExistingAssignableEl = document.getElementById('campusExistingAssignable');
+            const campusExistingWorkstationEl = document.getElementById('campusExistingWorkstation');
+            const campusExistingOfficeEl = document.getElementById('campusExistingOffice');
+            const campusExistingCollabEl = document.getElementById('campusExistingCollab');
+            const campusExistingSeatsEl = document.getElementById('campusExistingSeats');
+            
+            if (campusExistingAssignableEl) campusExistingAssignableEl.textContent = campusExistingAssignable.toLocaleString();
+            if (campusExistingWorkstationEl) campusExistingWorkstationEl.textContent = existingQuantities.cubicalDesk + iccExistingQuantities.cubicalDesk + hotelExistingQuantities.cubicalDesk;
+            if (campusExistingOfficeEl) campusExistingOfficeEl.textContent = existingQuantities.office + iccExistingQuantities.office + hotelExistingQuantities.office;
+            if (campusExistingCollabEl) campusExistingCollabEl.textContent = campusExistingCollaborationPoints;
+            if (campusExistingSeatsEl) campusExistingSeatsEl.textContent = campusExistingSeats;
+            
+            // Update campus planned data
             const campusPlannedAssignableEl = document.getElementById('campusPlannedAssignable');
-            const campusPlannedWorkPointsEl = document.getElementById('campusPlannedWorkstation');
-            const campusPlannedCollaborationPointsEl = document.getElementById('campusPlannedOffice');
+            const campusPlannedWorkstationEl = document.getElementById('campusPlannedWorkstation');
+            const campusPlannedOfficeEl = document.getElementById('campusPlannedOffice');
+            const campusPlannedCollabEl = document.getElementById('campusPlannedCollab');
+            const campusPlannedSeatsEl = document.getElementById('campusPlannedSeats');
             
             if (campusPlannedAssignableEl) campusPlannedAssignableEl.textContent = combinedTotalASF.toLocaleString();
-            if (campusPlannedWorkPointsEl) campusPlannedWorkPointsEl.textContent = campusPlannedWorkPoints;
-            if (campusPlannedCollaborationPointsEl) campusPlannedCollaborationPointsEl.textContent = campusPlannedCollaborationPoints;
+            if (campusPlannedWorkstationEl) campusPlannedWorkstationEl.textContent = (quantities.cubicalDesk || 0) + (iccQuantities.cubicalDesk || 0) + (hotelQuantities.cubicalDesk || 0);
+            if (campusPlannedOfficeEl) campusPlannedOfficeEl.textContent = (quantities.office || 0) + (iccQuantities.office || 0) + (hotelQuantities.office || 0);
+            if (campusPlannedCollabEl) campusPlannedCollabEl.textContent = campusPlannedCollaborationPoints;
+            if (campusPlannedSeatsEl) campusPlannedSeatsEl.textContent = campusPlannedSeats;
             
             // Calculate individual building totals for summary cards
             const adminWorkPointsCount = (quantities.cubicalDesk || 0) + (quantities.office || 0);
@@ -5293,27 +5376,209 @@
             const hotelWorkPointsCount = (hotelQuantities.cubicalDesk || 0) + (hotelQuantities.office || 0);
             const hotelCollaborationPointsCount = (hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0);
             
-            // Update building summary cards
+            // Update building summary cards - Existing data
+            const adminSummaryExistingWorkstationEl = document.getElementById('adminSummaryExistingWorkstation');
+            const adminSummaryExistingOfficeEl = document.getElementById('adminSummaryExistingOffice');
+            const adminSummaryExistingCollabEl = document.getElementById('adminSummaryExistingCollab');
+            const adminSummaryExistingSeatsEl = document.getElementById('adminSummaryExistingSeats');
+            
+            if (adminSummaryExistingWorkstationEl) adminSummaryExistingWorkstationEl.textContent = existingQuantities.cubicalDesk;
+            if (adminSummaryExistingOfficeEl) adminSummaryExistingOfficeEl.textContent = existingQuantities.office;
+            if (adminSummaryExistingCollabEl) adminSummaryExistingCollabEl.textContent = existingQuantities.conferenceRoom + existingQuantities.huddleShelter;
+            if (adminSummaryExistingSeatsEl) adminSummaryExistingSeatsEl.textContent = (existingQuantities.cubicalDesk + existingQuantities.office) + ((existingQuantities.conferenceRoom + existingQuantities.huddleShelter) * 6);
+            
+            const iccSummaryExistingWorkstationEl = document.getElementById('iccSummaryExistingWorkstation');
+            const iccSummaryExistingOfficeEl = document.getElementById('iccSummaryExistingOffice');
+            const iccSummaryExistingCollabEl = document.getElementById('iccSummaryExistingCollab');
+            const iccSummaryExistingSeatsEl = document.getElementById('iccSummaryExistingSeats');
+            
+            if (iccSummaryExistingWorkstationEl) iccSummaryExistingWorkstationEl.textContent = iccExistingQuantities.cubicalDesk;
+            if (iccSummaryExistingOfficeEl) iccSummaryExistingOfficeEl.textContent = iccExistingQuantities.office;
+            if (iccSummaryExistingCollabEl) iccSummaryExistingCollabEl.textContent = iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter;
+            if (iccSummaryExistingSeatsEl) iccSummaryExistingSeatsEl.textContent = (iccExistingQuantities.cubicalDesk + iccExistingQuantities.office) + ((iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter) * 6);
+            
+            const hotelSummaryExistingWorkstationEl = document.getElementById('hotelSummaryExistingWorkstation');
+            const hotelSummaryExistingOfficeEl = document.getElementById('hotelSummaryExistingOffice');
+            const hotelSummaryExistingCollabEl = document.getElementById('hotelSummaryExistingCollab');
+            const hotelSummaryExistingSeatsEl = document.getElementById('hotelSummaryExistingSeats');
+            
+            if (hotelSummaryExistingWorkstationEl) hotelSummaryExistingWorkstationEl.textContent = hotelExistingQuantities.cubicalDesk;
+            if (hotelSummaryExistingOfficeEl) hotelSummaryExistingOfficeEl.textContent = hotelExistingQuantities.office;
+            if (hotelSummaryExistingCollabEl) hotelSummaryExistingCollabEl.textContent = hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
+            if (hotelSummaryExistingSeatsEl) hotelSummaryExistingSeatsEl.textContent = (hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office) + ((hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter) * 6);
+            
+            // Update building summary cards - Planned data
             const adminSummaryWorkPointsEl = document.getElementById('adminSummaryWorkstation');
             const adminSummaryCollaborationPointsEl = document.getElementById('adminSummaryOffice');
+            const adminSummaryCollabEl = document.getElementById('adminSummaryCollab');
+            const adminSummarySeatsEl = document.getElementById('adminSummarySeats');
             
             if (adminSummaryWorkPointsEl) adminSummaryWorkPointsEl.textContent = adminWorkPointsCount;
             if (adminSummaryCollaborationPointsEl) adminSummaryCollaborationPointsEl.textContent = adminCollaborationPointsCount;
+            if (adminSummaryCollabEl) adminSummaryCollabEl.textContent = adminCollaborationPointsCount;
+            if (adminSummarySeatsEl) adminSummarySeatsEl.textContent = adminWorkPointsCount + (adminCollaborationPointsCount * 6);
             
             const iccSummaryWorkPointsEl = document.getElementById('iccSummaryWorkstation');
             const iccSummaryCollaborationPointsEl = document.getElementById('iccSummaryOffice');
+            const iccSummaryCollabEl = document.getElementById('iccSummaryCollab');
+            const iccSummarySeatsEl = document.getElementById('iccSummarySeats');
             
             if (iccSummaryWorkPointsEl) iccSummaryWorkPointsEl.textContent = iccWorkPointsCount;
             if (iccSummaryCollaborationPointsEl) iccSummaryCollaborationPointsEl.textContent = iccCollaborationPointsCount;
+            if (iccSummaryCollabEl) iccSummaryCollabEl.textContent = iccCollaborationPointsCount;
+            if (iccSummarySeatsEl) iccSummarySeatsEl.textContent = iccWorkPointsCount + (iccCollaborationPointsCount * 6);
             
             const hotelSummaryWorkPointsEl = document.getElementById('hotelSummaryWorkstation');
             const hotelSummaryCollaborationPointsEl = document.getElementById('hotelSummaryOffice');
+            const hotelSummaryCollabEl = document.getElementById('hotelSummaryCollab');
+            const hotelSummarySeatsEl = document.getElementById('hotelSummarySeats');
             
             if (hotelSummaryWorkPointsEl) hotelSummaryWorkPointsEl.textContent = hotelWorkPointsCount;
             if (hotelSummaryCollaborationPointsEl) hotelSummaryCollaborationPointsEl.textContent = hotelCollaborationPointsCount;
+            if (hotelSummaryCollabEl) hotelSummaryCollabEl.textContent = hotelCollaborationPointsCount;
+            if (hotelSummarySeatsEl) hotelSummarySeatsEl.textContent = hotelWorkPointsCount + (hotelCollaborationPointsCount * 6);
+            
+            // Update comparison cards with existing and planned data
+            updateComparisonCards();
             
             // Update Adelphi comparison charts
             if (typeof updateAdephiComparisonCharts === 'function') updateAdephiComparisonCharts();
+        }
+        
+        // Function to update comparison cards with existing and planned data
+        function updateComparisonCards() {
+            // Calculate existing data from building data structures
+            const adminExistingWorkPoints = existingQuantities.cubicalDesk + existingQuantities.office;
+            const adminExistingCollaborationPoints = existingQuantities.conferenceRoom + existingQuantities.huddleShelter;
+            const adminExistingAssignable = 77514; // This should match the hardcoded value or be calculated
+            
+            const iccExistingWorkPoints = iccExistingQuantities.cubicalDesk + iccExistingQuantities.office;
+            const iccExistingCollaborationPoints = iccExistingQuantities.conferenceRoom + iccExistingQuantities.huddleShelter;
+            const iccExistingAssignable = 36021; // This should match the hardcoded value or be calculated
+            
+            const hotelExistingWorkPoints = hotelExistingQuantities.cubicalDesk + hotelExistingQuantities.office;
+            const hotelExistingCollaborationPoints = hotelExistingQuantities.conferenceRoom + hotelExistingQuantities.huddleShelter;
+            const hotelExistingAssignable = 5310; // This should match the hardcoded value or be calculated
+            
+            // Calculate planned data from current building quantities
+            const adminPlannedWorkPoints = (quantities.cubicalDesk || 0) + (quantities.office || 0);
+            const adminPlannedCollaborationPoints = (quantities.conferenceRoom || 0) + (quantities.huddleShelter || 0);
+            const adminPlannedAssignable = floorSpaces.reduce((sum, gsf, index) => {
+                return sum + Math.round(gsf * (floorEfficiencies[index] / 100));
+            }, 0);
+            
+            const iccPlannedWorkPoints = (iccQuantities.cubicalDesk || 0) + (iccQuantities.office || 0);
+            const iccPlannedCollaborationPoints = (iccQuantities.conferenceRoom || 0) + (iccQuantities.huddleShelter || 0);
+            const iccPlannedAssignable = iccFloorSpaces.reduce((sum, gsf, index) => {
+                return sum + Math.round(gsf * (iccFloorEfficiencies[index] / 100));
+            }, 0);
+            
+            const hotelPlannedWorkPoints = (hotelQuantities.cubicalDesk || 0) + (hotelQuantities.office || 0);
+            const hotelPlannedCollaborationPoints = (hotelQuantities.conferenceRoom || 0) + (hotelQuantities.huddleShelter || 0);
+            const hotelPlannedAssignable = hotelFloorSpaces.reduce((sum, gsf, index) => {
+                return sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100));
+            }, 0);
+            
+            // Update Admin Building comparison cards
+            const adminExistingAssignableEl = document.getElementById('existingAssignable');
+            const adminExistingWorkPointsEl = document.getElementById('existingWorkPoints');
+            const adminExistingDeskCountEl = document.getElementById('existingDeskCount');
+            const adminExistingOfficeCountEl = document.getElementById('existingOfficeCount');
+            const adminExistingCollabPointsEl = document.getElementById('existingCollabPoints');
+            const adminExistingConfCountEl = document.getElementById('existingConfCount');
+            const adminExistingHuddleCountEl = document.getElementById('existingHuddleCount');
+            
+            if (adminExistingAssignableEl) adminExistingAssignableEl.textContent = adminExistingAssignable.toLocaleString();
+            if (adminExistingWorkPointsEl) adminExistingWorkPointsEl.textContent = `${adminExistingWorkPoints} spaces`;
+            if (adminExistingDeskCountEl) adminExistingDeskCountEl.textContent = existingQuantities.cubicalDesk;
+            if (adminExistingOfficeCountEl) adminExistingOfficeCountEl.textContent = existingQuantities.office;
+            if (adminExistingCollabPointsEl) adminExistingCollabPointsEl.textContent = `${adminExistingCollaborationPoints} spaces`;
+            if (adminExistingConfCountEl) adminExistingConfCountEl.textContent = existingQuantities.conferenceRoom;
+            if (adminExistingHuddleCountEl) adminExistingHuddleCountEl.textContent = existingQuantities.huddleShelter;
+            
+            const adminPlannedAssignableEl = document.getElementById('plannedAssignable');
+            const adminPlannedWorkPointsEl = document.getElementById('plannedWorkPoints');
+            const adminPlannedDeskCountEl = document.getElementById('plannedDeskCount');
+            const adminPlannedOfficeCountEl = document.getElementById('plannedOfficeCount');
+            const adminPlannedCollabPointsEl = document.getElementById('plannedCollabPoints');
+            const adminPlannedConfCountEl = document.getElementById('plannedConfCount');
+            const adminPlannedHuddleCountEl = document.getElementById('plannedHuddleCount');
+            
+            if (adminPlannedAssignableEl) adminPlannedAssignableEl.textContent = adminPlannedAssignable.toLocaleString();
+            if (adminPlannedWorkPointsEl) adminPlannedWorkPointsEl.textContent = `${adminPlannedWorkPoints} spaces`;
+            if (adminPlannedDeskCountEl) adminPlannedDeskCountEl.textContent = quantities.cubicalDesk || 0;
+            if (adminPlannedOfficeCountEl) adminPlannedOfficeCountEl.textContent = quantities.office || 0;
+            if (adminPlannedCollabPointsEl) adminPlannedCollabPointsEl.textContent = `${adminPlannedCollaborationPoints} spaces`;
+            if (adminPlannedConfCountEl) adminPlannedConfCountEl.textContent = quantities.conferenceRoom || 0;
+            if (adminPlannedHuddleCountEl) adminPlannedHuddleCountEl.textContent = quantities.huddleShelter || 0;
+            
+            // Update ICC Building comparison cards
+            const iccExistingAssignableEl = document.getElementById('iccExistingAssignable');
+            const iccExistingWorkPointsEl = document.getElementById('iccExistingWorkPoints');
+            const iccExistingDeskCountEl = document.getElementById('iccExistingDeskCount');
+            const iccExistingOfficeCountEl = document.getElementById('iccExistingOfficeCount');
+            const iccExistingCollabPointsEl = document.getElementById('iccExistingCollabPoints');
+            const iccExistingConfCountEl = document.getElementById('iccExistingConfCount');
+            const iccExistingHuddleCountEl = document.getElementById('iccExistingHuddleCount');
+            
+            if (iccExistingAssignableEl) iccExistingAssignableEl.textContent = iccExistingAssignable.toLocaleString();
+            if (iccExistingWorkPointsEl) iccExistingWorkPointsEl.textContent = `${iccExistingWorkPoints} spaces`;
+            if (iccExistingDeskCountEl) iccExistingDeskCountEl.textContent = iccExistingQuantities.cubicalDesk;
+            if (iccExistingOfficeCountEl) iccExistingOfficeCountEl.textContent = iccExistingQuantities.office;
+            if (iccExistingCollabPointsEl) iccExistingCollabPointsEl.textContent = `${iccExistingCollaborationPoints} spaces`;
+            if (iccExistingConfCountEl) iccExistingConfCountEl.textContent = iccExistingQuantities.conferenceRoom;
+            if (iccExistingHuddleCountEl) iccExistingHuddleCountEl.textContent = iccExistingQuantities.huddleShelter;
+            
+            // Update Hotel Building comparison cards
+            const hotelExistingAssignableEl = document.getElementById('hotelExistingAssignable');
+            const hotelExistingWorkPointsEl = document.getElementById('hotelExistingWorkPoints');
+            const hotelExistingDeskCountEl = document.getElementById('hotelExistingDeskCount');
+            const hotelExistingOfficeCountEl = document.getElementById('hotelExistingOfficeCount');
+            const hotelExistingCollabPointsEl = document.getElementById('hotelExistingCollabPoints');
+            const hotelExistingConfCountEl = document.getElementById('hotelExistingConfCount');
+            const hotelExistingHuddleCountEl = document.getElementById('hotelExistingHuddleCount');
+            
+            if (hotelExistingAssignableEl) hotelExistingAssignableEl.textContent = hotelExistingAssignable.toLocaleString();
+            if (hotelExistingWorkPointsEl) hotelExistingWorkPointsEl.textContent = `${hotelExistingWorkPoints} spaces`;
+            if (hotelExistingDeskCountEl) hotelExistingDeskCountEl.textContent = hotelExistingQuantities.cubicalDesk;
+            if (hotelExistingOfficeCountEl) hotelExistingOfficeCountEl.textContent = hotelExistingQuantities.office;
+            if (hotelExistingCollabPointsEl) hotelExistingCollabPointsEl.textContent = `${hotelExistingCollaborationPoints} spaces`;
+            if (hotelExistingConfCountEl) hotelExistingConfCountEl.textContent = hotelExistingQuantities.conferenceRoom;
+            if (hotelExistingHuddleCountEl) hotelExistingHuddleCountEl.textContent = hotelExistingQuantities.huddleShelter;
+            
+            // Update ICC Building planned comparison cards
+            const iccPlannedAssignableEl = document.getElementById('iccPlannedAssignable');
+            const iccPlannedWorkPointsEl = document.getElementById('iccPlannedWorkPoints');
+            const iccPlannedDeskCountEl = document.getElementById('iccPlannedDeskCount');
+            const iccPlannedOfficeCountEl = document.getElementById('iccPlannedOfficeCount');
+            const iccPlannedCollabPointsEl = document.getElementById('iccPlannedCollabPoints');
+            const iccPlannedConfCountEl = document.getElementById('iccPlannedConfCount');
+            const iccPlannedHuddleCountEl = document.getElementById('iccPlannedHuddleCount');
+            
+            if (iccPlannedAssignableEl) iccPlannedAssignableEl.textContent = iccPlannedAssignable.toLocaleString();
+            if (iccPlannedWorkPointsEl) iccPlannedWorkPointsEl.textContent = `${iccPlannedWorkPoints} spaces`;
+            if (iccPlannedDeskCountEl) iccPlannedDeskCountEl.textContent = iccQuantities.cubicalDesk || 0;
+            if (iccPlannedOfficeCountEl) iccPlannedOfficeCountEl.textContent = iccQuantities.office || 0;
+            if (iccPlannedCollabPointsEl) iccPlannedCollabPointsEl.textContent = `${iccPlannedCollaborationPoints} spaces`;
+            if (iccPlannedConfCountEl) iccPlannedConfCountEl.textContent = iccQuantities.conferenceRoom || 0;
+            if (iccPlannedHuddleCountEl) iccPlannedHuddleCountEl.textContent = iccQuantities.huddleShelter || 0;
+            
+            // Update Hotel Building planned comparison cards
+            const hotelPlannedAssignableEl = document.getElementById('hotelPlannedAssignable');
+            const hotelPlannedWorkPointsEl = document.getElementById('hotelPlannedWorkPoints');
+            const hotelPlannedDeskCountEl = document.getElementById('hotelPlannedDeskCount');
+            const hotelPlannedOfficeCountEl = document.getElementById('hotelPlannedOfficeCount');
+            const hotelPlannedCollabPointsEl = document.getElementById('hotelPlannedCollabPoints');
+            const hotelPlannedConfCountEl = document.getElementById('hotelPlannedConfCount');
+            const hotelPlannedHuddleCountEl = document.getElementById('hotelPlannedHuddleCount');
+            
+            if (hotelPlannedAssignableEl) hotelPlannedAssignableEl.textContent = hotelPlannedAssignable.toLocaleString();
+            if (hotelPlannedWorkPointsEl) hotelPlannedWorkPointsEl.textContent = `${hotelPlannedWorkPoints} spaces`;
+            if (hotelPlannedDeskCountEl) hotelPlannedDeskCountEl.textContent = hotelQuantities.cubicalDesk || 0;
+            if (hotelPlannedOfficeCountEl) hotelPlannedOfficeCountEl.textContent = hotelQuantities.office || 0;
+            if (hotelPlannedCollabPointsEl) hotelPlannedCollabPointsEl.textContent = `${hotelPlannedCollaborationPoints} spaces`;
+            if (hotelPlannedConfCountEl) hotelPlannedConfCountEl.textContent = hotelQuantities.conferenceRoom || 0;
+            if (hotelPlannedHuddleCountEl) hotelPlannedHuddleCountEl.textContent = hotelQuantities.huddleShelter || 0;
         }
 
         function toggleFloorAssignment() {
@@ -5321,22 +5586,25 @@
             assignByFloor = document.getElementById('assignByFloorToggle').checked;
             
             if (assignByFloor && !wasFloorMode) {
-                // Switching TO floor mode: distribute building quantities equally across floors
+                // Switching TO floor mode: preserve existing distributions if they exist
                 SPACE_TYPES.forEach(type => {
-                    const buildingQty = quantities[type.id] || 0;
-                    if (buildingQty > 0) {
-                        const qtyPerFloor = Math.floor(buildingQty / 4);
-                        const remainder = buildingQty % 4;
-                        
-                        // Distribute equally with remainder to first floors
-                        floorQuantities[type.id] = [
-                            qtyPerFloor + (remainder > 0 ? 1 : 0),
-                            qtyPerFloor + (remainder > 1 ? 1 : 0),
-                            qtyPerFloor + (remainder > 2 ? 1 : 0),
-                            qtyPerFloor
-                        ];
-                    } else {
-                        floorQuantities[type.id] = [0, 0, 0, 0];
+                    // Only distribute equally if floor quantities are all zeros
+                    if (floorQuantities[type.id].every(qty => qty === 0)) {
+                        const buildingQty = quantities[type.id] || 0;
+                        if (buildingQty > 0) {
+                            const qtyPerFloor = Math.floor(buildingQty / 4);
+                            const remainder = buildingQty % 4;
+                            
+                            // Distribute equally with remainder to first floors
+                            floorQuantities[type.id] = [
+                                qtyPerFloor + (remainder > 0 ? 1 : 0),
+                                qtyPerFloor + (remainder > 1 ? 1 : 0),
+                                qtyPerFloor + (remainder > 2 ? 1 : 0),
+                                qtyPerFloor
+                            ];
+                        } else {
+                            floorQuantities[type.id] = [0, 0, 0, 0];
+                        }
                     }
                 });
             } else if (!assignByFloor && wasFloorMode) {
@@ -5874,6 +6142,176 @@
             document.getElementById('capacityAlert').style.display = 'none';
         }
 
+        // Best Practice Efficiency Functions
+        function applyBestPracticeEfficiency() {
+            // Apply best practice values to all Admin Building floors
+            const bestPracticeValues = [60, 65, 65, 75]; // Best practice values for floors 1, 2, 3, 4
+            
+            // Update all floor efficiency sliders and values
+            for (let floor = 1; floor <= 4; floor++) {
+                const slider = document.getElementById(`floor${floor}EffSlider`);
+                const valueSpan = document.getElementById(`floor${floor}EffValue`);
+                
+                if (slider && valueSpan) {
+                    const bestPracticeEfficiency = bestPracticeValues[floor - 1];
+                    slider.value = bestPracticeEfficiency;
+                    valueSpan.textContent = bestPracticeEfficiency + '%';
+                    
+                    // Update floor efficiency array
+                    floorEfficiencies[floor - 1] = bestPracticeEfficiency;
+                    
+                    // Update assignable SF display
+                    const existingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
+                    const assignable = Math.round(existingGSF[floor - 1] * (bestPracticeEfficiency / 100));
+                    document.getElementById(`floor${floor}Assignable`).textContent = assignable.toLocaleString();
+                }
+            }
+            
+            // Update building totals and calculations
+            updateBuildingTotals();
+            updateSpaceCalculations();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('bestPracticeEfficiencyBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Applied!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#e3f2fd';
+                button.style.color = '#1976d2';
+                button.style.borderColor = '#bbdefb';
+            }, 2000);
+        }
+
+        function applyICCBestPracticeEfficiency() {
+            // Apply best practice value to ICC Building 3rd floor
+            const bestPracticeEfficiency = 80; // Best practice value for ICC 3rd floor
+            
+            // Update 3rd floor efficiency slider and value
+            const slider = document.getElementById('iccFloor3EffSlider');
+            const valueSpan = document.getElementById('iccFloor3EffValue');
+            
+            if (slider && valueSpan) {
+                slider.value = bestPracticeEfficiency;
+                valueSpan.textContent = bestPracticeEfficiency + '%';
+                
+                // Update floor efficiency array
+                iccFloorEfficiencies[2] = bestPracticeEfficiency; // 3rd floor is index 2
+                
+                // Update assignable SF display
+                const existingGSF = 19900; // 3rd floor GSF
+                const assignable = Math.round(existingGSF * (bestPracticeEfficiency / 100));
+                document.getElementById('iccFloor3Assignable').textContent = assignable.toLocaleString();
+            }
+            
+            // Update building totals and calculations
+            updateICCBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('iccBestPracticeEfficiencyBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Applied!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#e3f2fd';
+                button.style.color = '#1976d2';
+                button.style.borderColor = '#bbdefb';
+            }, 2000);
+        }
+
+        // Reset to Existing Conditions Functions
+        function resetToExistingConditions() {
+            // Reset Admin Building to existing efficiency values
+            const existingValues = [49, 46, 53, 73]; // Existing efficiency values for floors 1, 2, 3, 4
+            
+            // Update all floor efficiency sliders and values
+            for (let floor = 1; floor <= 4; floor++) {
+                const slider = document.getElementById(`floor${floor}EffSlider`);
+                const valueSpan = document.getElementById(`floor${floor}EffValue`);
+                
+                if (slider && valueSpan) {
+                    const existingEfficiency = existingValues[floor - 1];
+                    slider.value = existingEfficiency;
+                    valueSpan.textContent = existingEfficiency + '%';
+                    
+                    // Update floor efficiency array
+                    floorEfficiencies[floor - 1] = existingEfficiency;
+                    
+                    // Update assignable SF display
+                    const existingGSF = [37200, 37100, 37100, 30900]; // Floor 1, 2, 3, 4 existing GSF
+                    const assignable = Math.round(existingGSF[floor - 1] * (existingEfficiency / 100));
+                    document.getElementById(`floor${floor}Assignable`).textContent = assignable.toLocaleString();
+                }
+            }
+            
+            // Update building totals and calculations
+            updateBuildingTotals();
+            updateSpaceCalculations();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('resetToExistingBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Reset!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#fff3e0';
+                button.style.color = '#f57c00';
+                button.style.borderColor = '#ffcc02';
+            }, 2000);
+        }
+
+        function resetICCToExistingConditions() {
+            // Reset ICC Building to existing efficiency value
+            const existingEfficiency = 79; // ICC 3rd floor existing efficiency
+            
+            // Update 3rd floor efficiency slider and value
+            const slider = document.getElementById('iccFloor3EffSlider');
+            const valueSpan = document.getElementById('iccFloor3EffValue');
+            
+            if (slider && valueSpan) {
+                slider.value = existingEfficiency;
+                valueSpan.textContent = existingEfficiency + '%';
+                
+                // Update floor efficiency array
+                iccFloorEfficiencies[2] = existingEfficiency; // 3rd floor is index 2
+                
+                // Update assignable SF display
+                const existingGSF = 19900; // 3rd floor GSF
+                const assignable = Math.round(existingGSF * (existingEfficiency / 100));
+                document.getElementById('iccFloor3Assignable').textContent = assignable.toLocaleString();
+            }
+            
+            // Update building totals and calculations
+            updateICCBuildingTotals();
+            updateBuildingComparison();
+            
+            // Show success message
+            const button = document.getElementById('iccResetToExistingBtn');
+            const originalText = button.innerHTML;
+            button.innerHTML = 'Reset!';
+            button.style.background = '#c8e6c9';
+            button.style.color = '#2e7d32';
+            button.style.borderColor = '#a5d6a7';
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '#fff3e0';
+                button.style.color = '#f57c00';
+                button.style.borderColor = '#ffcc02';
+            }, 2000);
+        }
+
         // Initialize on page load if Dashboard 1 is active
         window.addEventListener('load', function() {
             if (document.getElementById('dashboard1').classList.contains('active')) {
@@ -5910,14 +6348,14 @@
                         labels: ['Admin Building', 'ICC Building', 'Hotel Building', 'Campus Total'],
                         datasets: [
                             {
-                                label: 'Existing Open Offices',
-                                data: [40, 0, 0, 40],
+                                label: 'Existing Workstations',
+                                data: [99, 17, 0, 116],
                                 backgroundColor: 'rgba(128, 128, 128, 0.6)',
                                 stack: 'existing'
                             },
                             {
-                                label: 'Existing Closed Offices',
-                                data: [25, 0, 0, 25],
+                                label: 'Existing Offices',
+                                data: [193, 49, 0, 242],
                                 backgroundColor: 'rgba(90, 90, 90, 0.6)',
                                 stack: 'existing'
                             },
@@ -5963,41 +6401,41 @@
                 collabRoomsChart = new Chart(collabRoomsCtx, {
                     type: 'bar',
                     data: {
-                        labels: ['Phone Rooms', 'Huddle Rooms', 'Small Meeting', 'Medium Meeting', 'Large Meeting', 'Collaboration'],
+                        labels: ['Conference Rooms', 'Huddle Shelters'],
                         datasets: [
                             {
                                 label: 'Admin - Existing',
-                                data: [3, 4, 3, 3, 2, 2],
+                                data: [21, 35],
                                 backgroundColor: 'rgba(128, 128, 128, 0.6)',
                                 stack: 'existing'
                             },
                             {
                                 label: 'ICC - Existing',
-                                data: [0, 0, 0, 0, 0, 0],
+                                data: [7, 0],
                                 backgroundColor: 'rgba(128, 128, 128, 0.4)',
                                 stack: 'existing'
                             },
                             {
                                 label: 'Hotel - Existing',
-                                data: [0, 0, 0, 0, 0, 0],
+                                data: [6, 0],
                                 backgroundColor: 'rgba(128, 128, 128, 0.2)',
                                 stack: 'existing'
                             },
                             {
                                 label: 'Admin - Planned',
-                                data: [0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
+                                data: [0, 0], // Will be updated by updateAdephiComparisonCharts
                                 backgroundColor: adminColor,
                                 stack: 'planned'
                             },
                             {
                                 label: 'ICC - Planned',
-                                data: [0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
+                                data: [0, 0], // Will be updated by updateAdephiComparisonCharts
                                 backgroundColor: iccColor,
                                 stack: 'planned'
                             },
                             {
                                 label: 'Hotel - Planned',
-                                data: [0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
+                                data: [0, 0], // Will be updated by updateAdephiComparisonCharts
                                 backgroundColor: hotelColor,
                                 stack: 'planned'
                             }
@@ -6193,54 +6631,32 @@
         
         // Function to update Adelphi comparison charts with current data
         function updateAdephiComparisonCharts() {
-            // Calculate Admin totals
-            const adminWorkstations = quantities.workstation || 0;
-            const adminClosedOffices = (quantities.smallOffice || 0) + (quantities.medOffice || 0) + (quantities.largeOffice || 0);
-            const adminPhoneRooms = quantities.phoneRoom || 0;
-            const adminHuddle = quantities.huddleRoom || 0;
-            const adminSmallMeeting = quantities.smallMeeting || 0;
-            const adminMedMeeting = quantities.mediumMeeting || 0;
-            const adminLargeMeeting = quantities.largeMeeting || 0;
-            const adminCollab = quantities.collaboration || 0;
+            // Calculate Admin totals using current space types
+            const adminWorkstations = quantities.cubicalDesk || 0;
+            const adminOffices = quantities.office || 0;
+            const adminConferenceRooms = quantities.conferenceRoom || 0;
+            const adminHuddleShelters = quantities.huddleShelter || 0;
             
-            // Calculate Admin SF
-            const adminWorkstationsSF = adminWorkstations * (spaceSF.workstation || 100);
-            const adminSmallOfficeSF = (quantities.smallOffice || 0) * (spaceSF.smallOffice || 150);
-            const adminMedOfficeSF = (quantities.medOffice || 0) * (spaceSF.medOffice || 220);
-            const adminLargeOfficeSF = (quantities.largeOffice || 0) * (spaceSF.largeOffice || 320);
-            const adminPhoneRoomSF = adminPhoneRooms * (spaceSF.phoneRoom || 20);
-            const adminHuddleSF = adminHuddle * (spaceSF.huddleRoom || 50);
-            const adminSmallMeetingSF = adminSmallMeeting * (spaceSF.smallMeeting || 150);
-            const adminMedMeetingSF = adminMedMeeting * (spaceSF.mediumMeeting || 450);
-            const adminLargeMeetingSF = adminLargeMeeting * (spaceSF.largeMeeting || 1000);
-            const adminCollabSF = adminCollab * (spaceSF.collaboration || 320);
+            // Calculate Admin SF using current space types
+            const adminWorkstationsSF = adminWorkstations * (spaceSF.cubicalDesk || 60);
+            const adminOfficesSF = adminOffices * (spaceSF.office || 140);
+            const adminConferenceRoomsSF = adminConferenceRooms * (spaceSF.conferenceRoom || 480);
+            const adminHuddleSheltersSF = adminHuddleShelters * (spaceSF.huddleShelter || 180);
             
             // Calculate Admin seats
-            const adminCollabSeats = adminPhoneRooms + adminHuddle * 4 + adminSmallMeeting * 6 + adminMedMeeting * 10 + adminLargeMeeting * 20 + adminCollab * 8;
+            const adminCollabSeats = adminConferenceRooms * 12 + adminHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
             
-            // Calculate ICC totals
-            const iccWorkstations = iccQuantities.workstation || 0;
-            const iccClosedOffices = (iccQuantities.smallOffice || 0) + (iccQuantities.medOffice || 0) + (iccQuantities.largeOffice || 0);
+            // Calculate ICC totals using current space types
+            const iccWorkstations = iccQuantities.cubicalDesk || 0;
+            const iccOffices = iccQuantities.office || 0;
+            const iccConferenceRooms = iccQuantities.conferenceRoom || 0;
+            const iccHuddleShelters = iccQuantities.huddleShelter || 0;
             
-            // Calculate ICC collaboration rooms
-            const iccPhoneRooms = iccQuantities.phoneRoom || 0;
-            const iccHuddle = iccQuantities.huddleRoom || 0;
-            const iccSmallMeeting = iccQuantities.smallMeeting || 0;
-            const iccMedMeeting = iccQuantities.mediumMeeting || 0;
-            const iccLargeMeeting = iccQuantities.largeMeeting || 0;
-            const iccCollab = iccQuantities.collaboration || 0;
-            
-            // Calculate Hotel totals
-            const hotelWorkstations = hotelQuantities.workstation || 0;
-            const hotelClosedOffices = (hotelQuantities.smallOffice || 0) + (hotelQuantities.medOffice || 0) + (hotelQuantities.largeOffice || 0);
-            
-            // Calculate Hotel collaboration rooms
-            const hotelPhoneRooms = hotelQuantities.phoneRoom || 0;
-            const hotelHuddle = hotelQuantities.huddleRoom || 0;
-            const hotelSmallMeeting = hotelQuantities.smallMeeting || 0;
-            const hotelMedMeeting = hotelQuantities.mediumMeeting || 0;
-            const hotelLargeMeeting = hotelQuantities.largeMeeting || 0;
-            const hotelCollab = hotelQuantities.collaboration || 0;
+            // Calculate Hotel totals using current space types
+            const hotelWorkstations = hotelQuantities.cubicalDesk || 0;
+            const hotelOffices = hotelQuantities.office || 0;
+            const hotelConferenceRooms = hotelQuantities.conferenceRoom || 0;
+            const hotelHuddleShelters = hotelQuantities.huddleShelter || 0;
             
             // Calculate efficiency
             const adminTotalGSF = floorSpaces.reduce((a, b) => a + b, 0);
@@ -6256,17 +6672,17 @@
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
             // Calculate ICC collaboration seats
-            const iccCollabSeats = iccPhoneRooms + iccHuddle * 4 + iccSmallMeeting * 6 + iccMedMeeting * 10 + iccLargeMeeting * 20 + iccCollab * 8;
+            const iccCollabSeats = iccConferenceRooms * 12 + iccHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
             
             // Calculate Hotel collaboration seats
-            const hotelCollabSeats = hotelPhoneRooms + hotelHuddle * 4 + hotelSmallMeeting * 6 + hotelMedMeeting * 10 + hotelLargeMeeting * 20 + hotelCollab * 8;
+            const hotelCollabSeats = hotelConferenceRooms * 12 + hotelHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
             
             // Calculate campus totals
             const campusTotalGSF = adminTotalGSF + iccTotalGSF + hotelTotalGSF;
             const campusAssignableSF = adminAssignableSF + iccAssignableSF + hotelAssignableSF;
             const campusEfficiency = campusTotalGSF > 0 ? Math.round((campusAssignableSF / campusTotalGSF) * 100) : 0;
             const campusWorkstations = adminWorkstations + iccWorkstations + hotelWorkstations;
-            const campusClosedOffices = adminClosedOffices + iccClosedOffices + hotelClosedOffices;
+            const campusOffices = adminOffices + iccOffices + hotelOffices;
             const campusCollabSeats = adminCollabSeats + iccCollabSeats + hotelCollabSeats;
             
             // Update Efficiency Chart
@@ -6278,18 +6694,18 @@
             // Update Seats & Offices Chart
             if (seatsOfficesChart) {
                 seatsOfficesChart.data.datasets[2].data = [adminWorkstations, iccWorkstations, hotelWorkstations, campusWorkstations];
-                seatsOfficesChart.data.datasets[3].data = [adminClosedOffices, iccClosedOffices, hotelClosedOffices, campusClosedOffices];
+                seatsOfficesChart.data.datasets[3].data = [adminOffices, iccOffices, hotelOffices, campusOffices];
                 seatsOfficesChart.update();
             }
             
             // Update Collaboration Rooms Chart (stacked by building)
             if (collabRoomsChart) {
                 // Dataset 0: Admin - Existing (no update needed, static)
-                // Dataset 1: ICC - Existing (no update needed, no existing data)
-                // Dataset 2: Hotel - Existing (no update needed, no existing data)
-                collabRoomsChart.data.datasets[3].data = [adminPhoneRooms, adminHuddle, adminSmallMeeting, adminMedMeeting, adminLargeMeeting, adminCollab];
-                collabRoomsChart.data.datasets[4].data = [iccPhoneRooms, iccHuddle, iccSmallMeeting, iccMedMeeting, iccLargeMeeting, iccCollab];
-                collabRoomsChart.data.datasets[5].data = [hotelPhoneRooms, hotelHuddle, hotelSmallMeeting, hotelMedMeeting, hotelLargeMeeting, hotelCollab];
+                // Dataset 1: ICC - Existing (no update needed, static)
+                // Dataset 2: Hotel - Existing (no update needed, static)
+                collabRoomsChart.data.datasets[3].data = [adminConferenceRooms, adminHuddleShelters]; // Admin planned data
+                collabRoomsChart.data.datasets[4].data = [iccConferenceRooms, iccHuddleShelters]; // ICC planned data
+                collabRoomsChart.data.datasets[5].data = [hotelConferenceRooms, hotelHuddleShelters]; // Hotel planned data
                 collabRoomsChart.update();
             }
             
