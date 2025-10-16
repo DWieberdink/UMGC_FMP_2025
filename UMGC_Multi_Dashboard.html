@@ -3262,6 +3262,27 @@
 
             // Store active tab in localStorage
             localStorage.setItem('umgc_active_tab', tabName);
+            
+            // If switching to Space Planning tab, ensure all data is updated
+            if (tabName === 'dashboard1') {
+                console.log('Switching to Space Planning tab, updating all data...');
+                // Ensure space planning is initialized
+                if (typeof initSpacePlanning === 'function') {
+                    initSpacePlanning();
+                }
+                // Ensure campus building is properly initialized
+                if (typeof switchBuilding === 'function') {
+                    setTimeout(() => {
+                        switchBuilding('comparison');
+                    }, 50);
+                }
+                // Update all building comparisons to ensure campus card shows correct values
+                if (typeof updateBuildingComparison === 'function') {
+                    setTimeout(() => {
+                        updateBuildingComparison();
+                    }, 100);
+                }
+            }
         }
 
         // Hide loading indicator when iframe loads
@@ -6829,11 +6850,10 @@
             }, 2000);
         }
 
-        // Initialize on page load if Dashboard 1 is active
+        // Initialize on page load regardless of which tab is active
         window.addEventListener('load', function() {
-            if (document.getElementById('dashboard1').classList.contains('active')) {
-                initSpacePlanning();
-            }
+            console.log('Page loaded, initializing space planning...');
+            initSpacePlanning();
         });
     </script>
     
