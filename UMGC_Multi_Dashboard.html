@@ -1638,8 +1638,9 @@
                 <div class="building-content-wrapper">
                 <!-- Admin Building Content -->
                 <div id="admin-building-content" class="building-content">
-                    <!-- Sticky Comparison Header -->
-                    <div class="collapsible-header" onclick="toggleComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
+                    <div class="space-planning-container">
+                        <!-- Sticky Comparison Header -->
+                        <div class="collapsible-header" onclick="toggleComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                 <h3 style="color: white; margin: 0; font-size: 1.3rem; font-weight: 700;">Admin Building</h3>
                                 <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
@@ -1756,11 +1757,11 @@
 
                     <!-- Building Parameters -->
                     <div class="space-card">
-                        <div class="collapsible-header" style="padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-navy) 0%, var(--umgc-navy-dark) 100%); border-radius: 8px; margin-bottom: 15px;">
+                        <div class="collapsible-header" onclick="toggleAdminBuildingParams()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-navy) 0%, var(--umgc-navy-dark) 100%); border-radius: 8px; margin-bottom: 15px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                 <div style="display: flex; align-items: center; gap: 15px;">
                                 <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Building Parameters</h3>
-                                    <button id="bestPracticeEfficiencyBtn" onclick="applyBestPracticeEfficiency()" 
+                                    <button id="bestPracticeEfficiencyBtn" onclick="event.stopPropagation(); applyBestPracticeEfficiency()" 
                                             style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
                                                    font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                    transition: all 0.3s ease;"
@@ -1768,7 +1769,7 @@
                                             onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
                                         Best Practice Efficiency
                                     </button>
-                                    <button id="resetToExistingBtn" onclick="resetToExistingConditions()" 
+                                    <button id="resetToExistingBtn" onclick="event.stopPropagation(); resetToExistingConditions()" 
                                             style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
                                                    font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                    transition: all 0.3s ease;"
@@ -1791,6 +1792,7 @@
                                         <div id="overallEfficiency" style="color: white; font-size: 1.1rem; font-weight: 700;">66%</div>
                                     </div>
                                 </div>
+                                <span id="adminBuildingParamsToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s ease;">▼</span>
                             </div>
                         </div>
                         <div id="buildingParamsContent" class="collapsible-content" style="max-height: 2000px; overflow: hidden; transition: max-height 0.4s ease;">
@@ -2072,12 +2074,14 @@
                         <button class="alert-modal-button" onclick="closeCapacityAlert()">Understood</button>
                     </div>
                 </div>
-            </div>
+                    </div>
+                </div>
 
                 <!-- ICC Building Content -->
                 <div id="icc-building-content" class="building-content" style="display: none;">
-                    <!-- Sticky Comparison Header for ICC -->
-                    <div class="collapsible-header" onclick="toggleICCComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
+                    <div class="space-planning-container">
+                        <!-- Sticky Comparison Header for ICC -->
+                        <div class="collapsible-header" onclick="toggleICCComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                 <h3 style="color: white; margin: 0; font-size: 1.3rem; font-weight: 700;">ICC Building</h3>
                                 <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
@@ -2191,11 +2195,11 @@
                         
                         <!-- ICC Building Parameters -->
                         <div class="space-card">
-                            <div class="collapsible-header" style="padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-gold) 0%, #d97706 100%); border-radius: 8px; margin-bottom: 15px;">
+                            <div class="collapsible-header" onclick="toggleICCBuildingParams()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-gold) 0%, #d97706 100%); border-radius: 8px; margin-bottom: 15px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 15px;">
                                     <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">ICC Building Parameters</h3>
-                                        <button id="iccBestPracticeEfficiencyBtn" onclick="applyICCBestPracticeEfficiency()" 
+                                        <button id="iccBestPracticeEfficiencyBtn" onclick="event.stopPropagation(); applyICCBestPracticeEfficiency()" 
                                                 style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
                                                        font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                        transition: all 0.3s ease;"
@@ -2203,7 +2207,7 @@
                                                 onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
                                             Best Practice Efficiency
                                         </button>
-                                        <button id="iccResetToExistingBtn" onclick="resetICCToExistingConditions()" 
+                                        <button id="iccResetToExistingBtn" onclick="event.stopPropagation(); resetICCToExistingConditions()" 
                                                 style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
                                                        font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                        transition: all 0.3s ease;"
@@ -2226,6 +2230,7 @@
                                             <div id="iccBuildingEfficiency" style="color: white; font-size: 1.1rem; font-weight: 700;">96%</div>
                                         </div>
                                     </div>
+                                    <span id="iccBuildingParamsToggle" style="color: white; font-size: 1.2rem; transition: transform 0.3s ease;">▼</span>
                                 </div>
                             </div>
                             <div id="iccBuildingParamsContent" style="max-height: 1000px; overflow: hidden; transition: max-height 0.3s ease;">
@@ -2301,6 +2306,10 @@
                                                 onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
                                             Reset to Existing
                                         </button>
+                                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px;">
+                                            <input type="checkbox" id="iccShowExistingToggle" onchange="toggleICCExistingData()" checked style="cursor: pointer;">
+                                            <span style="color: white; font-size: 0.85rem; font-weight: 600;">Show Existing</span>
+                                        </label>
                                     </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
@@ -2401,13 +2410,15 @@
                                 </div>
                             </div>
                         </div>
+                </div>
                     </div>
                 </div>
 
                 <!-- Hotel Building Content -->
                 <div id="hotel-building-content" class="building-content" style="display: none;">
-                    <!-- Sticky Comparison Header for Hotel -->
-                    <div class="collapsible-header" onclick="toggleHotelComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
+                    <div class="space-planning-container">
+                        <!-- Sticky Comparison Header for Hotel -->
+                        <div class="collapsible-header" onclick="toggleHotelComparison()" style="cursor: pointer; padding: 15px 20px; background: linear-gradient(135deg, var(--umgc-red) 0%, #b91c1c 100%); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); position: sticky; top: 236px; z-index: 997; margin: 0;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                 <h3 style="color: white; margin: 0; font-size: 1.3rem; font-weight: 700;">Hotel Building</h3>
                                 <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
@@ -2525,7 +2536,7 @@
                                 <div style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                                     <h3 style="color: white; margin: 0; font-size: 1.1rem; font-weight: 600;">Hotel Building Parameters</h3>
-                                        <button id="hotelBestPracticeEfficiencyBtn" onclick="applyHotelBestPracticeEfficiency()" 
+                                        <button id="hotelBestPracticeEfficiencyBtn" onclick="event.stopPropagation(); applyHotelBestPracticeEfficiency()" 
                                                 style="background: #e3f2fd; color: #1976d2; border: 1px solid #bbdefb; padding: 6px 12px; border-radius: 15px; 
                                                        font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                        transition: all 0.3s ease;"
@@ -2533,7 +2544,7 @@
                                                 onmouseout="this.style.background='#e3f2fd'; this.style.borderColor='#bbdefb'">
                                             Best Practice Efficiency
                                         </button>
-                                        <button id="hotelResetToExistingBtn" onclick="resetHotelToExistingConditions()" 
+                                        <button id="hotelResetToExistingBtn" onclick="event.stopPropagation(); resetHotelToExistingConditions()" 
                                                 style="background: #fff3e0; color: #f57c00; border: 1px solid #ffcc02; padding: 6px 12px; border-radius: 15px; 
                                                        font-size: 0.8rem; font-weight: 600; cursor: pointer; 
                                                        transition: all 0.3s ease;"
@@ -2609,6 +2620,10 @@
                                                 onmouseout="this.style.background='#fff3e0'; this.style.borderColor='#ffcc02'">
                                             Reset to Existing
                                         </button>
+                                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; background: rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 20px;">
+                                            <input type="checkbox" id="hotelShowExistingToggle" onchange="toggleHotelExistingData()" checked style="cursor: pointer;">
+                                            <span style="color: white; font-size: 0.85rem; font-weight: 600;">Show Existing</span>
+                                        </label>
                                     </div>
                                     <div style="display: flex; gap: 25px; align-items: center; flex: 1; justify-content: flex-end;">
                                         <div style="text-align: center;">
@@ -2709,6 +2724,7 @@
                                 </div>
                             </div>
                         </div>
+                </div>
                     </div>
                 </div>
 
@@ -5459,6 +5475,36 @@
                     button.style.color = '#f57c00';
                     button.style.borderColor = '#ffcc02';
                 }, 2000);
+            }
+        }
+
+        function toggleAdminBuildingParams() {
+            const content = document.getElementById('buildingParamsContent');
+            const toggle = document.getElementById('adminBuildingParamsToggle');
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                toggle.textContent = '▶';
+                toggle.style.transform = 'rotate(-90deg)';
+            } else {
+                content.style.maxHeight = '2000px';
+                toggle.textContent = '▼';
+                toggle.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function toggleICCBuildingParams() {
+            const content = document.getElementById('iccBuildingParamsContent');
+            const toggle = document.getElementById('iccBuildingParamsToggle');
+            
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                toggle.textContent = '▶';
+                toggle.style.transform = 'rotate(-90deg)';
+            } else {
+                content.style.maxHeight = '2000px';
+                toggle.textContent = '▼';
+                toggle.style.transform = 'rotate(0deg)';
             }
         }
 
