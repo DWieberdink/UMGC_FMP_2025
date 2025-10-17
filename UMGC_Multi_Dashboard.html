@@ -2424,7 +2424,7 @@
                                 <div style="display: flex; align-items: center; gap: 20px; flex: 1; justify-content: center;">
                                     <div style="text-align: center;">
                                         <div style="color: white; font-size: 0.7rem; margin-bottom: 2px;">Remaining SF</div>
-                                        <div id="hotelRemainingSF" style="color: white; font-size: 1.2rem; font-weight: 700;">7,500</div>
+                                        <div id="hotelRemainingSF" style="color: white; font-size: 1.2rem; font-weight: 700;">0</div>
                                     </div>
                                 </div>
                                 <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
@@ -3016,14 +3016,6 @@
                                 </div>
                             </div>
                             
-                            <!-- Collaboration Rooms by Category -->
-                            <div style="margin-bottom: 40px;">
-                                <h4 style="color: var(--umgc-navy); font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Collaboration Rooms by Category</h4>
-                                <div style="position: relative; height: 400px; width: 100%;">
-                                    <canvas id="collabRoomsComparisonChart"></canvas>
-                                </div>
-                            </div>
-                            
                             <!-- Collaboration Seats -->
                             <div style="margin-bottom: 40px;">
                                 <h4 style="color: var(--umgc-navy); font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Collaboration Seats</h4>
@@ -3032,21 +3024,15 @@
                                 </div>
                             </div>
                             
-                            <!-- Space Category SF -->
+                            <!-- Collaboration Rooms by Category -->
                             <div style="margin-bottom: 40px;">
-                                <h4 style="color: var(--umgc-navy); font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Space Allocation by Category (Square Feet)</h4>
-                                <div style="position: relative; height: 350px; width: 100%;">
-                                    <canvas id="spaceCategoryComparisonChart"></canvas>
+                                <h4 style="color: var(--umgc-navy); font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Collaboration Rooms by Category</h4>
+                                <div style="position: relative; height: 400px; width: 100%;">
+                                    <canvas id="collabRoomsComparisonChart"></canvas>
                                 </div>
                             </div>
                             
-                            <!-- Space Detail SF -->
-                            <div style="margin-bottom: 40px;">
-                                <h4 style="color: var(--umgc-navy); font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Space Allocation by Type (Square Feet)</h4>
-                                <div style="position: relative; height: 500px; width: 100%;">
-                                    <canvas id="spaceDetailComparisonChart"></canvas>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -5582,8 +5568,10 @@
         }
 
         function updateHotelBuildingTotals() {
-            // Hotel has fixed ASF (no sliders)
-            const totalAssignable = 7500; // Fixed 1st floor ASF
+            // Hotel has fixed ASF with efficiency calculation
+            const totalGSF = 7500; // Fixed 1st floor GSF
+            const efficiency = hotelFloorEfficiencies[0] || 70.8; // Use 1st floor efficiency
+            const totalAssignable = Math.round(totalGSF * (efficiency / 100)); // Calculate assignable SF
             
             // Calculate space allocation totals
             let usedSF = 0;
@@ -5656,7 +5644,7 @@
         }
 
         function updateHotelComparison(totalGSF, assignableSF, workPointsCount, collaborationPointsCount) {
-            // Existing conditions for Hotel (6 conference rooms @ 885 SF = 5,310 SF)
+            // Existing conditions for Hotel (7,500 GSF * 70.8% efficiency = 5,310 SF)
             const existingAssignable = 5310;
             const existingWorkPoints = 0; // No existing desks or offices
             const existingCollaborationPoints = 6; // 6 conference rooms
@@ -5933,7 +5921,7 @@
             const adminExistingASFEl = document.getElementById('adminExistingASF');
             const adminPlannedASFEl = document.getElementById('adminPlannedASF');
             
-            if (adminExistingASFEl) adminExistingASFEl.textContent = 77514; // Existing ASF
+            if (adminExistingASFEl) adminExistingASFEl.textContent = (77514).toLocaleString(); // Existing ASF
             if (adminPlannedASFEl) adminPlannedASFEl.textContent = adminAssignableSF.toLocaleString(); // Planned ASF
             
             const iccExistingASFEl = document.getElementById('iccExistingASF');
@@ -5945,7 +5933,7 @@
             const hotelExistingASFEl = document.getElementById('hotelExistingASF');
             const hotelPlannedASFEl = document.getElementById('hotelPlannedASF');
             
-            if (hotelExistingASFEl) hotelExistingASFEl.textContent = 5310; // Existing ASF
+            if (hotelExistingASFEl) hotelExistingASFEl.textContent = (5310).toLocaleString(); // Existing ASF
             if (hotelPlannedASFEl) hotelPlannedASFEl.textContent = hotelAssignableSF.toLocaleString(); // Planned ASF
             
             // Update building summary cards - Planned data (default to existing values)
@@ -7061,8 +7049,6 @@
         let seatsOfficesChart = null;
         let collabRoomsChart = null;
         let collabSeatsChart = null;
-        let spaceCategoryChart = null;
-        let spaceDetailChart = null;
         
         // Function to create Adelphi Campus comparison charts
         function createAdephiComparisonCharts() {
@@ -7203,7 +7189,7 @@
                         datasets: [
                             {
                                 label: 'Existing',
-                                data: [75, 0, 0, 75],
+                                data: [588, 126, 108, 822],
                                 backgroundColor: existingColor
                             },
                             {
@@ -7230,168 +7216,56 @@
                 });
             }
             
-            // 5. Space Category SF
-            const spaceCategoryCtx = document.getElementById('spaceCategoryComparisonChart');
-            if (spaceCategoryCtx) {
-                spaceCategoryChart = new Chart(spaceCategoryCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Workstations', 'Offices', 'Collaboration', 'Other'],
-                        datasets: [
-                            {
-                                label: 'Admin - Existing',
-                                data: [4000, 4750, 4500, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'ICC - Existing',
-                                data: [0, 0, 0, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.4)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'Hotel - Existing',
-                                data: [0, 0, 0, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.2)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'Admin - Planned',
-                                data: [0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: adminColor,
-                                stack: 'planned'
-                            },
-                            {
-                                label: 'ICC - Planned',
-                                data: [0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: iccColor,
-                                stack: 'planned'
-                            },
-                            {
-                                label: 'Hotel - Planned',
-                                data: [0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: hotelColor,
-                                stack: 'planned'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: true, position: 'top' },
-                            title: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: { display: true, text: 'Square Feet' }
-                            }
-                        }
-                    }
-                });
-            }
             
-            // 6. Space Detail SF
-            const spaceDetailCtx = document.getElementById('spaceDetailComparisonChart');
-            if (spaceDetailCtx) {
-                spaceDetailChart = new Chart(spaceDetailCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['Workstation', 'Small Office', 'Med Office', 'Large Office', 'Phone Room', 'Huddle', 'Small Meeting', 'Med Meeting', 'Large Meeting', 'Collaboration'],
-                        datasets: [
-                            {
-                                label: 'Admin - Existing',
-                                data: [4000, 2250, 1540, 960, 60, 200, 450, 1350, 1800, 640],
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'ICC - Existing',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.4)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'Hotel - Existing',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                                backgroundColor: 'rgba(128, 128, 128, 0.2)',
-                                stack: 'existing'
-                            },
-                            {
-                                label: 'Admin - Planned',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: adminColor,
-                                stack: 'planned'
-                            },
-                            {
-                                label: 'ICC - Planned',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: iccColor,
-                                stack: 'planned'
-                            },
-                            {
-                                label: 'Hotel - Planned',
-                                data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], // Will be updated by updateAdephiComparisonCharts
-                                backgroundColor: hotelColor,
-                                stack: 'planned'
-                            }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: { display: true, position: 'top' },
-                            title: { display: false }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: { display: true, text: 'Square Feet' }
-                            },
-                            x: {
-                                ticks: {
-                                    autoSkip: false,
-                                    maxRotation: 45,
-                                    minRotation: 45
-                                }
-                            }
-                        }
-                    }
-                });
-            }
         }
         
         // Function to update Adelphi comparison charts with current data
         function updateAdephiComparisonCharts() {
-            // Calculate Admin totals using current space types
+            
+            // Calculate Admin totals using correct space types
             const adminWorkstations = quantities.cubicalDesk || 0;
             const adminOffices = quantities.office || 0;
             const adminConferenceRooms = quantities.conferenceRoom || 0;
             const adminHuddleShelters = quantities.huddleShelter || 0;
             
-            // Calculate Admin SF using current space types
+            // Calculate Admin SF using correct space types
             const adminWorkstationsSF = adminWorkstations * (spaceSF.cubicalDesk || 60);
             const adminOfficesSF = adminOffices * (spaceSF.office || 140);
             const adminConferenceRoomsSF = adminConferenceRooms * (spaceSF.conferenceRoom || 480);
             const adminHuddleSheltersSF = adminHuddleShelters * (spaceSF.huddleShelter || 180);
             
-            // Calculate Admin seats
-            const adminCollabSeats = adminConferenceRooms * 12 + adminHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
+            // Calculate Admin seats (18 per conference room + 6 per huddle)
+            const adminCollabSeats = (adminConferenceRooms * 18) + (adminHuddleShelters * 6);
             
-            // Calculate ICC totals using current space types
+            // Calculate ICC totals using correct space types
             const iccWorkstations = iccQuantities.cubicalDesk || 0;
             const iccOffices = iccQuantities.office || 0;
             const iccConferenceRooms = iccQuantities.conferenceRoom || 0;
             const iccHuddleShelters = iccQuantities.huddleShelter || 0;
             
-            // Calculate Hotel totals using current space types
+            // Calculate ICC SF using correct space types
+            const iccWorkstationsSF = iccWorkstations * (iccSpaceSF.cubicalDesk || 60);
+            const iccOfficesSF = iccOffices * (iccSpaceSF.office || 150);
+            const iccConferenceRoomsSF = iccConferenceRooms * (iccSpaceSF.conferenceRoom || 450);
+            const iccHuddleSheltersSF = iccHuddleShelters * (iccSpaceSF.huddleShelter || 50);
+            
+            // Calculate ICC seats (18 per conference room + 6 per huddle)
+            const iccCollabSeats = (iccConferenceRooms * 18) + (iccHuddleShelters * 6);
+            
+            // Calculate Hotel totals using correct space types
             const hotelWorkstations = hotelQuantities.cubicalDesk || 0;
             const hotelOffices = hotelQuantities.office || 0;
             const hotelConferenceRooms = hotelQuantities.conferenceRoom || 0;
             const hotelHuddleShelters = hotelQuantities.huddleShelter || 0;
+            
+            // Calculate Hotel SF using correct space types
+            const hotelWorkstationsSF = hotelWorkstations * (hotelSpaceSF.cubicalDesk || 60);
+            const hotelOfficesSF = hotelOffices * (hotelSpaceSF.office || 150);
+            const hotelConferenceRoomsSF = hotelConferenceRooms * (hotelSpaceSF.conferenceRoom || 450);
+            const hotelHuddleSheltersSF = hotelHuddleShelters * (hotelSpaceSF.huddleShelter || 50);
+            
+            // Calculate Hotel seats (18 per conference room + 6 per huddle)
+            const hotelCollabSeats = (hotelConferenceRooms * 18) + (hotelHuddleShelters * 6);
             
             // Calculate efficiency
             const adminTotalGSF = floorSpaces.reduce((a, b) => a + b, 0);
@@ -7412,11 +7286,7 @@
             const hotelAssignableSF = hotelExistingGSF.reduce((sum, gsf, index) => sum + Math.round(gsf * (hotelFloorEfficiencies[index] / 100)), 0);
             const hotelEfficiency = hotelTotalGSF > 0 ? Math.round((hotelAssignableSF / hotelTotalGSF) * 100) : 0;
             
-            // Calculate ICC collaboration seats
-            const iccCollabSeats = iccConferenceRooms * 12 + iccHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
-            
-            // Calculate Hotel collaboration seats
-            const hotelCollabSeats = hotelConferenceRooms * 12 + hotelHuddleShelters * 6; // 12 seats per conference room, 6 per huddle shelter
+            // ICC and Hotel collaboration seats already calculated above
             
             // Calculate campus totals
             const campusTotalGSF = adminTotalGSF + iccTotalGSF + hotelTotalGSF;
@@ -7452,12 +7322,14 @@
             
             // Update Collaboration Seats Chart
             if (collabSeatsChart) {
+                // Calculate campus total seats
+                const campusCollabSeats = adminCollabSeats + iccCollabSeats + hotelCollabSeats;
+                
                 collabSeatsChart.data.datasets[1].data = [adminCollabSeats, iccCollabSeats, hotelCollabSeats, campusCollabSeats];
                 collabSeatsChart.update();
             }
             
-            // Calculate ICC SF by category
-            const iccWorkstationsSF = iccWorkstations * (iccSpaceSF.workstation || 100);
+            // Calculate ICC SF by category (additional space types)
             const iccSmallOfficeSF = (iccQuantities.smallOffice || 0) * (iccSpaceSF.smallOffice || 150);
             const iccMedOfficeSF = (iccQuantities.medOffice || 0) * (iccSpaceSF.medOffice || 220);
             const iccLargeOfficeSF = (iccQuantities.largeOffice || 0) * (iccSpaceSF.largeOffice || 320);
@@ -7468,8 +7340,7 @@
             const iccLargeMeetingSF = iccLargeMeeting * (iccSpaceSF.largeMeeting || 1000);
             const iccCollabSF = iccCollab * (iccSpaceSF.collaboration || 320);
             
-            // Calculate Hotel SF by category
-            const hotelWorkstationsSF = hotelWorkstations * (hotelSpaceSF.workstation || 100);
+            // Calculate Hotel SF by category (additional space types)
             const hotelSmallOfficeSF = (hotelQuantities.smallOffice || 0) * (hotelSpaceSF.smallOffice || 150);
             const hotelMedOfficeSF = (hotelQuantities.medOffice || 0) * (hotelSpaceSF.medOffice || 220);
             const hotelLargeOfficeSF = (hotelQuantities.largeOffice || 0) * (hotelSpaceSF.largeOffice || 320);
@@ -7480,69 +7351,7 @@
             const hotelLargeMeetingSF = hotelLargeMeeting * (hotelSpaceSF.largeMeeting || 1000);
             const hotelCollabSF = hotelCollab * (hotelSpaceSF.collaboration || 320);
             
-            // Update Space Category SF Chart (stacked by building)
-            if (spaceCategoryChart) {
-                const adminWorkstationCat = adminWorkstationsSF;
-                const adminOfficesCat = adminSmallOfficeSF + adminMedOfficeSF + adminLargeOfficeSF;
-                const adminCollabCat = adminPhoneRoomSF + adminHuddleSF + adminSmallMeetingSF + adminMedMeetingSF + adminLargeMeetingSF + adminCollabSF;
-                const adminOtherCat = customSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
-                
-                const iccWorkstationCat = iccWorkstationsSF;
-                const iccOfficesCat = iccSmallOfficeSF + iccMedOfficeSF + iccLargeOfficeSF;
-                const iccCollabCat = iccPhoneRoomSF + iccHuddleSF + iccSmallMeetingSF + iccMedMeetingSF + iccLargeMeetingSF + iccCollabSF;
-                const iccOtherCat = iccCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
-                
-                const hotelWorkstationCat = hotelWorkstationsSF;
-                const hotelOfficesCat = hotelSmallOfficeSF + hotelMedOfficeSF + hotelLargeOfficeSF;
-                const hotelCollabCat = hotelPhoneRoomSF + hotelHuddleSF + hotelSmallMeetingSF + hotelMedMeetingSF + hotelLargeMeetingSF + hotelCollabSF;
-                const hotelOtherCat = hotelCustomSpaces.reduce((total, space) => total + space.sf * space.quantity, 0);
-                
-                spaceCategoryChart.data.datasets[3].data = [adminWorkstationCat, adminOfficesCat, adminCollabCat, adminOtherCat];
-                spaceCategoryChart.data.datasets[4].data = [iccWorkstationCat, iccOfficesCat, iccCollabCat, iccOtherCat];
-                spaceCategoryChart.data.datasets[5].data = [hotelWorkstationCat, hotelOfficesCat, hotelCollabCat, hotelOtherCat];
-                spaceCategoryChart.update();
-            }
             
-            // Update Space Detail SF Chart (stacked by building)
-            if (spaceDetailChart) {
-                spaceDetailChart.data.datasets[3].data = [
-                    adminWorkstationsSF, 
-                    adminSmallOfficeSF, 
-                    adminMedOfficeSF, 
-                    adminLargeOfficeSF, 
-                    adminPhoneRoomSF, 
-                    adminHuddleSF, 
-                    adminSmallMeetingSF, 
-                    adminMedMeetingSF, 
-                    adminLargeMeetingSF, 
-                    adminCollabSF
-                ];
-                spaceDetailChart.data.datasets[4].data = [
-                    iccWorkstationsSF,
-                    iccSmallOfficeSF,
-                    iccMedOfficeSF,
-                    iccLargeOfficeSF,
-                    iccPhoneRoomSF,
-                    iccHuddleSF,
-                    iccSmallMeetingSF,
-                    iccMedMeetingSF,
-                    iccLargeMeetingSF,
-                    iccCollabSF
-                ];
-                spaceDetailChart.data.datasets[5].data = [
-                    hotelWorkstationsSF,
-                    hotelSmallOfficeSF,
-                    hotelMedOfficeSF,
-                    hotelLargeOfficeSF,
-                    hotelPhoneRoomSF,
-                    hotelHuddleSF,
-                    hotelSmallMeetingSF,
-                    hotelMedMeetingSF,
-                    hotelLargeMeetingSF,
-                    hotelCollabSF
-                ];
-                spaceDetailChart.update();
-            }
         }
         
         // Initialize charts when page loads
