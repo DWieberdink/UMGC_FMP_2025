@@ -3867,11 +3867,11 @@
         // ===== SPACE PLANNING FUNCTIONALITY =====
         
         const SPACE_TYPES = [
-            { id: "cubicalDesk", name: "Cubical/Desk (60 sf)", defaultSf: 60, category: "workPoints", color: "hsl(217, 91%, 60%)", seats: 0 },
-            { id: "office", name: "Office (140 sf)", defaultSf: 140, category: "workPoints", color: "hsl(142, 76%, 36%)", seats: 0 },
-            { id: "conferenceRoom", name: "Conference Room - Reservable (480 sf)", defaultSf: 480, category: "collaborationPoints", color: "hsl(47, 96%, 53%)", seats: 12 },
-            { id: "huddleShelter", name: "Huddle/Shelter - Non Reservable (180 sf)", defaultSf: 180, category: "collaborationPoints", color: "hsl(47, 96%, 63%)", seats: 6 },
-            { id: "otherSpaces", name: "Storage, Kitchen, and Other Support Spaces (28174 sf)", defaultSf: 28174, category: "otherSpaces", color: "hsl(280, 65%, 45%)", seats: 0 }
+            { id: "cubicalDesk", name: "Cubical/Desk", defaultSf: 60, category: "workPoints", color: "hsl(217, 91%, 60%)", seats: 0 },
+            { id: "office", name: "Office", defaultSf: 140, category: "workPoints", color: "hsl(142, 76%, 36%)", seats: 0 },
+            { id: "conferenceRoom", name: "Conference Room - Reservable", defaultSf: 480, category: "collaborationPoints", color: "hsl(47, 96%, 53%)", seats: 12 },
+            { id: "huddleShelter", name: "Huddle/Shelter - Non Reservable", defaultSf: 180, category: "collaborationPoints", color: "hsl(47, 96%, 63%)", seats: 6 },
+            { id: "otherSpaces", name: "Storage, Kitchen, and Other Support Spaces", defaultSf: 28174, category: "otherSpaces", color: "hsl(280, 65%, 45%)", seats: 0 }
         ];
 
         const CATEGORY_NAMES = {
@@ -6659,10 +6659,10 @@
             
             // Update type comparison chart - showing COUNT of spaces (not SF)
             const existingTypeData = {
-                'Cubical/Desk (60 sf)': 99,      // Count of cubical/desks
-                'Office (140 sf)': 193,          // Count of offices
-                'Conference Room - Reservable (480 sf)': 21,   // Count of conference rooms
-                'Huddle/Shelter - Non Reservable (180 sf)': 35 // Count of huddle spaces
+                'Cubical/Desk': 99,      // Count of cubical/desks
+                'Office': 193,          // Count of offices
+                'Conference Room - Reservable': 21,   // Count of conference rooms
+                'Huddle/Shelter - Non Reservable': 35 // Count of huddle spaces
             };
             
             const typeLabels = [];
